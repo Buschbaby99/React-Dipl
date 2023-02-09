@@ -8,9 +8,8 @@ import Name from '@/Components/Name';
 
 
 const navigation = [
+  { name: 'News', href: 'welcome', current: false },
   { name: 'Dashboard', href: 'dashboard', current: false },
-  { name: 'Welcome', href: 'welcome', current: false },
-  { name: 'Admin', href: 'myadmin', current: false },
   { name: 'Projects', href: 'myprojects', current: false },
 ]
 

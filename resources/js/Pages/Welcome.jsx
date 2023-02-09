@@ -1,12 +1,12 @@
 import { Link, Head } from '@inertiajs/react';
-import MyNavbar from '@/Layouts/MyNavbar';
+import LoggedIn from '@/Components/LoggedIn';
 
 
 export default function Welcome(props) {
     return (
         <>
             <Head title="Welcome" />
-            <MyNavbar></MyNavbar>
+            <LoggedIn auth={props.auth}></LoggedIn>
         
 
             <div className="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">

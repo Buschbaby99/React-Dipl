@@ -16,6 +16,11 @@ use Inertia\Inertia;
 |
 */
 
+Route::get('/api/user', function () {
+    return auth()->user();
+});
+
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -28,12 +33,10 @@ Route::get('/', function () {
 Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin');
 
 Route::get('/welcome', function () {
-    return Inertia::render('Welcome')->name('welcome');
+    return Inertia::render('Welcome');
 });
 
-Route::get('/myprojects', function () {
-    return Inertia::render('myprojects');
-});
+
 
 Route::get('/myprojects', function () {
     return Inertia::render('myprojects');
@@ -43,9 +46,17 @@ Route::get('/myadmin', function () {
     return Inertia::render('myadmin');
 })->middleware(['auth', 'verified', 'isAdmin'])->name('myadmin');
 
+Route::get('/myadmin', function () {
+    return Inertia::render('myadmin');
+})->middleware(['auth', 'verified', 'isAdmin'])->name('myadmin');
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/projects_list', function () {
+    return Inertia::render('projects_list');
+})->middleware(['auth', 'verified', 'isUser'])->name('projects_list');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

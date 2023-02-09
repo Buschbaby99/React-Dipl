@@ -1,5 +1,5 @@
 import { Head } from '@inertiajs/react';
-import MyNavbar from '@/Layouts/MyNavbar';
+import MyNavbar from '@/Components/AdminNavbar';
 import Name from '../Components/Name'
 
 export default function myadmin(props) {
