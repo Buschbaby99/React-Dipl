@@ -1,14 +1,15 @@
 import { Head } from '@inertiajs/react';
-import MyNavbar from '@/Components/AdminNavbar';
-import Name from '../Components/Name'
+import LoggedIn from '@/Components/LoggedIn';
+import Name from '../Components/Name';
+import AdminTable from '../Components/AdminTable';
 
 export default function myadmin(props) {
     return (
         <div>
             <Head title="MyAdmin" />
-            <MyNavbar></MyNavbar>
+            <LoggedIn></LoggedIn>
             <Name auth={props.auth}></Name>
-            <div>My admin</div>
+            <AdminTable Input={props}></AdminTable>
         </div>
     );
 }

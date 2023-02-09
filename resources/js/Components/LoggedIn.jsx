@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ManagerNav from "./ManagerNavbar";
 import AdminNav from "./AdminNavbar";
 import UserNav from "./UserNavbar";
+import Welcome from "./WelcomeNavbar";
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
@@ -24,15 +25,15 @@ const Dashboard = () => {
 
 
   if (!user) {
-    return <UserNav></UserNav>;
+    return null;
   }
 
   if (user.role == 1) {
-    return <AdminNav></AdminNav>;
-  } else if (user.role === 2) {
-    return <ManagerNav></ManagerNav>;
+    return <AdminNav myUser={user.name}></AdminNav>;
+  } else if (user.role == 2) {
+    return <ManagerNav myUser={user.name}></ManagerNav>;
   } else {
-    return <UserNav></UserNav>;
+    return <UserNav myUser={user.name}></UserNav>;
   }
 };
 

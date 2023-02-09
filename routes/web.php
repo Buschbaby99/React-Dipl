@@ -16,11 +16,6 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/api/user', function () {
-    return auth()->user();
-});
-
-
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -30,26 +25,25 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin');
+
+Route::get('/api/user', function () {
+    return auth()->user();
+});
+
+Route::get('/myadmin', [\App\Http\Controllers\AdminController::class, 'formyadmin'])->middleware(['auth', 'verified', 'isAdmin'])->name('myadmin');
 
 Route::get('/welcome', function () {
     return Inertia::render('Welcome');
 });
 
-
-
 Route::get('/myprojects', function () {
     return Inertia::render('myprojects');
 })->middleware(['auth', 'verified', 'isManager'])->name('myprojects');
-
+/*
 Route::get('/myadmin', function () {
-    return Inertia::render('myadmin');
+   
 })->middleware(['auth', 'verified', 'isAdmin'])->name('myadmin');
-
-Route::get('/myadmin', function () {
-    return Inertia::render('myadmin');
-})->middleware(['auth', 'verified', 'isAdmin'])->name('myadmin');
-
+*/
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

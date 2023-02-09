@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class AdminController extends Controller
 {
@@ -15,6 +16,8 @@ class AdminController extends Controller
     public function formyadmin()
     {
         $users = User::all();
-        return view('myadmin', ['users' => $users]);
+        $encode[]=json_encode($users);
+
+        return Inertia::render('myadmin', $encode);
     }
 }
