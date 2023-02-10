@@ -8,9 +8,9 @@ import Name from '@/Components/Name';
 
 
 const navigation = [
-  { name: 'News', href: 'welcome', current: false },
-  { name: 'Dashboard', href: 'dashboard', current: false },
-  { name: 'Projects', href: 'myprojects', current: false },
+  { name: 'News', href: 'news', current: false },
+  { name: 'Personaleinteilung', href: 'dashboard', current: false },
+  { name: 'Projekte', href: 'myprojects', current: false },
 ]
 
 const myNavRight = [

@@ -8,9 +8,9 @@ import LoggedIn from '@/Components/LoggedIn';
 
 
 const navigation = [
-  { name: 'Dashboard', href: 'dashboard', current: false },
-  { name: 'News', href: 'welcome', current: false },
-  { name: 'Projects', href: 'myprojects', current: false },
+  { name: 'News', href: 'news', current: false },
+  { name: 'Personaleinteilung', href: 'dashboard', current: false },
+  { name: 'Projekte', href: 'myprojects', current: false },
   { name: 'Admin', href: 'myadmin', current: false },
 ]
 

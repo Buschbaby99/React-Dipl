@@ -36,6 +36,10 @@ Route::get('/welcome', function () {
     return Inertia::render('Welcome');
 });
 
+Route::get('/news', function () {
+    return Inertia::render('news');
+})->middleware(['auth', 'verified'])->name('news');
+
 Route::get('/myprojects', function () {
     return Inertia::render('myprojects');
 })->middleware(['auth', 'verified', 'isManager'])->name('myprojects');

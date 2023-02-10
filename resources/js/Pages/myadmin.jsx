@@ -8,8 +8,7 @@ export default function myadmin(props) {
         <div>
             <Head title="MyAdmin" />
             <LoggedIn></LoggedIn>
-            <Name auth={props.auth}></Name>
-            <AdminTable Input={props}></AdminTable>
+            <AdminTable props={props}></AdminTable>
         </div>
     );
 }

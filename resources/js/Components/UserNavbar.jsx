@@ -7,9 +7,9 @@ import Dropdown from '@/Components/Dropdown';
 
 
 const navigation = [
-  { name: 'News', href: 'welcome', current: false },
-  { name: 'Dashboard', href: 'dashboard', current: false },
-  { name: 'Projects', href: 'projects_list', current: false },
+  { name: 'News', href: 'news', current: false },
+  { name: 'Personaleinteilung', href: 'dashboard', current: false },
+  { name: 'Projekte', href: 'myprojects', current: false },
 ]
 
 const myNavRight = [
