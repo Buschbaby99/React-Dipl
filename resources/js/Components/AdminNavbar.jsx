@@ -4,7 +4,6 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import firmenlogo from '../../images/firmenlogo.png'
 import userImage from '../../images/tryFoto.jpg'
 import Dropdown from '@/Components/Dropdown';
-import LoggedIn from '@/Components/LoggedIn';
 
 
 const navigation = [
@@ -12,10 +11,6 @@ const navigation = [
   { name: 'Personaleinteilung', href: 'dashboard', current: false },
   { name: 'Projekte', href: 'myprojects', current: false },
   { name: 'Admin', href: 'myadmin', current: false },
-]
-
-const myNavRight = [
-  { name: 'Login', href: 'login', current: false },
 ]
 
 function classNames(...classes) {

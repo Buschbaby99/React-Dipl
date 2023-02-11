@@ -16,8 +16,12 @@ use Inertia\Inertia;
 |
 */
 
+Route::post('sendrequest', 'App\Http\Controllers\AdminController@ReceiveIt');
+
+
+
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('loginPage', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
@@ -25,15 +29,14 @@ Route::get('/', function () {
     ]);
 });
 
-
-Route::get('/api/user', function () {
-    return auth()->user();
-});
-
 Route::get('/myadmin', [\App\Http\Controllers\AdminController::class, 'formyadmin'])->middleware(['auth', 'verified', 'isAdmin'])->name('myadmin');
 
-Route::get('/welcome', function () {
-    return Inertia::render('Welcome');
+Route::get('/loginPage', function () {
+    return Inertia::render('LoginPage');
+});
+
+Route::get('/adminInsertPage', function () {
+    return Inertia::render('adminInsertPage');
 });
 
 Route::get('/news', function () {

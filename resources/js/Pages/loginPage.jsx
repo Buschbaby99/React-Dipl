@@ -4,7 +4,7 @@ import Login from './Auth/Login';
 export default function Welcome(props) {
     return (
         <>
-            <Head title="Welcome" />  
+            <Head title="Login" />  
             <Login></Login>
         </>
     );
