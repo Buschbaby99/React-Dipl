@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 
 class AdminController extends Controller
@@ -28,11 +28,13 @@ class AdminController extends Controller
         $user = new User;
         $user->name = $request->input('name');
         $user->email = $request->input('email');
+        $user->password = '12345678';
         $user->role = $request->input('role');
         $user->save();
 
         return response()->json(['message' => 'Data inserted successfully']);
     }
+
     public function ReceiveIt(Request $request){
         $validatedData = $request->validate([
             'id' => 'nullable',
@@ -46,9 +48,19 @@ class AdminController extends Controller
             'role' => 'nullable'
         ]);
 
-        var_dump($validatedData);
-
         return json_encode($validatedData);
+    }
+
+    public function myRegister(Request $request)
+    {
+        $user = new User;
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $mypassword = $request->input('password');
+        $user->password = password_hash($mypassword, PASSWORD_BCRYPT);
+        $user->save();
+
+        return redirect()->route('myadmin');
     }
 
 }

@@ -17,7 +17,8 @@ use Inertia\Inertia;
 */
 
 Route::post('sendrequest', 'App\Http\Controllers\AdminController@ReceiveIt');
-
+Route::post('insertUser', 'App\Http\Controllers\AdminController@insertData');
+Route::post('insertUser2', 'App\Http\Controllers\AdminController@myRegister');
 
 
 Route::get('/', function () {
@@ -38,6 +39,7 @@ Route::get('/loginPage', function () {
 Route::get('/adminInsertPage', function () {
     return Inertia::render('adminInsertPage');
 });
+
 
 Route::get('/news', function () {
     return Inertia::render('news');

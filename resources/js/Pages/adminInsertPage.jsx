@@ -1,7 +1,8 @@
-import AdminInputInsert from '@/Components/AdminInputInsert'
+
 import React from 'react'
 import LoggedIn from '@/Components/LoggedIn';
 import { Head } from '@inertiajs/react';
+import AdminInsertPage2 from '../Components/AdminInsertPage2';
 
 
 export default function adminInsertPage(props) {
@@ -9,7 +10,7 @@ export default function adminInsertPage(props) {
     <div>
         <Head title="AdminInsertPage" />
         <LoggedIn auth={props.auth}></LoggedIn>
-        <AdminInputInsert></AdminInputInsert>
+        <AdminInsertPage2></AdminInsertPage2>
     </div>
   )
 }

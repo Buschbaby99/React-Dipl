@@ -22,10 +22,9 @@ export default function AdminInputInsert() {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(inputs);
-        axios.post('/sendrequest', inputs)
+        axios.post('/insertUser', inputs)
         .then(
             response => alert(JSON.stringify(response.data))
-            
             )
         .catch(error => {
             console.log("ERROR:: ",error.response.data);
