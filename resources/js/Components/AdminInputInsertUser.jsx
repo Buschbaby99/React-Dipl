@@ -39,7 +39,7 @@ export default function AdminInputInsert() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.post('/insertUser2', data)
+        axios.post('/insertUser', data)
         .then(() => {
                 alert("User: " + JSON.stringify(data.name) + "wurde angelegt!");
                 reset();

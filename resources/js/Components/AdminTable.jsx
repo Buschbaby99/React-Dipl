@@ -5,7 +5,7 @@ import { useState } from 'react'
 
 export default function AdminTable(props) {
 
-    const [user, setDatasetUser] = useState('');
+    const [user, setDataUser] = useState('');
 
     /*
     const handleDelete = (id, name, email) => {
@@ -13,11 +13,12 @@ export default function AdminTable(props) {
     };
 */
     const handleDelete = (id, name, email) => {
-        if (window.confirm(`Möchten Sie den Benutzer ${name} (${email}) wirklich löschen?`)){
-        axios.post(`/deleteUser`, id)
+        if (window.confirm(`Möchten Sie den Benutzer ${name} (${email}) wirklich löschen?`)){ 
+            axios.post(`/deleteUser`, {id})
             .then(response => {
-                console.log(response);
+                //console.log(response);
                 alert(`Benutzer ${name} wurde erfolgreich gelöscht.`);
+                window.location.reload();
             })
             .catch(error => {
                 console.error(error);

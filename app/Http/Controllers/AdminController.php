@@ -71,9 +71,10 @@ class AdminController extends Controller
         $persons->save();
     }
 
-    public function deleteUser($id)
+    public function deleteUser(Request $request)
     {
-        var_dump("sjcjscbsjnc");
+        $id = $request->id;
+        
         $user = User::findOrFail($id);
         $user->delete();
     }
