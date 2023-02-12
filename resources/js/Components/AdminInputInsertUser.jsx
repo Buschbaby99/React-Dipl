@@ -19,6 +19,12 @@ export default function AdminInputInsert() {
         email: '',
         password: '',
         password_confirmation: '',
+        firstname: '',
+        lastname: '',
+        department: '',
+        TelNr1: '',
+        TelNr2: '',
+        rank: '',
     });
 
     useEffect(() => {
@@ -44,13 +50,13 @@ export default function AdminInputInsert() {
             });
     }
 
-
     return (
         <>
+        <div>
             <div className="flex justify-center align-center p-12">
                 <form  onSubmit={handleSubmit}>
                     <div style={inputStyle}>
-                        <InputLabel forInput="name" value="Name" />
+                        <InputLabel className="mt-4" forInput="name" value="Username" />
 
                         <TextInput
                             id="name"
@@ -67,7 +73,7 @@ export default function AdminInputInsert() {
                     </div>
 
                     <div style={inputStyle}>
-                        <InputLabel forInput="email" value="Email" />
+                        <InputLabel className="mt-4" forInput="email" value="Email" />
 
                         <TextInput
                             id="email"
@@ -84,7 +90,7 @@ export default function AdminInputInsert() {
                     </div>
 
                     <div style={inputStyle}>
-                        <InputLabel forInput="password" value="Password" />
+                        <InputLabel className="mt-4" forInput="password" value="Passwort" />
 
                         <TextInput
                             id="password"
@@ -99,21 +105,99 @@ export default function AdminInputInsert() {
 
                         <InputError message={errors.password} className="mt-2" />
                     </div>
-
                     <div style={inputStyle}>
-                        <InputLabel forInput="password_confirmation" value="Confirm Password" />
+                        <InputLabel className="mt-4" forInput="firstname" value="Vorname" />
 
                         <TextInput
-                            id="password_confirmation"
-                            type="password"
-                            name="password_confirmation"
-                            value={data.password_confirmation}
+                            id="firstname"
+                            name="firstname"
+                            value={data.firstname}
                             className="mt-1 block w-full"
+                            autoComplete="firstname"
+                            isFocused={true}
                             handleChange={onHandleChange}
                             required
                         />
 
-                        <InputError message={errors.password_confirmation} className="mt-2" />
+                        <InputError message={errors.firstname} className="mt-2" />
+                    </div>
+
+                    <div style={inputStyle}>
+                        <InputLabel className="mt-4" forInput="lastname" value="Nachname" />
+
+                        <TextInput
+                            id="lastname"
+                            name="lastname"
+                            value={data.lastname}
+                            className="mt-1 block w-full"
+                            autoComplete="lastname"
+                            handleChange={onHandleChange}
+                            required
+                        />
+
+                        <InputError message={errors.lastname} className="mt-2" />
+                    </div>
+
+                    <div style={inputStyle}>
+                        <InputLabel className="mt-4" forInput="department" value="Abteilung" />
+
+                        <TextInput
+                            id="department"
+                            name="department"
+                            value={data.department}
+                            className="mt-1 block w-full"
+                            autoComplete="department"
+                            handleChange={onHandleChange}
+                            required
+                        />
+
+                        <InputError message={errors.department} className="mt-2" />
+                    </div>
+                    <div style={inputStyle}>
+                        <InputLabel className="mt-4" forInput="TelNr1" value="Telefonnummer 1" />
+
+                        <TextInput
+                            id="TelNr1"
+                            name="TelNr1"
+                            value={data.TelNr1}
+                            className="mt-1 block w-full"
+                            autoComplete="TelNr1"
+                            handleChange={onHandleChange}
+                            required
+                        />
+
+                        <InputError message={errors.TelNr1} className="mt-2" />
+                    </div>
+                    <div style={inputStyle}>
+                        <InputLabel className="mt-4" forInput="TelNr2" value="Telefonnummer 2" />
+
+                        <TextInput
+                            id="TelNr2"
+                            name="TelNr2"
+                            value={data.TelNr2}
+                            className="mt-1 block w-full"
+                            autoComplete="TelNr2"
+                            handleChange={onHandleChange}
+                            required
+                        />
+
+                        <InputError message={errors.TelNr2} className="mt-2" />
+                    </div>
+
+                    <div style={inputStyle}>
+                        <InputLabel className="mt-4" forInput="rank" value="Rang" />
+
+                        <TextInput
+                            id="rank"
+                            name="rank"
+                            value={data.rank}
+                            className="mt-1 block w-full"
+                            autoComplete="rank"
+                            handleChange={onHandleChange}
+                            required
+                        />
+
+                        <InputError message={errors.rank} className="mt-2" />
                     </div>
 
                     <div className="flex justify-center align-center p-5">
@@ -123,7 +207,11 @@ export default function AdminInputInsert() {
                     </div>
                 </form>
             </div>
+        </div>
             <AdminBackButton></AdminBackButton>
         </>
         )
 }
+
+
+

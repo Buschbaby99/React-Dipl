@@ -17,20 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('firstname');
             $table->string('lastname');
-            $table->string('insuranceNr');
-            $table->timestamp('DayOfBirth');
-            $table->foreignId('staffingId');
-            $table->foreignId('departmentId');
-            $table->foreignId('carId');
+            $table->string('department');
             $table->string('TelNr1');
             $table->string('TelNr2');
             $table->string('rank');
-            $table->string('gender');
-            $table->foreignId('addressId');
-            $table->timestamp('entrydate')->nullable();
-            $table->timestamp('exitdate')->nullable();
-            $table->string('profession');
-            $table->rememberToken();
             $table->timestamps();
         });
     }

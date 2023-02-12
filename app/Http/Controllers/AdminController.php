@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\Persons;
+use Faker\Provider\ar_EG\Person;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -58,6 +60,15 @@ class AdminController extends Controller
         $mypassword = $request->input('password');
         $user->password = password_hash($mypassword, PASSWORD_BCRYPT);
         $user->save();
+
+        $persons = new Persons;
+        $persons->firstname = $request->input('firstname');
+        $persons->lastname = $request->input('lastname');
+        $persons->department = $request->input('department');
+        $persons->TelNr1 = $request->input('TelNr1');
+        $persons->TelNr2 = $request->input('TelNr2');
+        $persons->rank = $request->input('rank');
+        $persons->save();
     }
 
     public function deleteUser($id)
