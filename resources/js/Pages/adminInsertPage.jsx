@@ -2,7 +2,7 @@
 import React from 'react'
 import LoggedIn from '@/Components/LoggedIn';
 import { Head } from '@inertiajs/react';
-import AdminInsertPage2 from '../Components/AdminInsertPage2';
+import AdminInputInsertUser from '../Components/AdminInputInsertUser';
 
 
 export default function adminInsertPage(props) {
@@ -10,7 +10,7 @@ export default function adminInsertPage(props) {
     <div>
         <Head title="AdminInsertPage" />
         <LoggedIn auth={props.auth}></LoggedIn>
-        <AdminInsertPage2></AdminInsertPage2>
+        <AdminInputInsertUser></AdminInputInsertUser>
     </div>
   )
 }

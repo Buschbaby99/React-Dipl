@@ -60,7 +60,7 @@ class AdminController extends Controller
         $user->password = password_hash($mypassword, PASSWORD_BCRYPT);
         $user->save();
 
-        return redirect()->route('myadmin');
+        //return redirect('/myprojects');
     }
 
 }

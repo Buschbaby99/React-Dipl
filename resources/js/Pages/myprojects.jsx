@@ -1,7 +1,7 @@
 import { Head } from '@inertiajs/react';
 import Projects from '../Components/Projects'
 import LoggedIn from '@/Components/LoggedIn';
-import AdminInsertPage2 from '../Components/AdminInsertPage2';
+import AdminInsertPage2 from '../Components/AdminInputInsertUser';
 
 export default function myprojects(props) {
     return (
