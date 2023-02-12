@@ -68,14 +68,18 @@ class AdminController extends Controller
         $persons->TelNr1 = $request->input('TelNr1');
         $persons->TelNr2 = $request->input('TelNr2');
         $persons->rank = $request->input('rank');
+
+        $persons->user_FK = $user->id;
         $persons->save();
     }
 
     public function deleteUser(Request $request)
     {
         $id = $request->id;
-        
-        $user = User::findOrFail($id);
+        $user = User::where('id', $id)->first();
+        $userId = $user->id;
+        $persons = Persons::where('user_FK', $userId)->first();
+        $persons->delete();
         $user->delete();
     }
 

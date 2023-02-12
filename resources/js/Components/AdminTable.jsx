@@ -12,8 +12,8 @@ export default function AdminTable(props) {
         console.log(`ID: ${id}, Name: ${name}, Email: ${email}`);
     };
 */
-    const handleDelete = (id, name, email) => {
-        if (window.confirm(`Möchten Sie den Benutzer ${name} (${email}) wirklich löschen?`)){ 
+    const handleDelete = (id, name) => {
+        if (window.confirm(`Möchten Sie den Benutzer ${name} wirklich löschen?`)){ 
             axios.post(`/deleteUser`, {id})
             .then(response => {
                 //console.log(response);
@@ -92,7 +92,7 @@ export default function AdminTable(props) {
                                         <a
                                             className="text-red-500 hover:text-red-700"
                                             href="#"
-                                            onClick={() => handleDelete(id, name, email)}
+                                            onClick={() => handleDelete(id, name)}
                                         >
                                             Delete
                                         </a>

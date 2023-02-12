@@ -18,5 +18,6 @@ class Persons extends Model
         'TelNr1',
         'TelNr2',
         'rank',
+        'user_FK'
     ];
 }
