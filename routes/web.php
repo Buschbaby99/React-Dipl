@@ -19,6 +19,7 @@ use Inertia\Inertia;
 Route::post('sendrequest', 'App\Http\Controllers\AdminController@ReceiveIt');
 Route::post('insertUser', 'App\Http\Controllers\AdminController@insertData');
 Route::post('insertUser2', 'App\Http\Controllers\AdminController@myRegister');
+Route::post('deleteUser', 'App\Http\Controllers\AdminController@deleteUser');
 
 
 Route::get('/', function () {

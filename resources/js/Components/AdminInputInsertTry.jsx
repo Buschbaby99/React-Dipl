@@ -28,7 +28,6 @@ export default function AdminInputInsert() {
             )
         .catch(error => {
             console.log("ERROR:: ",error.response.data);
-            
             });
     }
 

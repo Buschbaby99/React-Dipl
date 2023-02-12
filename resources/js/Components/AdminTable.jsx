@@ -1,9 +1,31 @@
 import React from "react";
-
-
+import axios from "axios";
+import { useState } from 'react'
 
 
 export default function AdminTable(props) {
+
+    const [user, setDatasetUser] = useState('');
+
+    /*
+    const handleDelete = (id, name, email) => {
+        console.log(`ID: ${id}, Name: ${name}, Email: ${email}`);
+    };
+*/
+    const handleDelete = (id, name, email) => {
+        if (window.confirm(`Möchten Sie den Benutzer ${name} (${email}) wirklich löschen?`)){
+        axios.post(`/deleteUser`, id)
+            .then(response => {
+                console.log(response);
+                alert(`Benutzer ${name} wurde erfolgreich gelöscht.`);
+            })
+            .catch(error => {
+                console.error(error);
+                alert(`Beim Löschen des Benutzers ${name} ist ein Fehler aufgetreten.`);
+            });
+        }
+    };
+
     return (
         <div className="flex flex-col">
             <div className="overflow-x-auto">
@@ -38,16 +60,12 @@ export default function AdminTable(props) {
                                     </th>
                                     <td className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase">
                                         <a
-                                            className="text-black-500 hover:text-green-700"
-                                            href="#"
                                         >
                                             Edit
                                         </a>
                                     </td>
                                     <td className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase">
                                         <a
-                                            className="text-black-500 hover:text-red-700"
-                                            href="#"
                                         >
                                             Delete
                                         </a>
@@ -57,10 +75,10 @@ export default function AdminTable(props) {
                             <tbody className="divide-y divide-gray-200">
                                   {JSON.parse(props.props[0]).map(({ id, name, email,role }) => (
                                     <tr key={id}>
-                                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">{id}</td>
-                                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">{name}</td>
-                                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">{email}</td>
-                                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">{role}</td>
+                                      <td name="id" className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">{id}</td>
+                                      <td name="name" className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">{name}</td>
+                                      <td name="email" className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">{email}</td>
+                                      <td name="role" className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">{role}</td>
                                       <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap">
                                         <a
                                             className="text-green-500 hover:text-green-700"
@@ -73,6 +91,7 @@ export default function AdminTable(props) {
                                         <a
                                             className="text-red-500 hover:text-red-700"
                                             href="#"
+                                            onClick={() => handleDelete(id, name, email)}
                                         >
                                             Delete
                                         </a>

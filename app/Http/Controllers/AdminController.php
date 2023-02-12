@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Illuminate\Support\Facades\Hash;
 
 
 class AdminController extends Controller
@@ -59,8 +58,13 @@ class AdminController extends Controller
         $mypassword = $request->input('password');
         $user->password = password_hash($mypassword, PASSWORD_BCRYPT);
         $user->save();
+    }
 
-        //return redirect('/myprojects');
+    public function deleteUser($id)
+    {
+        var_dump("sjcjscbsjnc");
+        $user = User::findOrFail($id);
+        $user->delete();
     }
 
 }
