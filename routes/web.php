@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,11 @@ use Inertia\Inertia;
 Route::post('sendrequest', 'App\Http\Controllers\AdminController@ReceiveIt');
 Route::post('insertUser', 'App\Http\Controllers\AdminController@myRegister');
 Route::post('deleteUser', 'App\Http\Controllers\AdminController@deleteUser');
+Route::post('editUser', 'App\Http\Controllers\AdminController@editUser');
+
+//Route::get('/adminInsertPage', [\App\Http\Controllers\AdminController::class, 'editUser']);
+
+
 
 
 Route::get('/', function () {
@@ -39,6 +45,7 @@ Route::get('/loginPage', function () {
 Route::get('/adminInsertPage', function () {
     return Inertia::render('adminInsertPage');
 });
+
 
 
 Route::get('/news', function () {

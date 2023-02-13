@@ -12,7 +12,9 @@ const inputStyle = {
     width: '500px'
 }
 
-export default function AdminInputInsert() {
+export default function AdminInputInsert(props) {
+
+    const [result, setResult] = useState([]);
 
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
@@ -27,7 +29,16 @@ export default function AdminInputInsert() {
         rank: '',
     });
 
+    console.log(result);
+
     useEffect(() => {
+        axios.post('editUser')
+            .then(response => {
+                setResult(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
         return () => {
             reset('password', 'password_confirmation');
         };
@@ -49,6 +60,9 @@ export default function AdminInputInsert() {
             console.log("ERROR:: ",error.response.data);
             });
     }
+
+
+    
 
     return (
         <>

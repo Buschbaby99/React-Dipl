@@ -6,6 +6,7 @@ use App\Models\Persons;
 use Faker\Provider\ar_EG\Person;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Http\Controllers\DB;
 
 
 class AdminController extends Controller
@@ -83,4 +84,17 @@ class AdminController extends Controller
         $user->delete();
     }
 
+    public function editUser(Request $request)
+    {
+        $id = $request->id;
+       
+        $myArray[0] = $id;
+        if (!$request->id) {
+            die(var_dump($request->id));
+          }
+
+
+        return $myArray;
+    }
 }
+

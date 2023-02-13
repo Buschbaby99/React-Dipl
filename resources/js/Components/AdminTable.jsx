@@ -5,7 +5,7 @@ import { useState } from 'react'
 
 export default function AdminTable(props) {
 
-    const [user, setDataUser] = useState('');
+    const [result, setResult] = useState('');
 
     /*
     const handleDelete = (id, name, email) => {
@@ -25,6 +25,18 @@ export default function AdminTable(props) {
                 alert(`Beim Löschen des Benutzers ${name} ist ein Fehler aufgetreten.`);
             });
         }
+    };
+
+    const handleEdit = (id) => {
+        axios.post(`/editUser`, {id})
+            .then(response => {
+                console.log(id);
+                
+                //window.location.href = `adminInsertPage?id=${id}`;
+            })
+            .catch(error => {
+                alert(`Beim Edit des Benutzers ist ein Fehler aufgetreten.`);
+            });
     };
 
     return (
@@ -84,6 +96,7 @@ export default function AdminTable(props) {
                                         <a
                                             className="text-green-500 hover:text-green-700"
                                             href="#"
+                                            onClick={() => handleEdit(id)}
                                         >
                                             Edit
                                         </a>

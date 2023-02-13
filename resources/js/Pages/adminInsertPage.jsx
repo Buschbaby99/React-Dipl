@@ -6,11 +6,14 @@ import AdminInputInsertUser from '../Components/AdminInputInsertUser';
 
 
 export default function adminInsertPage(props) {
+
+  console.log(props);
+
   return (
     <div>
         <Head title="AdminInsertPage" />
         <LoggedIn auth={props.auth}></LoggedIn>
-        <AdminInputInsertUser></AdminInputInsertUser>
+        <AdminInputInsertUser name={props}></AdminInputInsertUser>
     </div>
   )
 }

@@ -8,7 +8,7 @@ const LoggedIn = (props) => {
   
   useEffect(() => {
     const currentUser = props.auth.user.role;
-    console.log(currentUser);
+    //console.log(currentUser);
     setUser(currentUser);
   }, []);
 

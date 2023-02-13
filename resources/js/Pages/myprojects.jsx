@@ -8,6 +8,7 @@ export default function myprojects(props) {
         <div>
             <Head title="Projects" />
             <LoggedIn auth={props.auth}></LoggedIn>
+
         </div>
     );
 }
