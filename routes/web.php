@@ -25,6 +25,7 @@ Route::post('editUser', 'App\Http\Controllers\AdminController@editUser');
 //Route::get('/adminInsertPage', [\App\Http\Controllers\AdminController::class, 'editUser']);
 
 
+Route::get('/test', 'DataController@test');
 
 
 Route::get('/', function () {

@@ -87,14 +87,14 @@ class AdminController extends Controller
     public function editUser(Request $request)
     {
         $id = $request->id;
-       
-        $myArray[0] = $id;
-        if (!$request->id) {
-            die(var_dump($request->id));
-          }
-
-
-        return $myArray;
+        $user = User::where('id', $id)->first();
+        $userId = $user->id;
+        $persons = Persons::where('user_FK', $userId)->first();
+        
+        return response()->json([
+            'user' => $user,
+            'persons' => $persons
+        ]);
     }
 }
 

@@ -14,7 +14,7 @@ const inputStyle = {
 
 export default function AdminInputInsert(props) {
 
-    const [result, setResult] = useState([]);
+    const [result, setResult] = useState('');
 
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
@@ -29,20 +29,23 @@ export default function AdminInputInsert(props) {
         rank: '',
     });
 
-    console.log(result);
-
+    //console.log(result);
+/*
     useEffect(() => {
-        axios.post('editUser')
+        axios.post('/editUser')
             .then(response => {
-                setResult(response.data);
+                setUser(response.data.user);
+                setPersons(response.data.persons);
             })
             .catch(error => {
                 console.error(error);
             });
-        return () => {
-            reset('password', 'password_confirmation');
-        };
-    }, []);
+    }, [props.id]);
+*/
+    console.log(props);
+    //console.log(persons);
+
+   // console.log(data);
 
     const onHandleChange = (event) => {
         setData(event.target.name, event.target.value);
@@ -58,10 +61,8 @@ export default function AdminInputInsert(props) {
             )
         .catch(error => {
             console.log("ERROR:: ",error.response.data);
-            });
+        });
     }
-
-
     
 
     return (

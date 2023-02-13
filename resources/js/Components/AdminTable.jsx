@@ -1,22 +1,17 @@
 import React from "react";
 import axios from "axios";
 import { useState } from 'react'
+import adminInsertPage from '../Pages/adminInsertPage'
 
 
 export default function AdminTable(props) {
 
     const [result, setResult] = useState('');
 
-    /*
-    const handleDelete = (id, name, email) => {
-        console.log(`ID: ${id}, Name: ${name}, Email: ${email}`);
-    };
-*/
     const handleDelete = (id, name) => {
         if (window.confirm(`Möchten Sie den Benutzer ${name} wirklich löschen?`)){ 
             axios.post(`/deleteUser`, {id})
             .then(response => {
-                //console.log(response);
                 alert(`Benutzer ${name} wurde erfolgreich gelöscht.`);
                 window.location.reload();
             })
@@ -26,18 +21,20 @@ export default function AdminTable(props) {
             });
         }
     };
+    
 
     const handleEdit = (id) => {
         axios.post(`/editUser`, {id})
-            .then(response => {
-                console.log(id);
-                
-                //window.location.href = `adminInsertPage?id=${id}`;
-            })
-            .catch(error => {
-                alert(`Beim Edit des Benutzers ist ein Fehler aufgetreten.`);
-            });
+        .then((response) => {
+            setResult(response.data);
+            //window.location.href = `adminInsertPage`;
+        }); 
     };
+
+
+
+
+    console.log(result);
 
     return (
         <div className="flex flex-col">
