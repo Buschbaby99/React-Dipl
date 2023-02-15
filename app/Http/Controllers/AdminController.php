@@ -96,5 +96,22 @@ class AdminController extends Controller
             'persons' => $persons
         ]);
     }
+
+    public function updateUser(Request $request)
+    {
+        $id = $request->id;
+        $user = User::where('id', $id)->first();
+       
+        
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->role = $request->role;
+        $user->save();
+
+        $person = Persons::where('user_FK', $id)->first();
+        $person->address = $request->address;
+        $person->phone = $request->phone;
+        $person->save();
+    }
 }
 

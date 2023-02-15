@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useEffect } from 'react';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
@@ -6,88 +6,109 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 import AdminBackButton from './AdminBackButton';
-import { useLocation } from 'react-router-dom';
-
 
 const inputStyle = {
-    width: '500px'
-}
+  width: '500px'
+};
 
-export default function AdminInputInsert(props) {
+export default function AdminUpdate(props) {
+  const [result, setResult] = useState('');
+  let myVar;
+  const [loading, setLoading] = useState(true);
+  const urlSearchParams = new URLSearchParams(window.location.search);
+  myVar = urlSearchParams.get('id');
 
+  const { data, setData, post, processing, errors, reset } = useForm({
+    name: '',
+    email: '',
+    password: '',
+    password_confirmation: '',
+    firstname: '',
+    lastname: '',
+    department: '',
+    TelNr1: '',
+    TelNr2: '',
+    rank: '',
+});
 
-    const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
-        email: '',
-        password: '',
-        password_confirmation: '',
-        firstname: '',
-        lastname: '',
-        department: '',
-        TelNr1: '',
-        TelNr2: '',
-        rank: '',
-    });
-
-    //console.log(result);
 /*
-    useEffect(() => {
-        axios.post('/editUser')
-            .then(response => {
-                setUser(response.data.user);
-                setPersons(response.data.persons);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    }, [props.id]);
+    axios.post(`/editUser`, {id: myVar})
+    .then((response) => {
+        setResult(response.data);
+    }); 
 */
-    console.log(props);
-    //console.log(persons);
+    //console.log("klesdfklsafv");
+    //console.log(result.user.name);
 
-   // console.log(data);
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await axios.post(`/editUser`, { id: myVar });
+            setResult(response.data);
+            setData({
+              id: myVar,
+              name: response.data.user.name,
+              email: response.data.user.email,
+              firstname: response.data.persons.firstname,
+              lastname: response.data.persons.lastname,
+              department: response.data.persons.department,
+              TelNr1: response.data.persons.TelNr1,
+              TelNr2: response.data.persons.TelNr2,
+              rank: response.data.persons.rank,
+            });
+          } catch (error) {
+            console.error('Fehler beim Laden der Daten:', error);
+          } finally {
+            setLoading(false);
+          }
+        };
+        fetchData();
+      }, [myVar]);
+      
 
-    const onHandleChange = (event) => {
-        setData(event.target.name, event.target.value);
-    };
 
-    const handleSubmit = (event) => {
+      const handleSubmit = (event) => {
         event.preventDefault();
-        axios.post('/insertUser', data)
+        axios.post('/updateUser', data)
         .then(() => {
-                alert("User: " + JSON.stringify(data.name) + "wurde angelegt!");
-                reset();
+            alert("klsaklsfcsc");
             }
             )
         .catch(error => {
             console.log("ERROR:: ",error.response.data);
         });
     }
+    const handleChange = (event) => {
+        setData(event.target.name, event.target.value);
+    };
+
+
+      if (loading) {
+        return <div>Laden...</div>;
+      }
     
-
-    return (
+      return (
         <>
-        <div>
+          <div>
             <div className="flex justify-center align-center p-12">
-                <form  onSubmit={handleSubmit}>
-                    <div style={inputStyle}>
-                        <InputLabel className="mt-4" forInput="name" value="Username" />
-
-                        <TextInput
-                            id="name"
-                            name="name"
-                            value={data.name}
-                            className="mt-1 block w-full"
-                            autoComplete="name"
-                            isFocused={true}
-                            handleChange={onHandleChange}
-                            required
-                        />
-
-                        <InputError message={errors.name} className="mt-2" />
-                    </div>
-
-                    <div style={inputStyle}>
+              <form onSubmit={handleSubmit}>
+                <div style={inputStyle}>
+                  <InputLabel className="mt-4" forInput="name" value="Username" />
+    
+                  <TextInput
+                    id="name"
+                    name="name"
+                    value={data.name}
+                    className="mt-1 block w-full"
+                    autoComplete="name"
+                    isFocused={true}
+                    handleChange={handleChange}
+                    required
+                  />
+    
+                  <InputError message={errors.name} className="mt-2" />
+                </div>
+                <div style={inputStyle}>
                         <InputLabel className="mt-4" forInput="email" value="Email" />
 
                         <TextInput
@@ -97,29 +118,14 @@ export default function AdminInputInsert(props) {
                             value={data.email}
                             className="mt-1 block w-full"
                             autoComplete="username"
-                            handleChange={onHandleChange}
+                            handleChange={handleChange}
                             required
                         />
 
                         <InputError message={errors.email} className="mt-2" />
                     </div>
 
-                    <div style={inputStyle}>
-                        <InputLabel className="mt-4" forInput="password" value="Passwort" />
-
-                        <TextInput
-                            id="password"
-                            type="password"
-                            name="password"
-                            value={data.password}
-                            className="mt-1 block w-full"
-                            autoComplete="new-password"
-                            handleChange={onHandleChange}
-                            required
-                        />
-
-                        <InputError message={errors.password} className="mt-2" />
-                    </div>
+                   
                     <div style={inputStyle}>
                         <InputLabel className="mt-4" forInput="firstname" value="Vorname" />
 
@@ -130,7 +136,7 @@ export default function AdminInputInsert(props) {
                             className="mt-1 block w-full"
                             autoComplete="firstname"
                             isFocused={true}
-                            handleChange={onHandleChange}
+                            handleChange={handleChange}
                             required
                         />
 
@@ -146,7 +152,7 @@ export default function AdminInputInsert(props) {
                             value={data.lastname}
                             className="mt-1 block w-full"
                             autoComplete="lastname"
-                            handleChange={onHandleChange}
+                            handleChange={handleChange}
                             required
                         />
 
@@ -162,7 +168,7 @@ export default function AdminInputInsert(props) {
                             value={data.department}
                             className="mt-1 block w-full"
                             autoComplete="department"
-                            handleChange={onHandleChange}
+                            handleChange={handleChange}
                             required
                         />
 
@@ -177,7 +183,7 @@ export default function AdminInputInsert(props) {
                             value={data.TelNr1}
                             className="mt-1 block w-full"
                             autoComplete="TelNr1"
-                            handleChange={onHandleChange}
+                            handleChange={handleChange}
                             required
                         />
 
@@ -192,7 +198,7 @@ export default function AdminInputInsert(props) {
                             value={data.TelNr2}
                             className="mt-1 block w-full"
                             autoComplete="TelNr2"
-                            handleChange={onHandleChange}
+                            handleChange={handleChange}
                             required
                         />
 
@@ -208,13 +214,13 @@ export default function AdminInputInsert(props) {
                             value={data.rank}
                             className="mt-1 block w-full"
                             autoComplete="rank"
-                            handleChange={onHandleChange}
+                            handleChange={handleChange}
                             required
                         />
 
                         <InputError message={errors.rank} className="mt-2" />
                     </div>
-
+    
                     <div className="flex justify-center align-center p-5">
                         <PrimaryButton processing={processing}>
                             Register
@@ -227,6 +233,3 @@ export default function AdminInputInsert(props) {
         </>
         )
 }
-
-
-
