@@ -21,7 +21,6 @@ export default function AdminTable(props) {
         }
     };
 
-    //console.log(result);
 
     return (
             <div className="flex flex-col">
