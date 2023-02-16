@@ -15,10 +15,8 @@ return new class extends Migration
     {
         Schema::create('departments', function (Blueprint $table) {
             $table->id();
-            $table->string('area');
             $table->string('name');
-            
-            $table->rememberToken();
+            $table->bigInteger('manager_id');
             $table->timestamps();
         });
     }

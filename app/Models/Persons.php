@@ -14,10 +14,12 @@ class Persons extends Model
 
         'firstname',
         'lastname',
-        'department',
+       
         'TelNr1',
         'TelNr2',
         'rank',
-        'user_FK'
+        'user_id',
+        'department_id',
+        'personAddress_id'
     ];
 }

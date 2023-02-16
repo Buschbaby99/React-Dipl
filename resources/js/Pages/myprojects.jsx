@@ -1,15 +1,22 @@
 import { Head } from '@inertiajs/react';
-import Projects from '../Components/Projects'
 import LoggedIn from '@/Components/LoggedIn';
-import AdminInsertPage2 from '../Components/AdminInputInsertUser';
-import MyComponent from '../Components/MyComponent';
+import ProjectTable from '../Components/ProjectTable';
+import AdminButton from '@/Components/AdminButtonToInsert';
 
 
 export default function myprojects(props) {
+    
+    console.log(props);
     return (
         <div>
-            <Head title="Projects" />
+            <Head title="Myprojects" />
             <LoggedIn auth={props.auth}></LoggedIn>
+            <AdminButton
+                 href='projectInsertPage'
+            
+            ></AdminButton>
+            <ProjectTable props={props}></ProjectTable>
         </div>
     );
+
 }

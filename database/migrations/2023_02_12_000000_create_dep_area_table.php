@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('persons', function (Blueprint $table) {
-            $table->id();
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->string('department');
-            $table->string('TelNr1');
-            $table->string('TelNr2');
-            $table->string('rank');
+        Schema::create('dep_area', function (Blueprint $table) {
+            $table->bigInteger('department_id');
+            $table->bigInteger('area_id');
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('persons');
+        Schema::dropIfExists('dep_area');
     }
 };

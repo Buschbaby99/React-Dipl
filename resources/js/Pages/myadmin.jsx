@@ -9,7 +9,9 @@ export default function myadmin(props) {
         <div>
             <Head title="MyAdmin" />
             <LoggedIn auth={props.auth}></LoggedIn>
-            <AdminButton></AdminButton>
+            <AdminButton 
+            href='adminInsertPage'
+            ></AdminButton>
             <AdminTable props={props}></AdminTable>
         </div>
     );

@@ -27,6 +27,12 @@ export default function AdminInputInsert(props) {
         TelNr1: '',
         TelNr2: '',
         rank: '',
+        country: '',
+        zip:'',
+        city: '',
+        street:'',
+        role:'',
+
     });
 
     //console.log(result);
@@ -200,20 +206,100 @@ export default function AdminInputInsert(props) {
                     </div>
 
                     <div style={inputStyle}>
-                        <InputLabel className="mt-4" forInput="rank" value="Rang" />
+                        <InputLabel className="mt-4" forInput="role" value="Role" />
 
                         <TextInput
-                            id="rank"
-                            name="rank"
-                            value={data.rank}
+                            id="role"
+                            name="role"
+                            value={data.role}
                             className="mt-1 block w-full"
-                            autoComplete="rank"
+                            autoComplete="role"
                             handleChange={onHandleChange}
                             required
                         />
 
-                        <InputError message={errors.rank} className="mt-2" />
+                        <InputError message={errors.role} className="mt-2" />
                     </div>
+                    <div style={inputStyle}>
+                        <InputLabel className="mt-4" forInput="department" value="Department" />
+
+                        <TextInput
+                            id="department"
+                            name="department"
+                            value={data.department}
+                            className="mt-1 block w-full"
+                            autoComplete="department"
+                            handleChange={onHandleChange}
+                            required
+                        />
+
+                        <InputError message={errors.department} className="mt-2" />
+                    </div>
+                    <div style={inputStyle}>
+                        <InputLabel className="mt-4" forInput="country" value="Country" />
+
+                        <TextInput
+                            id="country"
+                            name="country"
+                            value={data.country}
+                            className="mt-1 block w-full"
+                            autoComplete="country"
+                            handleChange={onHandleChange}
+                            required
+                        />
+
+                        <InputError message={errors.country} className="mt-2" />
+                    </div>
+
+                    <div style={inputStyle}>
+                        <InputLabel className="mt-4" forInput="zip" value="Zip" />
+
+                        <TextInput
+                            id="zip"
+                            name="zip"
+                            value={data.zip}
+                            className="mt-1 block w-full"
+                            autoComplete="zip"
+                            handleChange={onHandleChange}
+                            required
+                        />
+
+                        <InputError message={errors.zip} className="mt-2" />
+                    </div>
+
+                    <div style={inputStyle}>
+                        <InputLabel className="mt-4" forInput="city" value="City" />
+
+                        <TextInput
+                            id="city"
+                            name="city"
+                            value={data.city}
+                            className="mt-1 block w-full"
+                            autoComplete="city"
+                            handleChange={onHandleChange}
+                            required
+                        />
+
+                        <InputError message={errors.city} className="mt-2" />
+                    </div>
+                    <div style={inputStyle}>
+                        <InputLabel className="mt-4" forInput="street" value="Street" />
+
+                        <TextInput
+                            id="street"
+                            name="street"
+                            value={data.street}
+                            className="mt-1 block w-full"
+                            autoComplete="street"
+                            handleChange={onHandleChange}
+                            required
+                        />
+
+                        <InputError message={errors.street} className="mt-2" />
+                    </div>
+                   
+
+                    
 
                     <div className="flex justify-center align-center p-5">
                         <PrimaryButton processing={processing}>

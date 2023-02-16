@@ -20,6 +20,8 @@ use Inertia\Inertia;
 Route::post('sendrequest', 'App\Http\Controllers\AdminController@ReceiveIt');
 Route::post('insertUser', 'App\Http\Controllers\AdminController@myRegister');
 Route::post('deleteUser', 'App\Http\Controllers\AdminController@deleteUser');
+Route::post('deleteProject', 'App\Http\Controllers\AdminController@deleteProject');
+
 Route::post('editUser', 'App\Http\Controllers\AdminController@editUser');
 Route::post('updateUser', 'App\Http\Controllers\AdminController@updateUser');
 
@@ -41,11 +43,14 @@ Route::get('/', function () {
 });
 
 Route::get('/myadmin', [\App\Http\Controllers\AdminController::class, 'formyadmin'])->middleware(['auth', 'verified', 'isAdmin'])->name('myadmin');
+Route::get('/myprojects', [\App\Http\Controllers\AdminController::class, 'formyprojects'])->middleware(['auth', 'verified', 'isAdmin'])->name('myprojects');
 
 Route::get('/loginPage', function () {
     return Inertia::render('LoginPage');
 });
-
+Route::get('/projectInsertPage', function () {
+    return Inertia::render('projectInsertPage');
+});
 Route::get('/adminInsertPage', function () {
     return Inertia::render('adminInsertPage');
 });
@@ -57,11 +62,11 @@ Route::get('/adminUpdatePage', function () {
 Route::get('/news', function () {
     return Inertia::render('news');
 })->middleware(['auth', 'verified'])->name('news');
-
+/*
 Route::get('/myprojects', function () {
     return Inertia::render('myprojects');
 })->middleware(['auth', 'verified', 'isManager'])->name('myprojects');
-/*
+
 Route::get('/myadmin', function () {
    
 })->middleware(['auth', 'verified', 'isAdmin'])->name('myadmin');

@@ -13,15 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('address', function (Blueprint $table) {
+        Schema::create('PersonAddresses', function (Blueprint $table) {
             $table->id();
             $table->string('country');
             $table->string('ZIP');
             $table->string('city');
             $table->string('street');
-            $table->string('name');
-           
-            $table->rememberToken();
             $table->timestamps();
         });
     }

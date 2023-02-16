@@ -13,12 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('staffing', function (Blueprint $table) {
+        Schema::create('persons', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('person_Id');
-            $table->bigInteger('project_Id');
-            $table->timestamp('startDate')->nullable();
-            $table->timestamp('endDate')->nullable();
+            $table->string('firstname');
+            $table->string('lastname');
+            $table->string('TelNr1');
+            $table->string('TelNr2')->nullable();
+            $table->string('rank')->nullable();
+            $table->bigInteger('user_id');
+            $table->bigInteger('department_id');
+            $table->bigInteger('personAddress_id');
             $table->timestamps();
         });
     }
@@ -30,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('staffing');
+        Schema::dropIfExists('persons');
     }
 };

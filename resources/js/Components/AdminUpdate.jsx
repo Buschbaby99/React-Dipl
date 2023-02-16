@@ -29,8 +29,14 @@ export default function AdminUpdate(props) {
     TelNr1: '',
     TelNr2: '',
     rank: '',
-});
+    country: '',
+    zip:'',
+    city: '',
+    street:'',
+    role:'',
 
+});
+console.log();
 /*
     axios.post(`/editUser`, {id: myVar})
     .then((response) => {
@@ -44,17 +50,30 @@ export default function AdminUpdate(props) {
         const fetchData = async () => {
           try {
             const response = await axios.post(`/editUser`, { id: myVar });
+            console.log(response.data);
+            
             setResult(response.data);
             setData({
+             
               id: myVar,
               name: response.data.user.name,
               email: response.data.user.email,
+              role: response.data.user.role,
+
               firstname: response.data.persons.firstname,
               lastname: response.data.persons.lastname,
-              department: response.data.persons.department,
+              department: response.data.persons.department_id,
               TelNr1: response.data.persons.TelNr1,
               TelNr2: response.data.persons.TelNr2,
               rank: response.data.persons.rank,
+              personAddress_id: response.data.persons.personAddress_id,
+
+              country:  response.data.address.country,
+              zip: response.data.address.ZIP,
+              city:  response.data.address.city,
+              street: response.data.address.street,
+           
+      
             });
           } catch (error) {
             console.error('Fehler beim Laden der Daten:', error);
@@ -71,7 +90,8 @@ export default function AdminUpdate(props) {
         event.preventDefault();
         axios.post('/updateUser', data)
         .then(() => {
-            alert("klsaklsfcsc");
+        
+            alert(data.firstname+" "+data.lastname+" wurde erfolreich geändert");
             }
             )
         .catch(error => {
@@ -80,6 +100,7 @@ export default function AdminUpdate(props) {
     }
     const handleChange = (event) => {
         setData(event.target.name, event.target.value);
+       
     };
 
 
@@ -206,20 +227,84 @@ export default function AdminUpdate(props) {
                     </div>
 
                     <div style={inputStyle}>
-                        <InputLabel className="mt-4" forInput="rank" value="Rang" />
+                        <InputLabel className="mt-4" forInput="role" value="Role" />
 
                         <TextInput
-                            id="rank"
-                            name="rank"
-                            value={data.rank}
+                            id="role"
+                            name="role"
+                            value={data.role}
                             className="mt-1 block w-full"
-                            autoComplete="rank"
+                            autoComplete="role"
                             handleChange={handleChange}
                             required
                         />
 
-                        <InputError message={errors.rank} className="mt-2" />
+                        <InputError message={errors.role} className="mt-2" />
                     </div>
+             
+                    <div style={inputStyle}>
+                        <InputLabel className="mt-4" forInput="country" value="Country" />
+
+                        <TextInput
+                            id="country"
+                            name="country"
+                            value={data.country}
+                            className="mt-1 block w-full"
+                            autoComplete="country"
+                            handleChange={handleChange}
+                            required
+                        />
+
+                        <InputError message={errors.country} className="mt-2" />
+                    </div>
+
+                    <div style={inputStyle}>
+                        <InputLabel className="mt-4" forInput="zip" value="Postleitzahl" />
+
+                        <TextInput
+                            id="zip"
+                            name="zip"
+                            value={data.zip}
+                            className="mt-1 block w-full"
+                            autoComplete="zip"
+                            handleChange={handleChange}
+                            required
+                        />
+
+                        <InputError message={errors.zip} className="mt-2" />
+                    </div>
+
+                    <div style={inputStyle}>
+                        <InputLabel className="mt-4" forInput="city" value="City" />
+
+                        <TextInput
+                            id="city"
+                            name="city"
+                            value={data.city}
+                            className="mt-1 block w-full"
+                            autoComplete="city"
+                            handleChange={handleChange}
+                            required
+                        />
+
+                        <InputError message={errors.city} className="mt-2" />
+                    </div>
+                    <div style={inputStyle}>
+                        <InputLabel className="mt-4" forInput="street" value="Street" />
+
+                        <TextInput
+                            id="street"
+                            name="street"
+                            value={data.street}
+                            className="mt-1 block w-full"
+                            autoComplete="street"
+                            handleChange={handleChange}
+                            required
+                        />
+
+                        <InputError message={errors.street} className="mt-2" />
+                    </div>
+                   
     
                     <div className="flex justify-center align-center p-5">
                         <PrimaryButton processing={processing}>
