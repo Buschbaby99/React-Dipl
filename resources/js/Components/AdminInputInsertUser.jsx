@@ -5,7 +5,7 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
-import AdminBackButton from './AdminBackButton';
+import AdminButton from './AdminButtonToInsert';
 import { useLocation } from 'react-router-dom';
 
 
@@ -309,7 +309,10 @@ export default function AdminInputInsert(props) {
                 </form>
             </div>
         </div>
-            <AdminBackButton></AdminBackButton>
+        <AdminButton
+            href='myadmin'
+            ></AdminButton>
+            
         </>
         )
 }
