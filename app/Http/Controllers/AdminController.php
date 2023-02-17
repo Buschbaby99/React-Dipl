@@ -89,7 +89,7 @@ class AdminController extends Controller
         $persons = new Persons;
         $persons->firstname = $request->input('firstname');
         $persons->lastname = $request->input('lastname');
-       // $persons->department = $request->input('department');
+        $persons->department = $request->input('department');
         $persons->TelNr1 = $request->input('TelNr1');
         $persons->TelNr2 = $request->input('TelNr2');
         $persons->personAddress_id = $personaddress->id;

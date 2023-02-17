@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('TelNr2')->nullable();
             $table->string('rank')->nullable();
             $table->bigInteger('user_id');
-            $table->bigInteger('department_id');
+            $table->string('department');
             $table->bigInteger('personAddress_id');
             $table->timestamps();
         });

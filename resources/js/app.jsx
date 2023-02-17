@@ -25,4 +25,3 @@ createInertiaApp({
 });
 
 
-E
