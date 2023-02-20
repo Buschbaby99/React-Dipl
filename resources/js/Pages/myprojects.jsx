@@ -1,7 +1,7 @@
 import { Head } from '@inertiajs/react';
 import LoggedIn from '@/Components/LoggedIn';
 import ProjectTable from '../Components/ProjectTable';
-import AdminButton from '@/Components/AdminButtonToInsert';
+import AdminButton from '@/Components/UniversalButtonComponent';
 
 
 export default function myprojects(props) {
@@ -11,7 +11,10 @@ export default function myprojects(props) {
         <div>
             <Head title="Myprojects" />
             <LoggedIn auth={props.auth}></LoggedIn>
-            <AdminButton href='projectInsertPage'></AdminButton>
+            <AdminButton 
+                href='projectInsertPage'
+                text="Hinzufügen">
+            </AdminButton>
             <ProjectTable props={props}></ProjectTable>
         </div>
     );

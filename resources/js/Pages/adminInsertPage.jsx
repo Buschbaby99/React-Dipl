@@ -3,6 +3,7 @@ import React from 'react'
 import LoggedIn from '@/Components/LoggedIn';
 import { Head } from '@inertiajs/react';
 import AdminInputInsertUser from '../Components/AdminInputInsertUser';
+import AdminButton from "../Components/UniversalButtonComponent"
 
 
 export default function adminInsertPage(props) {

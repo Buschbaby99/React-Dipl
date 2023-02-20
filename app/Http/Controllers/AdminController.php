@@ -143,7 +143,7 @@ class AdminController extends Controller
         $person = Persons::where('user_id', $request->id)->first();
         $person->firstname =$request->firstname;
         $person->lastname =$request->lastname;
-       // $person->department_id =$request->department_id;
+        $person->department =$request->department;
         $person->TelNr1= $request->TelNr1;
         $person->TelNr2= $request->TelNr2;
         $person->rank =$request->rank;
@@ -157,9 +157,7 @@ class AdminController extends Controller
         $personAddress->city =$request->city;
         $personAddress->street= $request->street;
         $personAddress->save();
-
-
-    
     }
+    
 }
 

@@ -9,7 +9,7 @@ export default function AdminTable(props) {
 
     const handleDelete = (id, name) => {
         if (window.confirm(`Möchten Sie den Benutzer ${name} wirklich löschen?`)){ 
-            axios.post(`/deleteUser`, {id})
+            axios.post(`/api/deleteUser`, {id})
             .then(response => {
                 alert(`Benutzer ${name} wurde erfolgreich gelöscht.`);
                 window.location.reload();
