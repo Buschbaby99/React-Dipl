@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('ZIP');
             $table->string('city');
             $table->string('street');
-            $table->string('name');
             $table->timestamps();
         });
     }

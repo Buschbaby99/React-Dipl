@@ -4,12 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Persons;
 use App\Models\Personaddress;
-use App\Models\Projects;
-use Faker\Provider\ar_EG\Person;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use App\Http\Controllers\DB;
-use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 
 class AdminController extends Controller
 {
@@ -26,13 +22,7 @@ class AdminController extends Controller
 
         return Inertia::render('myadmin', $encode);
     }
-    public function formyprojects()
-    {
-        $projects = Projects::all();
-        $encode[]=json_encode($projects);
-
-        return Inertia::render('myprojects', $encode);
-    }
+   
     
     public function insertData(Request $request)
     {
@@ -100,16 +90,6 @@ class AdminController extends Controller
         $persons->delete();
         $user->delete();
     }
-    
-    public function deleteProject(Request $request)
-    {
-        $id = $request->id;
-        $project = Projects::where('id', $id)->first();
-        $project->delete();
-    }
-
-    
-
 
     public function editUser(Request $request)
     {
@@ -121,7 +101,6 @@ class AdminController extends Controller
         $personAddress_id= $persons->personAddress_id;
         $address = Personaddress::where('id', $personAddress_id)->first();
        
-
         return response()->json([
             'user' => $user,
             'persons' => $persons,
@@ -131,14 +110,12 @@ class AdminController extends Controller
 
     public function updateUser(Request $request)
     {
-       
         $user = User::where('id', $request->id)->first();
        
         $user->name = $request->name;
         $user->email = $request->email;
         $user->role = $request->role;
         $user->save();
-
 
         $person = Persons::where('user_id', $request->id)->first();
         $person->firstname =$request->firstname;
@@ -149,7 +126,6 @@ class AdminController extends Controller
         $person->rank =$request->rank;
         $person->save();
 
-        
         $personAddress = Personaddress::where('id', $request->personAddress_id)->first();
 
         $personAddress->zip =$request->zip;

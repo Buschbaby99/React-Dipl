@@ -11,7 +11,7 @@ export default function ProjectTable(props) {
 
     const handleDelete = (id, name) => {
         if (window.confirm(`Möchten Sie das Projekt ${name} wirklich löschen?`)){ 
-            axios.post(`/deleteProject`, {id})
+            axios.post(`/api/deleteProject`, {id})
             .then(response => {
                 alert(`Projekt ${name} wurde erfolgreich gelöscht.`);
                 window.location.reload();
@@ -26,7 +26,7 @@ export default function ProjectTable(props) {
 
     const handleEdit = (id) => {
         
-        axios.post(`/editProject`, {id})
+        axios.post(`/api/editProject`, {id})
         .then((response) => {
             
    

@@ -24,26 +24,32 @@ export default function InsertProject(props) {
         data.endDate = newValue.endDate;
         console.log("newValue:", data.endDate);
     };
+
     const { data, setData, post, processing, errors, reset } = useForm({
         name: "",
         project_number: "",
         startDate: "",
         endDate: "",
         description: "",
-        projectAddress_Id: "",
+        street: "",
+        zip: "",
+        city: "",
+        country: "",
     });
 
-    const onHandleChange = (event, newValue) => {
+    console.log(data);
+
+    const onHandleChange = (event) => {
         setData(event.target.name, event.target.value);
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios
-            .post("/insertProject", data)
+        axios.post("/api/insertProject", data)
             .then(() => {
+                console.log("lsaslcs");
                 alert("User: " + JSON.stringify(data.name) + "wurde angelegt!");
-                reset();
+                //reset();
             })
             .catch((error) => {
                 console.log("ERROR:: ", error.response.data);
@@ -105,22 +111,87 @@ export default function InsertProject(props) {
                         <div style={inputStyle}>
                             <InputLabel
                                 className="mt-4"
-                                forInput="description"
-                                value="Beschreibung"
+                                forInput="country"
+                                value="Land"
                             />
 
                             <TextInput
-                                id="description"
-                                name="description"
-                                value={data.description}
+                                id="country"
+                                name="country"
+                                value={data.country}
                                 className="mt-1 block w-full"
-                                autoComplete="description"
+                                autoComplete="country"
                                 handleChange={onHandleChange}
                                 required
                             />
 
                             <InputError
-                                message={errors.description}
+                                message={errors.country}
+                                className="mt-2"
+                            />
+                        </div>
+
+                        <div style={inputStyle}>
+                            <InputLabel
+                                className="mt-4"
+                                forInput="zip"
+                                value="Postleitzahl"
+                            />
+
+                            <TextInput
+                                id="zip"
+                                name="zip"
+                                value={data.zip}
+                                className="mt-1 block w-full"
+                                autoComplete="zip"
+                                handleChange={onHandleChange}
+                                required
+                            />
+
+                            <InputError message={errors.zip} className="mt-2" />
+                        </div>
+
+                        <div style={inputStyle}>
+                            <InputLabel
+                                className="mt-4"
+                                forInput="city"
+                                value="Ort"
+                            />
+
+                            <TextInput
+                                id="city"
+                                name="city"
+                                value={data.city}
+                                className="mt-1 block w-full"
+                                autoComplete="city"
+                                handleChange={onHandleChange}
+                                required
+                            />
+
+                            <InputError
+                                message={errors.city}
+                                className="mt-2"
+                            />
+                        </div>
+                        <div style={inputStyle}>
+                            <InputLabel
+                                className="mt-4"
+                                forInput="street"
+                                value="Straße"
+                            />
+
+                            <TextInput
+                                id="street"
+                                name="street"
+                                value={data.street}
+                                className="mt-1 block w-full"
+                                autoComplete="street"
+                                handleChange={onHandleChange}
+                                required
+                            />
+
+                            <InputError
+                                message={errors.street}
                                 className="mt-2"
                             />
                         </div>
@@ -137,10 +208,37 @@ export default function InsertProject(props) {
                             />
                         </div>
 
+                        <div style={inputStyle}>
+                            <InputLabel
+                                className="mt-4"
+                                forInput="beschreibung"
+                                value="Beschreibung"
+                            />
+
+                            <textarea
+                                id="description"
+                                name="description"
+                                value={data.description}
+                                className="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm "
+                                autoComplete="description"
+                                onChange={onHandleChange}
+                                required
+                                rows={4}
+                            ></textarea>
+                        </div>
+
                         <div className="flex justify-center align-center p-5">
-                            <AdminButton type="submit" href='projectsInsertPage' text="Hinzufügen"></AdminButton>
+                            <AdminButton
+                                type="submit"
+                                href="projectInsertPage"
+                                text="Hinzufügen"
+                            ></AdminButton>
                             <div className="mx-2"></div>
-                            <AdminButton type="button" href='myprojects' text="Zurück"></AdminButton>
+                            <AdminButton
+                                type="button"
+                                href="myprojects"
+                                text="Zurück"
+                            ></AdminButton>
                         </div>
                     </form>
                 </div>

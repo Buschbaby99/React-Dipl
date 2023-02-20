@@ -18,9 +18,8 @@ use Inertia\Inertia;
 */
 
 
-
-Route::get('/myadmin', [\App\Http\Controllers\AdminController::class, 'formyadmin'])->middleware(['auth', 'verified', 'isAdmin'])->name('myadmin');
-Route::get('/myprojects', [\App\Http\Controllers\AdminController::class, 'formyprojects'])->middleware(['auth', 'verified', 'isAdmin'])->name('myprojects');
+Route::get('myadmin', [\App\Http\Controllers\AdminController::class, 'formyadmin'])->middleware(['auth', 'verified', 'isAdmin'])->name('myadmin');
+Route::get('myprojects', [\App\Http\Controllers\ProjectController::class, 'formyprojects'])->middleware(['auth', 'verified', 'isAdmin'])->name('myprojects');
 
 Route::get('/test', 'DataController@test');
 
@@ -33,6 +32,8 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+
 
 
 Route::get('/loginPage', function () {
