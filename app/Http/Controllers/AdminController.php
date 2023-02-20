@@ -72,8 +72,6 @@ class AdminController extends Controller
         $user->password = password_hash($mypassword, PASSWORD_BCRYPT);
         $user->save();
 
-    
-
         $personaddress = new Personaddress;
 
         $personaddress->ZIP= $request->input('zip');
@@ -81,10 +79,6 @@ class AdminController extends Controller
         $personaddress->city= $request->input('city');
         $personaddress->street= $request->input('street');
         $personaddress->save();
-
-
-
-
 
         $persons = new Persons;
         $persons->firstname = $request->input('firstname');
@@ -95,8 +89,6 @@ class AdminController extends Controller
         $persons->personAddress_id = $personaddress->id;
         $persons->user_id = $user->id;
         $persons->save();
-
-
     }
 
     public function deleteUser(Request $request)

@@ -35,23 +35,8 @@ export default function AdminInputInsert(props) {
 
     });
 
-    //console.log(result);
-/*
-    useEffect(() => {
-        axios.post('/editUser')
-            .then(response => {
-                setUser(response.data.user);
-                setPersons(response.data.persons);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    }, [props.id]);
-*/
     console.log(props);
-    //console.log(persons);
 
-   // console.log(data);
 
     const onHandleChange = (event) => {
         setData(event.target.name, event.target.value);
@@ -314,7 +299,7 @@ export default function AdminInputInsert(props) {
             ></AdminButton>
             
         </>
-        )
+    )
 }
 
 

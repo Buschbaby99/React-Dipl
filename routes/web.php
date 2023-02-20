@@ -25,11 +25,6 @@ Route::post('deleteProject', 'App\Http\Controllers\AdminController@deleteProject
 Route::post('editUser', 'App\Http\Controllers\AdminController@editUser');
 Route::post('updateUser', 'App\Http\Controllers\AdminController@updateUser');
 
-
-
-//Route::get('/adminInsertPage', [\App\Http\Controllers\AdminController::class, 'editUser']);
-
-
 Route::get('/test', 'DataController@test');
 
 
@@ -62,15 +57,8 @@ Route::get('/adminUpdatePage', function () {
 Route::get('/news', function () {
     return Inertia::render('news');
 })->middleware(['auth', 'verified'])->name('news');
-/*
-Route::get('/myprojects', function () {
-    return Inertia::render('myprojects');
-})->middleware(['auth', 'verified', 'isManager'])->name('myprojects');
 
-Route::get('/myadmin', function () {
-   
-})->middleware(['auth', 'verified', 'isAdmin'])->name('myadmin');
-*/
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

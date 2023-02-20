@@ -11,10 +11,7 @@ export default function myprojects(props) {
         <div>
             <Head title="Myprojects" />
             <LoggedIn auth={props.auth}></LoggedIn>
-            <AdminButton
-                 href='projectInsertPage'
-            
-            ></AdminButton>
+            <AdminButton href='projectInsertPage'></AdminButton>
             <ProjectTable props={props}></ProjectTable>
         </div>
     );

@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
-import { useState } from 'react'
-import { useNavigate } from "react-router-dom";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 
 export default function AdminTable(props) {
@@ -81,7 +81,7 @@ export default function AdminTable(props) {
                                                 //onClick={() => handleEdit(id)}
                                                 href={`/adminUpdatePage?id=${id}`}
                                             >
-                                                Edit
+                                                <EditIcon></EditIcon>
                                             </a>
                                         </td>
                                         <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap">
@@ -90,7 +90,7 @@ export default function AdminTable(props) {
                                                 href="#"
                                                 onClick={() => handleDelete(id, name)}
                                             >
-                                                Delete
+                                                <DeleteForeverIcon></DeleteForeverIcon>
                                             </a>
                                         </td>
                                         </tr>
