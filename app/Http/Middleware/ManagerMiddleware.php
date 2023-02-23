@@ -17,14 +17,14 @@ class ManagerMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check()){
-            if(Auth::user()->role == 2 || Auth::user()->role == 1){
+        if (Auth::check()) {
+            if (Auth::user()->role == 2 || Auth::user()->role == 1) {
                 return $next($request);
             } else {
-                return redirect('/welcome')->with('message', 'You are not admin');
+                return redirect('/news')->with('message', 'You are not admin');
             }
         } else {
-            return redirect('/welcome')->with('message', 'login to website');
+            return redirect('/news')->with('message', 'login to website');
         }
         return $next($request);
     }

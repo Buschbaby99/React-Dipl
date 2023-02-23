@@ -7,7 +7,7 @@ export default function news(props) {
     <div>
         <Head title="News" />
         <LoggedIn auth={props.auth}></LoggedIn>
-        <h1>Seite wird bearbeitet...</h1>
+        
     </div>
   )
 }

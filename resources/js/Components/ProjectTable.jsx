@@ -1,7 +1,8 @@
 import React from "react";
 import axios from "axios";
 import { useState } from 'react'
-
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 
 export default function ProjectTable(props) {
@@ -110,7 +111,7 @@ export default function ProjectTable(props) {
                                             href="#"
                                             onClick={() => handleEdit(id)}
                                         >
-                                            Edit
+                                            <EditIcon></EditIcon>
                                         </a>
                                     </td>
                                     <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap">
@@ -119,7 +120,7 @@ export default function ProjectTable(props) {
                                             href="#"
                                             onClick={() => handleDelete(id, name)}
                                         >
-                                            Delete
+                                            <DeleteForeverIcon></DeleteForeverIcon>
                                         </a>
                                     </td>
                                     </tr>
