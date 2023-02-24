@@ -37,6 +37,10 @@ Route::get('/loginPage', function () {
     return Inertia::render('LoginPage');
 });
 
+Route::get('/ProjectUpdatePage', function () {
+    return Inertia::render('ProjectUpdatePage');
+});
+
 Route::get('/projectInsertPage', function () {
     return Inertia::render('projectInsertPage');
 });

@@ -23,27 +23,6 @@ export default function ProjectTable(props) {
             });
         }
     };
-    
-
-    const handleEdit = (id) => {
-        
-        axios.post(`/api/editProject`, {id})
-        .then((response) => {
-            
-   
-
-            //bekommen die richtigen daten
-            console.log(response.data.user);
-            console.log(response.data.persons);
-            alert(`Benutzer wurde erfolgreich geändert.`);
-            window.location.href = `adminInsertPage?id=`+id;
-        }); 
-    };
-
-
-    console.log(props);
-
-    console.log(JSON.parse(props.props[0]));
 
     return (
         <div className="flex flex-col">
@@ -108,8 +87,7 @@ export default function ProjectTable(props) {
                                       <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap">
                                         <a
                                             className="text-green-500 hover:text-green-700"
-                                            href="#"
-                                            onClick={() => handleEdit(id)}
+                                            href={`/ProjectUpdatePage?id=${id}`}
                                         >
                                             <EditIcon></EditIcon>
                                         </a>

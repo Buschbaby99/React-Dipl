@@ -31,3 +31,6 @@ Route::post('updateUser', 'App\Http\Controllers\AdminController@updateUser');
  */
 Route::post('insertProject', 'App\Http\Controllers\ProjectController@insertProject');
 Route::post('deleteProject', 'App\Http\Controllers\ProjectController@deleteProject');
+
+Route::post('editProject', 'App\Http\Controllers\ProjectController@editProject');
+Route::post('updateProject', 'App\Http\Controllers\ProjectController@updateProject');
