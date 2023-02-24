@@ -53,7 +53,6 @@ Route::get('AdminUpdatePage', function () {
     return Inertia::render('Admin/AdminUpdatePage');
 });
 
-
 Route::get('/NewsPage', function () {
     return Inertia::render('NewsPage');
 })->middleware(['auth', 'verified'])->name('NewsPage');
