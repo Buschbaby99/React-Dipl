@@ -20,7 +20,7 @@ class AdminController extends Controller
         $users = User::all();
         $encode[]=json_encode($users);
 
-        return Inertia::render('myadmin', $encode);
+        return Inertia::render('Admin/AdminHome', $encode);
     }
    
     

@@ -1,11 +1,9 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
-import InputError from "@/Components/InputError";
-import InputLabel from "@/Components/InputLabel";
-import PrimaryButton from "@/Components/PrimaryButton";
-import TextInput from "@/Components/TextInput";
-import { Head, Link, useForm } from "@inertiajs/react";
-import AdminButton from "./UniversalButtonComponent";
+import React, { useState, useEffect } from "react";
+import InputError from "@/Components/Inputs/InputError";
+import InputLabel from "@/Components/Inputs/InputLabel";
+import TextInput from "@/Components/Inputs/TextInput";
+import { useForm } from "@inertiajs/react";
+import UniversalButton from "../Buttons/UniversalButtonComponent";
 
 const inputStyle = {
     width: "500px",
@@ -375,17 +373,17 @@ export default function AdminUpdate(props) {
                         </div>
 
                         <div className="flex justify-center align-center p-5">
-                            <AdminButton
+                            <UniversalButton
                                 type="submit"
-                                href="myadmin"
+                                href="AdminHome"
                                 text="Update"
-                            ></AdminButton>
+                            ></UniversalButton>
                             <div className="mx-2"></div>
-                            <AdminButton
+                            <UniversalButton
                                 type="button"
-                                href="myadmin"
+                                href="AdminHome"
                                 text="Zurück"
-                            ></AdminButton>
+                            ></UniversalButton>
                         </div>
                     </form>
                 </div>

@@ -1,9 +1,9 @@
 
 import React from 'react'
-import LoggedIn from '@/Components/LoggedIn';
+import LoggedIn from '@/Components/ChangeNavbarComponent';
 import { Head } from '@inertiajs/react';
-import AdminInputInsertUser from '../Components/AdminInputInsertUser';
-import AdminButton from "../Components/UniversalButtonComponent"
+import AdminInputInsertUser from '../../Components/Admin/InsertUserComponent';
+import AdminButton from "../../Components/Buttons/UniversalButtonComponent"
 
 
 export default function adminInsertPage(props) {

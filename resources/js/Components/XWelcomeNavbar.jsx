@@ -3,8 +3,8 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import firmenlogo from '../../images/firmenlogo.png'
 import userImage from '../../images/tryFoto.jpg'
-import Dropdown from '@/Components/Dropdown';
-import LoggedIn from '@/Components/LoggedIn';
+import Dropdown from '@/Components/Inputs/Dropdown';
+import LoggedIn from '@/Components/ChangeNavbarComponent';
 
 
 const navigation = [

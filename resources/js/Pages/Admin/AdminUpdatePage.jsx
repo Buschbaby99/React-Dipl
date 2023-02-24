@@ -1,18 +1,19 @@
 
 import React from 'react'
-import LoggedIn from '@/Components/LoggedIn';
+import LoggedIn from '@/Components/ChangeNavbarComponent';
 import { Head } from '@inertiajs/react';
-import ProjectUpdateComponent from '../Components/ProjectUpdateComponent';
+import AdminUpdateUser from '../../Components/Admin/UserUpdateComponents';
 
 
 export default function adminInsertPage(props) {
 
+  console.log(props);
 
   return (
     <div>
         <Head title="AdminUpdatePage" />
         <LoggedIn auth={props.auth}></LoggedIn>
-        <ProjectUpdateComponent name={props}></ProjectUpdateComponent>
+        <AdminUpdateUser name={props}></AdminUpdateUser>
     </div>
   )
 }

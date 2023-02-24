@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import ManagerNav from "./ManagerNavbar";
-import AdminNav from "./AdminNavbar";
-import UserNav from "./UserNavbar";
+import ManagerNav from "./Manager/NavbarComponent";
+import AdminNav from "./Admin/NavbarComponent";
+import UserNav from "./User/NavbarComponent"
 
 const LoggedIn = (props) => {
   const [user, setUser] = useState(null);

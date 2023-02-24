@@ -1,10 +1,10 @@
-import LoggedIn from '@/Components/LoggedIn';
+import LoggedIn from '@/Components/ChangeNavbarComponent';
 import { Head } from '@inertiajs/react';
 
-export default function Dashboard(props) {
+export default function Scheduler(props) {
     return (
         <div>
-            <Head title="Dashboard" />
+            <Head title="Scheduler" />
             <LoggedIn auth={props.auth}></LoggedIn>
         </div>
     );

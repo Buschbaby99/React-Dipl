@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
+import InputError from '@/Components/Inputs/InputError';
+import InputLabel from '@/Components/Inputs/InputLabel';
+import PrimaryButton from '@/Components/Buttons/PrimaryButton';
+import TextInput from '@/Components/Inputs/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
-import AdminButton from './UniversalButtonComponent';
-import { useLocation } from 'react-router-dom';
+import AdminButton from '../Buttons/UniversalButtonComponent';
+
 
 
 const inputStyle = {
@@ -285,9 +285,9 @@ export default function AdminInputInsert(props) {
                             <InputError message={errors.street} className="mt-2" />
                         </div>
                         <div className="flex justify-center align-center p-5">
-                            <AdminButton type="submit" href='adminInsertPage' text="Hinzufügen"></AdminButton>
+                            <AdminButton type="submit" href='AdminInsertPage' text="Hinzufügen"></AdminButton>
                             <div className="mx-2"></div>
-                            <AdminButton type="button" href='myadmin' text="Zurück"></AdminButton>
+                            <AdminButton type="button" href='AdminHome' text="Zurück"></AdminButton>
                         </div>
                     </form>
                 </div>

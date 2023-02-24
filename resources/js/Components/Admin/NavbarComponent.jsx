@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import firmenlogo from "../../images/firmenlogo.png";
-import Dropdown from "@/Components/Dropdown";
+import firmenlogo from "../../../images/firmenlogo.png";
+import Dropdown from "@/Components/Inputs/Dropdown";
 import SettingsIcon from "@mui/icons-material/Settings";
 
 const navigation = [
-    { name: "News", href: "news", current: false },
-    { name: "Personaleinteilung", href: "dashboard", current: false },
-    { name: "Projekte", href: "myprojects", current: false },
-    { name: "Admin", href: "myadmin", current: false },
+    { name: "News", href: "NewsPage", current: false },
+    { name: "Personaleinteilung", href: "Scheduler", current: false },
+    { name: "Projekte", href: "ProjectHome", current: false },
+    { name: "Admin", href: "AdminHome", current: false },
 ];
 
 function classNames(...classes) {

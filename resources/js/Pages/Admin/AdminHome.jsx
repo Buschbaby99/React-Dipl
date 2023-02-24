@@ -1,17 +1,16 @@
 import { Head } from '@inertiajs/react';
-import LoggedIn from '@/Components/LoggedIn';
-import Name from '../Components/Name';
-import AdminTable from '../Components/AdminTable';
-import AdminButton from '@/Components/UniversalButtonComponent';
+import LoggedIn from '@/Components/ChangeNavbarComponent';
+import AdminTable from '../../Components/Admin/UserTableComponent';
+import AdminButton from '@/Components/Buttons/UniversalButtonComponent';
 
 export default function myadmin(props) {
     return (
         <div>
-            <Head title="MyAdmin" />
+            <Head title="AdminHome" />
             <LoggedIn auth={props.auth}></LoggedIn>
             <AdminButton 
                 type="button"
-                href='adminInsertPage'
+                href='AdminInsertPage'
                 text= "Hinzufügen"
             ></AdminButton>
             <AdminTable props={props}></AdminTable>

@@ -18,14 +18,14 @@ use Inertia\Inertia;
 */
 
 
-Route::get('myadmin', [\App\Http\Controllers\AdminController::class, 'formyadmin'])->middleware(['auth', 'verified', 'isAdmin'])->name('myadmin');
-Route::get('myprojects', [\App\Http\Controllers\ProjectController::class, 'formyprojects'])->middleware(['auth', 'verified', 'isManager'])->name('myprojects');
+Route::get('AdminHome', [\App\Http\Controllers\AdminController::class, 'formyadmin'])->middleware(['auth', 'verified', 'isAdmin'])->name('AdminHome');
+Route::get('ProjectHome', [\App\Http\Controllers\ProjectController::class, 'formyprojects'])->middleware(['auth', 'verified', 'isManager'])->name('ProjectHome');
 
 Route::get('/test', 'DataController@test');
 
 
 Route::get('/', function () {
-    return Inertia::render('loginPage', [
+    return Inertia::render('Login/LoginPage', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
@@ -37,31 +37,31 @@ Route::get('/loginPage', function () {
     return Inertia::render('LoginPage');
 });
 
-Route::get('/ProjectUpdatePage', function () {
-    return Inertia::render('ProjectUpdatePage');
+Route::get('ProjectUpdatePage', function () {
+    return Inertia::render('Project/ProjectUpdatePage');
 });
 
-Route::get('/projectInsertPage', function () {
-    return Inertia::render('projectInsertPage');
+Route::get('ProjectInsertPage', function () {
+    return Inertia::render('Project/ProjectInsertPage');
 });
 
-Route::get('/adminInsertPage', function () {
-    return Inertia::render('adminInsertPage');
+Route::get('AdminInsertPage', function () {
+    return Inertia::render('Admin/AdminInsertPage');
 });
 
-Route::get('/adminUpdatePage', function () {
-    return Inertia::render('adminUpdatePage');
+Route::get('AdminUpdatePage', function () {
+    return Inertia::render('Admin/AdminUpdatePage');
 });
 
 
-Route::get('/news', function () {
-    return Inertia::render('news');
-})->middleware(['auth', 'verified'])->name('news');
+Route::get('/NewsPage', function () {
+    return Inertia::render('NewsPage');
+})->middleware(['auth', 'verified'])->name('NewsPage');
 
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/Scheduler', function () {
+    return Inertia::render('Scheduler');
+})->middleware(['auth', 'verified'])->name('Scheduler');
 
 Route::get('/projects_list', function () {
     return Inertia::render('projects_list');

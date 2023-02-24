@@ -78,8 +78,7 @@ export default function AdminTable(props) {
                                         <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap">
                                             <a
                                                 className="text-green-500 hover:text-green-700"
-                                                //onClick={() => handleEdit(id)}
-                                                href={`/adminUpdatePage?id=${id}`}
+                                                href={`AdminUpdatePage?id=${id}`}
                                             >
                                                 <EditIcon></EditIcon>
                                             </a>

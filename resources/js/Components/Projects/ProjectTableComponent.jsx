@@ -87,7 +87,7 @@ export default function ProjectTable(props) {
                                       <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap">
                                         <a
                                             className="text-green-500 hover:text-green-700"
-                                            href={`/ProjectUpdatePage?id=${id}`}
+                                            href={`ProjectUpdatePage?id=${id}`}
                                         >
                                             <EditIcon></EditIcon>
                                         </a>

@@ -1,5 +1,5 @@
 import React from 'react'
-import LoggedIn from '../Components/LoggedIn'
+import LoggedIn from '../Components/ChangeNavbarComponent'
 import { Head } from '@inertiajs/react';
 
 export default function news(props) {

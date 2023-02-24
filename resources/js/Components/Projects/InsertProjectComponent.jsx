@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import InputError from "@/Components/InputError";
-import InputLabel from "@/Components/InputLabel";
-import PrimaryButton from "@/Components/PrimaryButton";
-import TextInput from "@/Components/TextInput";
+import InputError from "@/Components/Inputs/InputError";
+import InputLabel from "@/Components/Inputs/InputLabel";
+import PrimaryButton from "@/Components/Buttons/PrimaryButton";
+import TextInput from "@/Components/Inputs/TextInput";
 import { Head, Link, useForm } from "@inertiajs/react";
-import AdminButton from "./UniversalButtonComponent";
+import AdminButton from "../Buttons/UniversalButtonComponent";
 import Datepicker from "react-tailwindcss-datepicker";
 
 const inputStyle = {
@@ -230,13 +230,13 @@ export default function InsertProject(props) {
                         <div className="flex justify-center align-center p-5">
                             <AdminButton
                                 type="submit"
-                                href="projectInsertPage"
+                                href="ProjectInsertPage"
                                 text="Hinzufügen"
                             ></AdminButton>
                             <div className="mx-2"></div>
                             <AdminButton
                                 type="button"
-                                href="myprojects"
+                                href="ProjectHome"
                                 text="Zurück"
                             ></AdminButton>
                         </div>

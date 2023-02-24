@@ -1,7 +1,7 @@
 import { Link, Head } from '@inertiajs/react';
-import Login from './Auth/Login';
+import Login from '../Auth/Login';
 
-export default function Welcome(props) {
+export default function LoginPage(props) {
     return (
         <>
             <Head title="Login" />  

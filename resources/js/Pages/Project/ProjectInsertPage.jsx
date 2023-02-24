@@ -1,8 +1,8 @@
 
 import React from 'react'
-import LoggedIn from '@/Components/LoggedIn';
+import LoggedIn from '@/Components/ChangeNavbarComponent';
 import { Head } from '@inertiajs/react';
-import InsertProject from '../Components/InsertProject';
+import InsertProject from '../../Components/Projects/InsertProjectComponent';
 
 
 export default function projectInsertPage(props) {

@@ -15,7 +15,7 @@ class ProjectController extends Controller
         $projects = Projects::all();
         $encode[]=json_encode($projects);
 
-        return Inertia::render('myprojects', $encode);
+        return Inertia::render('Project/ProjectHome', $encode);
     }
 
     public function insertProject(Request $request)
