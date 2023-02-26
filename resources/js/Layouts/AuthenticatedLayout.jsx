@@ -1,9 +1,4 @@
 import { useState } from 'react';
-import ApplicationLogo from '@/Components/XApplicationLogo';
-import Dropdown from '@/Components/Inputs/Dropdown';
-import NavLink from '@/Components/Inputs/NavLink';
-import ResponsiveNavLink from '@/Components/Inputs/ResponsiveNavLink';
-import { Link } from '@inertiajs/react';
 import LoggedIn from '@/Components/ChangeNavbarComponent';
 
 export default function Authenticated({ auth, header, children }) {
