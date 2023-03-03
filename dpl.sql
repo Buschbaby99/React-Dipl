@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 17. Feb 2023 um 08:37
+-- Erstellungszeit: 03. Mrz 2023 um 10:31
 -- Server-Version: 10.4.27-MariaDB
 -- PHP-Version: 8.2.0
 
@@ -145,7 +145,15 @@ INSERT INTO `personaddresses` (`id`, `country`, `ZIP`, `city`, `street`, `create
 (3, 'AT', '7564', 'Dobersdorf', 'Gartengasse 1', '2023-02-17 06:22:56', '2023-02-17 06:22:56'),
 (4, 'AT', '7564', 'Dobersdorf', 'Gartengasse 1', '2023-02-17 06:23:49', '2023-02-17 06:23:49'),
 (5, 'AT', '7564', 'Dobersdorfer', 'Gartengasse 1', '2023-02-17 06:25:16', '2023-02-17 06:25:44'),
-(6, 'Manager', 'Manager', 'Manager', 'Manager', '2023-02-17 06:33:13', '2023-02-17 06:33:50');
+(6, 'Manager', 'Manager', 'Manager', 'Manager', '2023-02-17 06:33:13', '2023-02-17 06:33:50'),
+(7, 'Austria', '8041', 'Graz', 'Sternäckerweg', '2023-02-17 06:50:32', '2023-02-17 06:50:59'),
+(8, 'sdd', '333', 'dfdf', 'dsdd', '2023-02-20 08:15:56', '2023-02-20 09:06:08'),
+(9, 'dffd', '444', 'ffg', 'fgfg', '2023-02-20 08:51:11', '2023-02-20 09:14:43'),
+(10, 'dsfd', '324', 'cv', 'ycyx', '2023-02-20 10:47:47', '2023-02-24 07:36:52'),
+(11, 'Austria', '8041', 'Graz', 'Sternäckerweg', '2023-02-23 08:56:12', '2023-02-23 08:56:12'),
+(12, 'aa', '22', 'ss', 'xx', '2023-02-24 08:12:59', '2023-02-24 08:12:59'),
+(13, 'sacsac', '45', 'dvdf', 'vdv', '2023-02-24 08:54:58', '2023-02-24 08:54:58'),
+(14, 'sss', 'sss', 'ss', 'ss', '2023-02-24 08:56:46', '2023-02-24 08:56:46');
 
 -- --------------------------------------------------------
 
@@ -192,24 +200,13 @@ CREATE TABLE `persons` (
 
 INSERT INTO `persons` (`id`, `firstname`, `lastname`, `TelNr1`, `TelNr2`, `rank`, `user_id`, `department`, `personAddress_id`, `created_at`, `updated_at`) VALUES
 (1, 'Alexander', 'Kainz', '06641509102', '06641509102', NULL, 9, 'Rechtschutz', 5, '2023-02-17 06:25:16', '2023-02-17 06:25:16'),
-(2, 'Manager', 'Manager', 'Manager', 'Manager', NULL, 10, 'Manager', 6, '2023-02-17 06:33:13', '2023-02-17 06:33:13');
-
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `projectaddress`
---
-
-CREATE TABLE `projectaddress` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `country` varchar(255) NOT NULL,
-  `ZIP` varchar(255) NOT NULL,
-  `city` varchar(255) NOT NULL,
-  `street` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+(2, 'Manager', 'Manager', 'Manager', 'Manager', NULL, 10, 'Manager', 6, '2023-02-17 06:33:13', '2023-02-17 06:33:13'),
+(4, 'Test', 'Test', '12211', '211', NULL, 12, 'sdsd', 8, '2023-02-20 08:15:56', '2023-02-20 08:15:56'),
+(5, 'zzzzsdsd', 'zz', '222', '222', NULL, 13, 'zz', 9, '2023-02-20 08:51:11', '2023-02-20 09:06:47'),
+(6, 'sdcsdc', 'sdcsdc', '324234', '23423', NULL, 14, 'dscsd', 10, '2023-02-20 10:47:47', '2023-02-20 10:47:47'),
+(7, 'Mario', 'Pilz', '0', '0', NULL, 15, 'Programmierer', 11, '2023-02-23 08:56:12', '2023-02-23 08:56:12'),
+(8, 'aa', 'aa', '22', '22', NULL, 16, 'aa', 12, '2023-02-24 08:12:59', '2023-02-24 08:12:59'),
+(9, 'assaa', 'asas', 'saas', 'assas', NULL, 17, 'asas', 13, '2023-02-24 08:54:58', '2023-02-24 08:54:58');
 
 -- --------------------------------------------------------
 
@@ -220,14 +217,46 @@ CREATE TABLE `projectaddress` (
 CREATE TABLE `projects` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
-  `project_number` bigint(20) NOT NULL,
+  `project_number` int(20) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `startDate` timestamp NULL DEFAULT NULL,
-  `endDate` timestamp NULL DEFAULT NULL,
+  `startDate` date DEFAULT NULL,
+  `endDate` date DEFAULT NULL,
   `projectAddress_Id` bigint(20) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Daten für Tabelle `projects`
+--
+
+INSERT INTO `projects` (`id`, `name`, `project_number`, `description`, `startDate`, `endDate`, `projectAddress_Id`, `created_at`, `updated_at`) VALUES
+(6, 'hallo1233', 111, '<x<yx<', '2023-03-02', '2023-04-29', 6, '2023-02-24 07:02:09', '2023-02-24 08:47:28'),
+(7, 'zzzaaa', 3, 'hhh', '2023-03-07', '2023-04-27', 7, '2023-02-24 08:58:20', '2023-02-26 12:09:51');
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `project_addresses`
+--
+
+CREATE TABLE `project_addresses` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `country` varchar(255) NOT NULL,
+  `ZIP` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `street` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Daten für Tabelle `project_addresses`
+--
+
+INSERT INTO `project_addresses` (`id`, `country`, `ZIP`, `city`, `street`, `created_at`, `updated_at`) VALUES
+(6, 'Austria', '1000', 'kksksk', 'kskkssk', '2023-02-24 07:02:09', '2023-02-24 07:31:30'),
+(7, 'zzz', '77', 'hhh', 'hhhh', '2023-02-24 08:58:20', '2023-02-24 08:58:20');
 
 -- --------------------------------------------------------
 
@@ -268,8 +297,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
-(9, 'alex', 'admin@gmx.at', NULL, '$2y$10$PwZ.hLuEkhOoC4.kjZRFoO2dSePCpsXUGpmfl6rM61aid5/2AFeay', 1, NULL, '2023-02-17 06:25:16', '2023-02-17 06:25:16'),
-(10, 'Manager', 'manager@gmx.at', NULL, '$2y$10$RCDvSAM8S3q9R6w7UmQij.cl7PUcCZAKehqhtnHv3.BCSasami72q', 2, NULL, '2023-02-17 06:33:13', '2023-02-17 06:33:50');
+(9, 'Test99', 'admin@gmx.at', NULL, '$2y$10$PwZ.hLuEkhOoC4.kjZRFoO2dSePCpsXUGpmfl6rM61aid5/2AFeay', 1, NULL, '2023-02-17 06:25:16', '2023-02-23 07:14:25'),
+(10, 'Manager', 'manager@gmx.at', NULL, '$2y$10$tYqaknEPBAs1tjRly.jNzueCKwSJtdB7dJKudP1skRwLRM7rhlQoe', 2, NULL, '2023-02-17 06:33:13', '2023-02-23 08:01:32'),
+(12, 'Test212ssxxx', 'test@gmx.at', NULL, '$2y$10$d3jMlxXRhJlv5EowJJXYG.waO9lpyRyFuYR.xo0VGAY4sECXOT2iu', 1, NULL, '2023-02-20 08:15:56', '2023-02-20 09:06:08'),
+(13, 'zzaa', 'zzz@tt.at', NULL, '$2y$10$r1jmstsFlfwFH9ZN/KbLeu.9Xc8vh2K6GVhrg.fwXX37IFf366tmq', 1, NULL, '2023-02-20 08:51:11', '2023-02-20 09:14:43'),
+(14, 'aaaa', 'dasdasda@sdcsd.at', NULL, '$2y$10$fPzMZCV3ZMvq0OnUWUVPZe/yOGTtm6tJkWlEYZwbfjdyXbUIpOiTC', 1, NULL, '2023-02-20 10:47:47', '2023-02-24 07:36:52'),
+(15, 'Mario', 'mario.pilz0601@gmail.com', NULL, '$2y$10$RqHTxmSZnJHGeVi.tNT8legJFzQnBm4C6Asn7mt8WqrUq.QnbFfE6', 0, NULL, '2023-02-23 08:56:12', '2023-02-23 08:56:12'),
+(16, 'aaa', 'aaa@aaa.at', NULL, '$2y$10$qkk5mYt9fUv4UywXunhlwervz/L/MZQ.hyTwjsDlEZ5GZ0.5o.tHG', 0, NULL, '2023-02-24 08:12:59', '2023-02-24 08:12:59'),
+(17, 'vsdvsd', 'sdvsdv@scsc.at', NULL, '$2y$10$rVGaksZ0w5nQ1TU0AfiR5OKecyYr5TVqDqp1dgh1ZIkZVauN9TwCK', 1, NULL, '2023-02-24 08:54:58', '2023-02-24 08:54:58');
 
 --
 -- Indizes der exportierten Tabellen
@@ -327,15 +362,15 @@ ALTER TABLE `persons`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indizes für die Tabelle `projectaddress`
---
-ALTER TABLE `projectaddress`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indizes für die Tabelle `projects`
 --
 ALTER TABLE `projects`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indizes für die Tabelle `project_addresses`
+--
+ALTER TABLE `project_addresses`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -383,7 +418,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT für Tabelle `personaddresses`
 --
 ALTER TABLE `personaddresses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT für Tabelle `personal_access_tokens`
@@ -395,19 +430,19 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT für Tabelle `persons`
 --
 ALTER TABLE `persons`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT für Tabelle `projectaddress`
---
-ALTER TABLE `projectaddress`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT für Tabelle `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT für Tabelle `project_addresses`
+--
+ALTER TABLE `project_addresses`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT für Tabelle `staffing`
@@ -419,7 +454,7 @@ ALTER TABLE `staffing`
 -- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
