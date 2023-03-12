@@ -8,7 +8,7 @@ import UpdateInsertComponent from '@/Components/Scheduler/UpdateInsertComponent'
 
 function SchedulerComponent(data) {
 
-
+    console.log(data);
 
     const [month, setMonth] = useState(new Date()); // initial value is today's date
     const daysInMonth = new Date(month.getFullYear(), month.getMonth() + 1, 0).getDate();
@@ -43,7 +43,7 @@ function SchedulerComponent(data) {
     const renderPersons = () => {
 
         addToPersons(data.data, persons);
-
+        console.log(persons)
 
         return persons.map((person, index) => {
             const personProjects = [];
@@ -64,21 +64,28 @@ function SchedulerComponent(data) {
             personProjects.forEach(({ project, start, end }) => {
                 // Add cells for any gaps between projects
                 if (currentIndex < start) {
-                    personCells.push(<td key={`gap-${currentIndex}`} colSpan={start - currentIndex} className="border px-3 py-2"></td>);
+                    personCells.push(
+                    <td key={`gap-${currentIndex}`} colSpan={start - currentIndex} className="border px-3 py-2">
+                        
+                    </td>);
+
                 }
                 // Add cells for the project duration
                 personCells.push(
                     <td key={`${person.name}-${project}-${start}-${end}`} colSpan={end - start + 1} className={`border px-3 py-2 bg-red-200`}>
                         <Popover className="relative">
                             <Popover.Button>{`Project ${project}`}</Popover.Button>
+                            <Popover.Panel className="absolute z-10  flex items-center justify-center ">
+                                <div className="grid grid-cols-2 flex items-center justify-center">
 
-                            <Popover.Panel className="absolute z-10">
-                                <div className="grid grid-cols-2">
-                                 
-                                   <UpdateInsertComponent
-                                   firstname={person.name}
-                                   lastname={person.name}
-                                   ></UpdateInsertComponent>
+                                    <UpdateInsertComponent
+                                        firstname={person.name}
+                                        lastname={person.lastname}
+                                        projectName={project}
+                                        startDate={start+1}
+                                        endDate={end+1}
+                                        month=  {month.getMonth()+1}
+                                    ></UpdateInsertComponent>
                                 </div>
 
                             </Popover.Panel>

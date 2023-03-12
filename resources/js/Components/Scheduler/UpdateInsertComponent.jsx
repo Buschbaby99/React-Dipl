@@ -112,6 +112,29 @@ console.log(props);
                                 className="mt-2"
                             />
                         </div>
+                        <div style={inputStyle}>
+                            <InputLabel
+                                className="mt-4"
+                                forInput="projektName"
+                                value="Projektname"
+                            />
+
+                            <TextInput
+                                id="projektName"
+                                name="projektName"
+                                value={props.projectName}
+                                className="mt-1 block w-full"
+                                autoComplete="projektName"
+                                handleChange={onHandleChange}
+                                locked={true}
+                            />
+
+                            <InputError
+                                message={errors.projectName}
+                                className="mt-2"
+                            />
+                        </div>
+                        
 
                         
 
