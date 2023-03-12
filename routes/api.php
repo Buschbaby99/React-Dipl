@@ -34,3 +34,4 @@ Route::post('deleteProject', 'App\Http\Controllers\ProjectController@deleteProje
 
 Route::post('editProject', 'App\Http\Controllers\ProjectController@editProject');
 Route::post('updateProject', 'App\Http\Controllers\ProjectController@updateProject');
+

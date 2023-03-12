@@ -2,10 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Staffing extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+
+        'person_id',
+        'startDate',
+        'endDate',
+        'project_Id',
+        
+    ];
 }

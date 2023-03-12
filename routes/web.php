@@ -20,6 +20,8 @@ use Inertia\Inertia;
 
 Route::get('AdminHome', [\App\Http\Controllers\AdminController::class, 'formyadmin'])->middleware(['auth', 'verified', 'isAdmin'])->name('AdminHome');
 Route::get('ProjectHome', [\App\Http\Controllers\ProjectController::class, 'formyprojects'])->middleware(['auth', 'verified', 'isManager'])->name('ProjectHome');
+Route::get('Scheduler', [\App\Http\Controllers\StaffingController::class, 'formystaffing'])->name('Scheduler');
+
 
 Route::get('/test', 'DataController@test');
 
@@ -57,11 +59,11 @@ Route::get('/NewsPage', function () {
     return Inertia::render('NewsPage');
 })->middleware(['auth', 'verified'])->name('NewsPage');
 
-
+/*
 Route::get('/Scheduler', function () {
     return Inertia::render('Scheduler');
 })->middleware(['auth', 'verified'])->name('Scheduler');
-
+*/
 Route::get('/projects_list', function () {
     return Inertia::render('projects_list');
 })->middleware(['auth', 'verified', 'isUser'])->name('projects_list');
