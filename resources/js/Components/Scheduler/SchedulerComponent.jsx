@@ -9,7 +9,7 @@ function SchedulerComponent(data)
 {
 
  
-    console.log(data);
+   console.log(data);
   const [month, setMonth] = useState(new Date()); // initial value is today's date
   const daysInMonth = new Date(month.getFullYear(), month.getMonth() + 1, 0).getDate();
   // get the number of days in the current month
@@ -33,15 +33,33 @@ function SchedulerComponent(data)
     return days;
   };
   // render table headers for each day of the month
-
+  const addToPersons = (data, persons) => {
+    data.forEach(item => {
+      const person = persons.find(p => p.name === item.name);
+      if (person) {
+        const unavailable = { start: item.start, end: item.end, project: item.project };
+        person.unavailable.push(unavailable);
+      } else {
+        persons.push({ name: item.name, unavailable: [{ start: item.start, end: item.end, project: item.project }] });
+      }
+    });
+  }
   
+
+
   const persons = [
-    { name: "Alexander", unavailable: [{ start: '2023-02-06', end: '2023-02-13 00:00:00', project: 1 },{ start: '2023-03-06', end: '2023-03-13', project: 1 }, { start: '2023-03-15', end: '2023-03-27', project: 2 }] },
-    { name: 'Mario', unavailable: [{ start: '2023-03-11', end: '2023-03-13', project: 1 }, { start: '2023-03-19', end: '2023-03-22', project: 2 }] },
-    { name: 'Dominik', unavailable: [{ start: '2023-03-06', end: '2023-03-09', project: 1 }, { start: '2023-03-15', end: '2023-03-17', project: 2 }] },
+    //{ name: "Alexander", unavailable: [{ start: '2023-02-06', end: '2023-02-13 00:00:00', project: 1 },{ start: '2023-03-06', end: '2023-03-13', project: 1 }, { start: '2023-03-15', end: '2023-03-27', project: 2 }] },
+    //{ name: 'Mario', unavailable: [{ start: '2023-03-11', end: '2023-03-13', project: 1 }, { start: '2023-03-19', end: '2023-03-22', project: 2 }] },
+   // { name: 'Dominik', unavailable: [{ start: '2023-03-06', end: '2023-03-09', project: 1 }, { start: '2023-03-15', end: '2023-03-17', project: 2 }] },
   ];
   
   const renderPersons = () => {
+    
+ 
+      
+      addToPersons(data.data, persons);
+      console.log(persons);
+
     return persons.map((person, index) => {
       const personProjects = [];
       person.unavailable.forEach(({ start, end, project }) => {
