@@ -1,18 +1,17 @@
-import React from "react";
+import React from 'react';
 import axios from "axios";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
-
 export default function AdminTable(props) {
-
+    console.log(JSON.parse(props.props[0]));
 
     const handleDelete = (id, name) => {
         if (window.confirm(`Möchten Sie den Benutzer ${name} wirklich löschen?`)){ 
             axios.post(`/api/deleteUser`, {id})
             .then(response => {
                 alert(`Benutzer ${name} wurde erfolgreich gelöscht.`);
-                window.location.reload();
+                setIsReloaded(true);
             })
             .catch(error => {
                 console.error(error);
@@ -20,7 +19,7 @@ export default function AdminTable(props) {
             });
         }
     };
-
+ 
 
     return (
             <div className="flex flex-col">
@@ -101,4 +100,4 @@ export default function AdminTable(props) {
                 </div>
             </div>                               
     );
-}
+};

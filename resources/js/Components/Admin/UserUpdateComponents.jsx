@@ -10,6 +10,8 @@ const inputStyle = {
 };
 
 export default function AdminUpdate(props) {
+    
+
     const [result, setResult] = useState("");
     let myVar;
     const [loading, setLoading] = useState(true);
@@ -76,12 +78,8 @@ export default function AdminUpdate(props) {
         axios
             .post("/api/updateUser", data)
             .then(() => {
-                alert(
-                    data.firstname +
-                        " " +
-                        data.lastname +
-                        " wurde erfolreich geändert"
-                );
+           window.location.href="AdminHome";
+                   
             })
             .catch((error) => {
                 console.log("ERROR:: ", error.response.data);
@@ -375,7 +373,7 @@ export default function AdminUpdate(props) {
                         <div className="flex justify-center align-center p-5">
                             <UniversalButton
                                 type="submit"
-                                href="AdminHome"
+                        
                                 text="Update"
                             ></UniversalButton>
                             <div className="mx-2"></div>
@@ -390,4 +388,4 @@ export default function AdminUpdate(props) {
             </div>
         </>
     );
-}
+};

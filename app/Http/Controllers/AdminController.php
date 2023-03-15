@@ -7,19 +7,17 @@ use App\Models\Personaddress;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
+
 class AdminController extends Controller
 {
-    public function index()
-    {
-        $users = User::all();
-        return view('admin', ['users' => $users]);
-    }
-
+   
     public function formyadmin()
     {
+      
         $users = User::all();
         $encode[]=json_encode($users);
-
+      
+        
         return Inertia::render('Admin/AdminHome', $encode);
     }
    
@@ -133,6 +131,11 @@ class AdminController extends Controller
         $personAddress->city =$request->city;
         $personAddress->street= $request->street;
         $personAddress->save();
+       
+        
+
+
+        
     }
     
 }

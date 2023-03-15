@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import InputError from "@/Components/Inputs/InputError";
 import InputLabel from "@/Components/Inputs/InputLabel";
-import PrimaryButton from "@/Components/Buttons/PrimaryButton";
 import TextInput from "@/Components/Inputs/TextInput";
-import { Head, Link, useForm } from "@inertiajs/react";
-import AdminButton from "../Buttons/UniversalButtonComponent";
+import { useForm } from "@inertiajs/react";
+import UniversalButton from "../Buttons/UniversalButtonComponent";
 import Datepicker from "react-tailwindcss-datepicker";
 
 const inputStyle = {
@@ -65,7 +64,10 @@ export default function ProjectUpdateComponent(props) {
         event.preventDefault();
         axios
             .post("/api/updateProject", data)
-            .then(() => {})
+            .then(() => {
+            window.location.href="ProjectHome"
+
+            })
             .catch((error) => {
                 console.log("ERROR:: ", error.response.data);
             });
@@ -263,17 +265,17 @@ export default function ProjectUpdateComponent(props) {
                         </div>
 
                         <div className="flex justify-center align-center p-5">
-                            <AdminButton
+                            <UniversalButton
                                 type="submit"
-                                href="ProjectHome"
-                                text="Hinzufügen"
-                            ></AdminButton>
+                               
+                                text="Update"
+                            ></UniversalButton>
                             <div className="mx-2"></div>
-                            <AdminButton
+                            <UniversalButton
                                 type="button"
                                 href="ProjectHome"
                                 text="Zurück"
-                            ></AdminButton>
+                            ></UniversalButton>
                         </div>
                     </form>
                 </div>
