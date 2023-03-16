@@ -12,8 +12,7 @@ const inputStyle = {
 };
 
 export default function ProjectUpdateComponent(props) {
-    
-console.log(props);
+    console.log(props);
 
     const { data, setData, post, processing, errors, reset } = useForm({
         firstname: "",
@@ -21,10 +20,7 @@ console.log(props);
         startDate: "",
         endDate: "",
         description: "",
-       
     });
-
-  
 
     const onHandleChange = (event) => {
         setData(event.target.name, event.target.value);
@@ -57,16 +53,12 @@ console.log(props);
                 console.log("ERROR:: ", error.response.data);
             });
     };
-   
 
     return (
         <>
             <div>
                 <div className="flex justify-center align-center p-12">
                     <form onSubmit={handleSubmit}>
-                       
-   
-
                         <div style={inputStyle}>
                             <InputLabel
                                 className="mt-4"
@@ -134,10 +126,6 @@ console.log(props);
                                 className="mt-2"
                             />
                         </div>
-                        
-
-                        
-
 
                         <div style={inputStyle}>
                             <InputLabel
@@ -151,15 +139,13 @@ console.log(props);
                             />
                         </div>
 
-                    
-
-                        <div className="flex justify-center align-center p-5">
+                        <div className="flex justify-center align-center">
                             <UniversalButton
                                 type="submit"
                                 href="Scheduler"
                                 text="Update/Insert"
                             ></UniversalButton>
-                            <div className="mx-2"></div>
+                            
                             <UniversalButton
                                 type="submit"
                                 href="Scheduler"
