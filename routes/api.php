@@ -44,6 +44,6 @@ Route::get('getAllDataForMyProjects', 'App\Http\Controllers\ProjectController@ge
  */
 
 
-Route::post('insertStaffing', 'App\Http\Controllers\AdminController@insertStaffing');
-Route::post('updateStaffing', 'App\Http\Controllers\AdminController@updateStaffing');
-Route::post('deleteStaffing', 'App\Http\Controllers\AdminController@deleteStaffing');
+Route::post('insertStaffing', 'App\Http\Controllers\StaffingController@insertStaffing');
+Route::post('updateStaffing', 'App\Http\Controllers\StaffingController@updateStaffing');
+Route::post('deleteStaffing', 'App\Http\Controllers\StaffingController@deleteStaffing');

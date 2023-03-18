@@ -113,12 +113,16 @@ function SchedulerComponent(data) {
                         project,
                         start: start_Date.getDate() - 1,
                         end: end_Date.getDate() - 1,
+                        start_Date: start,
+                        end_Date : end
+                       // end_Date: : end_Date,
                     });
                 }
+                console.log(start);
             });
             const personCells = [];
             let currentIndex = 0;
-            personProjects.forEach(({ project, start, end }) => {
+            personProjects.forEach(({ project, start, end,start_Date,end_Date }) => {
                 // Add cells for any gaps between projects
                 if (currentIndex < start) {
                     personCells.push(
@@ -132,7 +136,7 @@ function SchedulerComponent(data) {
                 // Add cells for the project duration
                 personCells.push(
                     <td
-                        key={`${person.name}-${project}-${start}-${end}`}
+                        key={`${person.name}-${project}-${start}-${end}}`}
                         colSpan={end - start + 1}
                         className={`border px-3 py-2 bg-red-200`}
                     >
@@ -157,8 +161,8 @@ function SchedulerComponent(data) {
                                         firstname={person.name}
                                         lastname={person.lastname}
                                         projectName={project}
-                                        startDate={start + 1}
-                                        endDate={end + 1}
+                                        startDate={start_Date}
+                                        endDate={end_Date}
                                         month={month.getMonth() + 1}
                                         staffingid={person.entryNumber}
                                     ></UpdateInsertComponent>
