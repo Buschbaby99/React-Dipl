@@ -6,6 +6,7 @@ import { addToPersons } from "./AddPersonComponent";
 import Exit from "@mui/icons-material/DisabledByDefault";
 import UpdateInsertComponent from "@/Components/Scheduler/UpdateInsertComponent";
 
+import InsertComponent from "@/Components/Scheduler/InsertComponent";
 const tableWrapperStyles = {
     overflowX: "auto",
     overflowY: "auto",
@@ -96,8 +97,7 @@ function SchedulerComponent(data) {
 
     const renderPersons = () => {
         addToPersons(data.data, persons);
-        console.log(persons);
-
+       
         return persons.map((person, index) => {
             const personProjects = [];
             person.unavailable.forEach(({ start, end, project }) => {
@@ -115,10 +115,10 @@ function SchedulerComponent(data) {
                         end: end_Date.getDate() - 1,
                         start_Date: start,
                         end_Date : end
-                       // end_Date: : end_Date,
+                       
                     });
                 }
-                console.log(start);
+             
             });
             const personCells = [];
             let currentIndex = 0;
@@ -163,7 +163,6 @@ function SchedulerComponent(data) {
                                         projectName={project}
                                         startDate={start_Date}
                                         endDate={end_Date}
-                                        month={month.getMonth() + 1}
                                         staffingid={person.entryNumber}
                                     ></UpdateInsertComponent>
                                 </div>
@@ -186,7 +185,39 @@ function SchedulerComponent(data) {
             return (
                 <tr key={index}>
                     <td className="border px-3 py-2" style={stickyColumnStyles}>
-                        {person.name}
+                    
+            
+                        <Popover className="relative">
+                            <Popover.Button>
+                                {person.name}
+                                <br />
+                                {person.lastname}
+                            </Popover.Button>
+
+                            <Popover.Panel className="fixed z-50 top-0 left-0 w-screen h-screen flex items-center justify-center">
+                                <div className="bg-gray-400 rounded-lg">
+                                    <div className="bg-gray-400 rounded-lg mt-2 mr-2">
+                                        <div className="flex justify-between items-start">
+                                            <div className="flex-grow text-center">
+                                                <h1>Projekt Einteilung</h1>
+                                            </div>
+                                            <div className="flex-shrink-0">
+                                                <Exit></Exit>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <InsertComponent
+                                        firstname={person.name}
+                                        lastname={person.lastname}
+                                      
+                                
+                                      
+                                    ></InsertComponent>
+                                </div>
+                            </Popover.Panel>
+                        </Popover>
+                    
+                        
                     </td>
                     {personCells}
                 </tr>
