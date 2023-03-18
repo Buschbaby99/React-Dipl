@@ -21,16 +21,17 @@ export default function ProjectUpdateComponent(props) {
         projectName: props.projectName,
         startDate: props.startDate,
         endDate: props.endDate,
-        //description: "",
+
+        description: "",
     });
-    console.log(data);
+  
     const onHandleChange = (event) => {
         setData(event.target.name, event.target.value);
     };
 
     const [value, setValue] = useState({
-        startDate: new Date(),
-        endDate: new Date().setMonth(11),
+        startDate: props.startDate,
+        endDate: props.endDate,
     });
 
     const handleValueChange = (newValue) => {
@@ -55,12 +56,12 @@ export default function ProjectUpdateComponent(props) {
         axios
             .post("/api/updateStaffing", data)
             .then(() => {
-                console.log(data);
+               
               window.location.href = "Scheduler";
                 
             })
             .catch((error) => {
-                console.log(data);
+             
             });
     };
     const handleDelete = (event) => {
@@ -78,7 +79,7 @@ export default function ProjectUpdateComponent(props) {
         <>
             <div>
                 <div className="flex justify-center align-center p-12">
-                    <form onSubmit={handleSubmit}>
+                    <form >
                         <div style={inputStyle}>
                             <InputLabel
                                 className="mt-4"
