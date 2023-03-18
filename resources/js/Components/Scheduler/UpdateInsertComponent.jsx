@@ -12,16 +12,18 @@ const inputStyle = {
 };
 
 export default function ProjectUpdateComponent(props) {
-    console.log(props);
+
 
     const { data, setData, post, processing, errors, reset } = useForm({
-        firstname: "",
-        lastname: "",
-        startDate: "",
-        endDate: "",
-        description: "",
+        staffingid : props.staffingid,
+        firstname: props.firstname,
+        lastname: props.lastname,
+        projectName: props.projectName,
+        startDate: props.startDate,
+        endDate: props.endDate,
+        //description: "",
     });
-
+    console.log(data);
     const onHandleChange = (event) => {
         setData(event.target.name, event.target.value);
     };
@@ -35,8 +37,7 @@ export default function ProjectUpdateComponent(props) {
         setValue(newValue);
         data.startDate = newValue.startDate;
         data.endDate = newValue.endDate;
-       props.startDate=newValue.startDate;
-       props.endDate=newValue.endDate;
+    
         console.log("newValue:", data.endDate);
     };
     const handleSubmit = (event) => {
@@ -52,14 +53,14 @@ export default function ProjectUpdateComponent(props) {
     const handleUpdate = (event) => {
         event.preventDefault();
         axios
-            .post("/api/updateStaffing", props)
+            .post("/api/updateStaffing", data)
             .then(() => {
-                console.log(props)
-               // window.location.href = "Scheduler";
-                console.log("Success")
+                console.log(data);
+              window.location.href = "Scheduler";
+                
             })
             .catch((error) => {
-            
+                console.log(data);
             });
     };
     const handleDelete = (event) => {
