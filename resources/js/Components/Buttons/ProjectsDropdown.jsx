@@ -26,7 +26,7 @@ const ProjectsDropdown = () => {
           </Menu.Item>
           {/* Fügen Sie hier weitere Menüelemente hinzu */}
           <Menu.Item>
-            {({ active }) => (
+            {({ active }) => ( 
                 
               <a
                 href="ProjectHome"
