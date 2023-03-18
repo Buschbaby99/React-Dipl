@@ -28,11 +28,16 @@ class StaffingController extends Controller
 
             
     }
-    public function updateStaffing (){
-
+    public function updateStaffing (Request $request){
+        $id = $request->staffingid;
+        $staffingEnry = Staffing::where('id', $id)->first();
+        $staffingEnry->startDate= $request->startDate;
+        $staffingEnry->endDate= $request->endDate;
+        $staffingEnry->save();
             
     }
     public function deleteStaffing (Request $request){
+        
         $id = $request->staffingid;
         $staffingEntry = Staffing::where('id', $id)->first();
         $staffingEntry->delete();
