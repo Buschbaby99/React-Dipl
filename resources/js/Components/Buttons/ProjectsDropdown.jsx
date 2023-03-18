@@ -1,6 +1,8 @@
 import React from "react";
 import { Menu } from "@headlessui/react";
 
+
+
 const ProjectsDropdown = () => {
   return (
     <Menu as="div" className="relative inline-block text-left">
@@ -24,16 +26,12 @@ const ProjectsDropdown = () => {
               </a>
             )}
           </Menu.Item>
-          {/* Fügen Sie hier weitere Menüelemente hinzu */}
           <Menu.Item>
             {({ active }) => ( 
-                
               <a
-                href="ProjectHome"
-                className={`${
-                  active ? "bg-gray-100 text-gray-900" : "text-gray-700"
-                } block px-4 py-2 text-sm`}
-              >
+              href="ProjectHome"
+              className={`${active ? "bg-gray-100 text-gray-900" : "text-gray-700"} block px-4 py-2 text-sm relative z-100`}
+            >
                 Statistik
               </a>
             )}
