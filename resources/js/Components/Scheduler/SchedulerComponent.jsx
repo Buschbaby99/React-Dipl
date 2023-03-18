@@ -160,6 +160,7 @@ function SchedulerComponent(data) {
                                         startDate={start + 1}
                                         endDate={end + 1}
                                         month={month.getMonth() + 1}
+                                        staffingid={person.entryNumber}
                                     ></UpdateInsertComponent>
                                 </div>
                             </Popover.Panel>

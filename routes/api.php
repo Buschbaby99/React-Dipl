@@ -34,4 +34,11 @@ Route::post('deleteProject', 'App\Http\Controllers\ProjectController@deleteProje
 
 Route::post('editProject', 'App\Http\Controllers\ProjectController@editProject');
 Route::post('updateProject', 'App\Http\Controllers\ProjectController@updateProject');
+/**
+ * Route for Staffing
+ */
 
+
+Route::post('insertStaffing', 'App\Http\Controllers\AdminController@insertStaffing');
+Route::post('updateStaffing', 'App\Http\Controllers\AdminController@updateStaffing');
+Route::post('deleteStaffing', 'App\Http\Controllers\AdminController@deleteStaffing');

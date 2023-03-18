@@ -54,6 +54,29 @@ export default function ProjectUpdateComponent(props) {
             });
     };
 
+    const handleUpdate = (event) => {
+        event.preventDefault();
+        axios
+            .post("/api/updateStaffing", props)
+            .then(() => {
+            
+            })
+            .catch((error) => {
+                console.log("ERROR:: ", error.response.data);
+            });
+    };
+    const handleDelete = (event) => {
+        event.preventDefault();
+        axios
+            .post("/api/deleteStaffing", props)
+            .then(() => {
+                    href="Scheduler"
+            })
+            .catch((error) => {
+                console.log("ERROR:: ", error.response.data);
+            });
+    };
+
     return (
         <>
             <div>
@@ -139,21 +162,23 @@ export default function ProjectUpdateComponent(props) {
                             />
                         </div>
 
-                        <div className="flex justify-center align-center">
+                
+                    </form>
+                    
+                </div>
+                <div className="flex justify-center align-center">
                             <UniversalButton
                                 type="submit"
-                                href="Scheduler"
+                                href={handleUpdate}
                                 text="Update/Insert"
                             ></UniversalButton>
                             
                             <UniversalButton
                                 type="submit"
-                                href="Scheduler"
+                                href={handleDelete}
                                 text="Delete"
                             ></UniversalButton>
                         </div>
-                    </form>
-                </div>
             </div>
         </>
     );
