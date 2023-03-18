@@ -16,12 +16,13 @@ export default function ProjectUpdateComponent(props) {
 
     const { data, setData, post, processing, errors, reset } = useForm({
         staffingid : props.staffingid,
+        personid:props.personid,
+        
         firstname: props.firstname,
         lastname: props.lastname,
-        projectName: props.projectName,
+        projectName: "",
         startDate: props.startDate,
         endDate: props.endDate,
-
         description: "",
     });
   
@@ -51,10 +52,10 @@ export default function ProjectUpdateComponent(props) {
           
     };
 
-    const handleUpdate = (event) => {
+    const handleInsert = (event) => {
         event.preventDefault();
         axios
-            .post("/api/updateStaffing", data)
+            .post("/api/insertStaffing", data)
             .then(() => {
                
               window.location.href = "Scheduler";
@@ -64,16 +65,7 @@ export default function ProjectUpdateComponent(props) {
              
             });
     };
-    const handleDelete = (event) => {
-        event.preventDefault();
-        axios
-            .post("/api/deleteStaffing", props)
-            .then(() => {
-                window.location.href = "Scheduler";
-                   
-            })
-    
-    };
+
 
     return (
         <>
@@ -139,7 +131,6 @@ export default function ProjectUpdateComponent(props) {
                                 className="mt-1 block w-full"
                                 autoComplete="projektName"
                                 handleChange={onHandleChange}
-                                locked={true}
                             />
 
                             <InputError
@@ -166,19 +157,13 @@ export default function ProjectUpdateComponent(props) {
                 </div>
 
                 <div className="flex justify-center align-center">
-                    <form onSubmit={handleUpdate}>
+                    <form onSubmit={handleInsert}>
                             <UniversalButton
                                 type="submit"
-                                text="Update"
+                                text="Hinzufügen"
                             ></UniversalButton>
                    </form>      
-                   <form onSubmit={handleDelete}>   
-                            <UniversalButton
-                                type="submit"      
-                                text="Delete"
-                            ></UniversalButton>
-                       
-                    </form>  
+   
                     </div>
             </div>
         </>
