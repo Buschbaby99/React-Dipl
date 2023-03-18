@@ -18,6 +18,12 @@ class ProjectController extends Controller
         return Inertia::render('Project/ProjectHome', $encode);
     }
 
+    public function getAllDataFromProjects()
+    {
+        $projects = Projects::all();
+        return response()->json($projects);
+    }
+
     public function insertProject(Request $request)
     {
         $projectAddress = new ProjectAddress;

@@ -35,6 +35,11 @@ Route::post('deleteProject', 'App\Http\Controllers\ProjectController@deleteProje
 Route::post('editProject', 'App\Http\Controllers\ProjectController@editProject');
 Route::post('updateProject', 'App\Http\Controllers\ProjectController@updateProject');
 /**
+ * BarChart fpr Projects
+ */
+Route::get('getAllDataForMyProjects', 'App\Http\Controllers\ProjectController@getAllDataFromProjects');
+
+/**
  * Route for Staffing
  */
 

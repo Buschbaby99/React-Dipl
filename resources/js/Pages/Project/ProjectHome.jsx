@@ -2,7 +2,7 @@ import { Head } from '@inertiajs/react';
 import LoggedIn from '@/Components/ChangeNavbarComponent';
 import ProjectTable from '../../Components/Projects/ProjectTableComponent';
 import AdminButton from '@/Components/Buttons/UniversalButtonComponent';
-
+import ProjectsBarChartComponent from '@/Components/Projects/ProjectsBarChartComponent'
 
 export default function myprojects(props) {
     
@@ -16,6 +16,7 @@ export default function myprojects(props) {
                 text="Hinzufügen">
             </AdminButton>
             <ProjectTable props={props}></ProjectTable>
+            <ProjectsBarChartComponent></ProjectsBarChartComponent>
         </div>
     );
 
