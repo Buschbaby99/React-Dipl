@@ -17,7 +17,7 @@ export default function ProjectUpdateComponent(props) {
     const { data, setData, post, processing, errors, reset } = useForm({
         staffingid : props.staffingid,
         personid:props.personid,
-        
+
         firstname: props.firstname,
         lastname: props.lastname,
         projectName: "",
@@ -34,6 +34,7 @@ export default function ProjectUpdateComponent(props) {
         startDate: props.startDate,
         endDate: props.endDate,
     });
+    
 
     const handleValueChange = (newValue) => {
         setValue(newValue);
@@ -49,6 +50,7 @@ export default function ProjectUpdateComponent(props) {
             .then(() => {
       
             })
+
           
     };
 
