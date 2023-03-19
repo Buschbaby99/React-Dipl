@@ -50,4 +50,4 @@ Route::post('deleteStaffing', 'App\Http\Controllers\StaffingController@deleteSta
  * Persons Statistic
  */
 Route::get('forMyPersonsStatistic', 'App\Http\Controllers\PersonController@forMyPersonsStatistic');
-Route::get('getAllDataFromPersons', 'App\Http\Controllers\ProjectController@getAllDataFromPersons');
+//Route::get('getAllDataFromPersons', 'App\Http\Controllers\ProjectController@getAllDataFromPersons');
