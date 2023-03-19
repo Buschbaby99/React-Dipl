@@ -1,8 +1,7 @@
 import { Head } from '@inertiajs/react';
 import LoggedIn from '@/Components/ChangeNavbarComponent';
-import ProjectTable from '../../Components/Projects/ProjectTableComponent';
-import AdminButton from '@/Components/Buttons/UniversalButtonComponent';
-import ProjectsBarChartComponent from '@/Components/Projects/ProjectsBarChartComponent'
+import ProjectsBarChartComponent from '@/Components/Statistics/ProjectsBarChartComponent';
+import PersonsStatistic from '@/Components/Statistics/PersonsStatistic';
 
 export default function myprojects(props) {
     
@@ -11,12 +10,8 @@ export default function myprojects(props) {
         <div>
             <Head title="Statistic" />
             <LoggedIn auth={props.auth}></LoggedIn>
-            <AdminButton 
-                href='ProjectInsertPage'
-                text="Hinzufügen">
-            </AdminButton>
-            <ProjectTable props={props}></ProjectTable>
             <ProjectsBarChartComponent></ProjectsBarChartComponent>
+            <PersonsStatistic></PersonsStatistic>
         </div>
     );
 

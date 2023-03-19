@@ -31,9 +31,9 @@ Route::post('updateUser', 'App\Http\Controllers\AdminController@updateUser');
  */
 Route::post('insertProject', 'App\Http\Controllers\ProjectController@insertProject');
 Route::post('deleteProject', 'App\Http\Controllers\ProjectController@deleteProject');
-
 Route::post('editProject', 'App\Http\Controllers\ProjectController@editProject');
 Route::post('updateProject', 'App\Http\Controllers\ProjectController@updateProject');
+
 /**
  * BarChart fpr Projects
  */
@@ -42,7 +42,12 @@ Route::get('getAllDataForMyProjects', 'App\Http\Controllers\ProjectController@ge
 /**
  * Route for Staffing
  */
-
 Route::post('insertStaffing', 'App\Http\Controllers\StaffingController@insertStaffing');
 Route::post('updateStaffing', 'App\Http\Controllers\StaffingController@updateStaffing');
 Route::post('deleteStaffing', 'App\Http\Controllers\StaffingController@deleteStaffing');
+
+/**
+ * Persons Statistic
+ */
+Route::get('forMyPersonsStatistic', 'App\Http\Controllers\PersonController@forMyPersonsStatistic');
+Route::get('getAllDataFromPersons', 'App\Http\Controllers\ProjectController@getAllDataFromPersons');

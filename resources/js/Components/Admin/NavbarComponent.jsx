@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Disclosure } from "@headlessui/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import firmenlogo from "../../../images/firmenlogo.png";
 import Dropdown from "@/Components/Inputs/Dropdown";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -19,8 +18,7 @@ function classNames(...classes) {
 }
 
 export default function MyNavbar({ myUser = NULL, header, children }) {
-    const [showingNavigationDropdown, setShowingNavigationDropdown] =
-        useState(false);
+   
     return (
         <Disclosure as="nav" className="bg-gray-800 z-1000">
             {({ open }) => (

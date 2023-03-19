@@ -22,7 +22,6 @@ Route::get('AdminHome', [\App\Http\Controllers\AdminController::class, 'formyadm
 Route::get('ProjectHome', [\App\Http\Controllers\ProjectController::class, 'formyprojects'])->middleware(['auth', 'verified', 'isManager'])->name('ProjectHome');
 Route::get('Scheduler', [\App\Http\Controllers\StaffingController::class, 'formystaffing'])->name('Scheduler');
 
-
 Route::get('/test', 'DataController@test');
 
 
@@ -37,6 +36,10 @@ Route::get('/', function () {
 
 Route::get('/loginPage', function () {
     return Inertia::render('LoginPage');
+});
+
+Route::get('Statistic', function () {
+    return Inertia::render('Statistic/Statistic');
 });
 
 Route::get('ProjectUpdatePage', function () {

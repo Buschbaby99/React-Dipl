@@ -9,13 +9,15 @@ import {
     Legend,
 } from "recharts";
 
+
+
 const ProjectsBarChartComponent = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch("/api/getAllDataForMyProjects"); // Ändern Sie dies auf die vollständige URL, falls erforderlich.
+                const response = await fetch("/api/getAllDataForMyProjects");
                 const projects = await response.json();
                 setData(
                     projects.map((project) => {
@@ -55,14 +57,13 @@ const ProjectsBarChartComponent = () => {
         );
     };
 
-    console.log(data[0]);
 
     return (
         <div>
-            <h1 className="text-4xl font-semibold text-center text-blue-600 my-8">Projekt Statistiken</h1>
+            <h1 className="text-4xl font-semibold text-center text-gray-800 my-8">Projekt Statistiken</h1>
             <div className="flex justify-center items-center mt-8">
                 <BarChart
-                    width={900}
+                    width={1400}
                     height={300}
                     data={data}
                     margin={{
