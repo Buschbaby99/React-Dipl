@@ -10,7 +10,6 @@ import {
 } from "recharts";
 
 
-
 const ProjectsBarChartComponent = () => {
     const [data, setData] = useState([]);
 

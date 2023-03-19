@@ -12,12 +12,10 @@ const inputStyle = {
 };
 
 export default function ProjectUpdateComponent(props) {
-
-
     const { data, setData, post, processing, errors, reset } = useForm({
-        staffingid : props.staffingid,
-        personid:props.personid,
-        
+        staffingid: props.staffingid,
+        personid: props.personid,
+
         firstname: props.firstname,
         lastname: props.lastname,
         projectName: "",
@@ -25,7 +23,7 @@ export default function ProjectUpdateComponent(props) {
         endDate: props.endDate,
         description: "",
     });
-  
+
     const onHandleChange = (event) => {
         setData(event.target.name, event.target.value);
     };
@@ -39,17 +37,12 @@ export default function ProjectUpdateComponent(props) {
         setValue(newValue);
         data.startDate = newValue.startDate;
         data.endDate = newValue.endDate;
-    
+
         console.log("newValue:", data.endDate);
     };
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios
-            .post("/api/updateUser", data)
-            .then(() => {
-      
-            })
-          
+        axios.post("/api/updateUser", data).then(() => {});
     };
 
     const handleInsert = (event) => {
@@ -57,21 +50,16 @@ export default function ProjectUpdateComponent(props) {
         axios
             .post("/api/insertStaffing", data)
             .then(() => {
-               
-              window.location.href = "Scheduler";
-                
+                window.location.href = "Scheduler";
             })
-            .catch((error) => {
-             
-            });
+            .catch((error) => {});
     };
-
 
     return (
         <>
             <div>
                 <div className="flex justify-center align-center p-12">
-                    <form >
+                    <form>
                         <div style={inputStyle}>
                             <InputLabel
                                 className="mt-4"
@@ -150,21 +138,17 @@ export default function ProjectUpdateComponent(props) {
                                 onChange={handleValueChange}
                             />
                         </div>
-
-                
                     </form>
-                    
                 </div>
 
                 <div className="flex justify-center align-center">
                     <form onSubmit={handleInsert}>
-                            <UniversalButton
-                                type="submit"
-                                text="Hinzufügen"
-                            ></UniversalButton>
-                   </form>      
-   
-                    </div>
+                        <UniversalButton
+                            type="submit"
+                            text="Hinzufügen"
+                        ></UniversalButton>
+                    </form>
+                </div>
             </div>
         </>
     );

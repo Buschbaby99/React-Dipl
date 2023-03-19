@@ -223,7 +223,9 @@ function SchedulerComponent(data) {
                             {renderDays()}
                         </tr>
                     </thead>
-                    <tbody>{renderPersons()}</tbody>
+                        <tbody>
+                                {renderPersons()}
+                        </tbody>
                 </table>
             </div>
         </div>

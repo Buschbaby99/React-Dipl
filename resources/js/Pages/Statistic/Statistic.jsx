@@ -5,7 +5,7 @@ import PersonsStatistic from '@/Components/Statistics/PersonsStatistic';
 
 export default function myprojects(props) {
     
-    console.log(props);
+    
     return (
         <div>
             <Head title="Statistic" />
