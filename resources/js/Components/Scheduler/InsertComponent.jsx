@@ -13,8 +13,13 @@ const inputStyle = {
 
 export default function ProjectUpdateComponent(props) {
     const { data, setData, post, processing, errors, reset } = useForm({
+<<<<<<< HEAD
         staffingid: props.staffingid,
         personid: props.personid,
+=======
+        staffingid : props.staffingid,
+        personid:props.personid,
+>>>>>>> 8db94eae4a51212d4e651c034d6c7ce6dc2e7dfb
 
         firstname: props.firstname,
         lastname: props.lastname,
@@ -32,6 +37,7 @@ export default function ProjectUpdateComponent(props) {
         startDate: props.startDate,
         endDate: props.endDate,
     });
+    
 
     const handleValueChange = (newValue) => {
         setValue(newValue);
@@ -42,7 +48,17 @@ export default function ProjectUpdateComponent(props) {
     };
     const handleSubmit = (event) => {
         event.preventDefault();
+<<<<<<< HEAD
         axios.post("/api/updateUser", data).then(() => {});
+=======
+        axios
+            .post("/api/updateUser", data)
+            .then(() => {
+      
+            })
+
+          
+>>>>>>> 8db94eae4a51212d4e651c034d6c7ce6dc2e7dfb
     };
 
     const handleInsert = (event) => {

@@ -110,6 +110,7 @@ function SchedulerComponent(data) {
                     end_Date.getFullYear() === month.getFullYear() &&
                     end_Date.getMonth() === month.getMonth()
                 ) {
+                    
                     personProjects.push({
                         project,
                         start: start_Date.getDate() - 1,
