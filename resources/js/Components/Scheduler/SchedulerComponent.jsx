@@ -5,6 +5,7 @@ import { Popover } from "@headlessui/react";
 import { addToPersons } from "./AddPersonComponent";
 import Exit from "@mui/icons-material/DisabledByDefault";
 import UpdateInsertComponent from "@/Components/Scheduler/UpdateInsertComponent";
+import InsertComponent from '@/Components/Scheduler/InsertComponent';
 
 const tableWrapperStyles = {
     overflowX: "auto",
@@ -188,7 +189,35 @@ function SchedulerComponent(data) {
             return (
                 <tr key={index}>
                     <td className="border px-3 py-2" style={stickyColumnStyles}>
-                        {person.name}
+                    <Popover className="relative">
+                            <Popover.Button>
+                                {person.name}
+                                <br />
+                                {person.lastname}
+                            </Popover.Button>
+
+                            <Popover.Panel className="fixed z-50 top-0 left-0 w-screen h-screen flex items-center justify-center">
+                                <div className="bg-gray-400 rounded-lg">
+                                    <div className="bg-gray-400 rounded-lg mt-2 mr-2">
+                                        <div className="flex justify-between items-start">
+                                            <div className="flex-grow text-center">
+                                                <h1>Projekt Einteilung</h1>
+                                            </div>
+                                            <div className="flex-shrink-0">
+                                                <Exit></Exit>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <InsertComponent
+                                        firstname={person.name}
+                                        lastname={person.lastname}
+                                      
+                                
+                                      
+                                    ></InsertComponent>
+                                </div>
+                            </Popover.Panel>
+                        </Popover>
                     </td>
                     {personCells}
                 </tr>
