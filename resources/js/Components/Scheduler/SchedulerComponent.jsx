@@ -93,7 +93,6 @@ function SchedulerComponent(data) {
         return days;
     };
     // render table headers for each day of the month
-
     const persons = [];
 
     const renderPersons = () => {
@@ -209,10 +208,10 @@ function SchedulerComponent(data) {
                                         </div>
                                     </div>
                                     <InsertComponent
+                                        personid= {person.id}
                                         firstname={person.name}
                                         lastname={person.lastname}
-                                      
-                                
+                                     
                                       
                                     ></InsertComponent>
                                 </div>

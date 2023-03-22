@@ -13,19 +13,21 @@ const inputStyle = {
 
 export default function ProjectUpdateComponent(props) {
     const { data, setData, post, processing, errors, reset } = useForm({
-        staffingid: props.staffingid,
+ 
         personid: props.personid,
 
         firstname: props.firstname,
         lastname: props.lastname,
-        projectName: "",
-        startDate: props.startDate,
-        endDate: props.endDate,
+        projectName: '',
+        startDate: '',
+        endDate: '',
         description: "",
     });
+    
 
     const onHandleChange = (event) => {
         setData(event.target.name, event.target.value);
+        console.log(data);
     };
 
     const [value, setValue] = useState({
@@ -41,10 +43,7 @@ export default function ProjectUpdateComponent(props) {
 
         console.log("newValue:", data.endDate);
     };
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        axios.post("/api/updateUser", data).then(() => {});
-    };
+  
 
     const handleInsert = (event) => {
         event.preventDefault();
@@ -109,14 +108,14 @@ export default function ProjectUpdateComponent(props) {
                         <div style={inputStyle}>
                             <InputLabel
                                 className="mt-4"
-                                forInput="projektName"
+                                forInput="projectName"
                                 value="Projektname"
                             />
 
                             <TextInput
-                                id="projektName"
-                                name="projektName"
-                                value={props.projectName}
+                                id="projectName"
+                                name="projectName"
+                                value={data.projectName}
                                 className="mt-1 block w-full"
                                 autoComplete="projektName"
                                 handleChange={onHandleChange}

@@ -9,10 +9,10 @@ class Staffing extends Model
 {
     protected $fillable = [
 
-        'person_id',
+        'person_Id',
         'startDate',
         'endDate',
-        'project_Id',
+        'project_id',
         
     ];
 }
