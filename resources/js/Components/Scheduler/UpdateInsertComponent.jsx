@@ -13,7 +13,7 @@ const inputStyle = {
 
 export default function ProjectUpdateComponent(props) {
 
-
+    console.log(props);
     const { data, setData, post, processing, errors, reset } = useForm({
         staffingid : props.staffingid,
         firstname: props.firstname,

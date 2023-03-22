@@ -18,6 +18,7 @@ class StaffingController extends Controller
             ->join('persons', 'staffings.person_Id', '=', 'persons.id')
             ->join('projects', 'staffings.project_Id', '=', 'projects.id')
             ->select('persons.id', 'persons.firstname as name', 'persons.lastname','staffings.id as entryNumber' ,'projects.name as project', 'staffings.startDate as start', 'staffings.endDate as end')
+            ->orderBy('start')
             ->get();
     
             return Inertia::render('Scheduler', array('data' => $jsonString));

@@ -69,7 +69,7 @@ function SchedulerComponent(data) {
             "11",
             "12",
         ];
-
+console.log(data);
         for (let i = 1; i <= daysInMonth; i++) {
             const date = new Date(month.getFullYear(), month.getMonth(), i);
             const weekday = weekdays[date.getDay()];
@@ -165,6 +165,8 @@ function SchedulerComponent(data) {
                                         projectName={project}
                                         startDate={start_Date}
                                         endDate={end_Date}
+                                        start={start}
+                                        end={end}
                                         month={month.getMonth() + 1}
                                         staffingid={person.entryNumber}
                                     ></UpdateInsertComponent>
