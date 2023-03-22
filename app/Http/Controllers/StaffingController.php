@@ -24,7 +24,19 @@ class StaffingController extends Controller
         }
     
     }
-    public function insertStaffing (){
+    public function insertStaffing (Request $request){
+        $staffingEnry= new Staffing;
+        
+        $project_id = DB::table('projects')
+        ->select('id')
+        ->where('name', '=', $request->projectName)
+        ->first();
+
+        $staffingEnry->person_Id= $request->personid;
+        $staffingEnry->endDate= $request->endDate;
+        $staffingEnry->startDate= $request->startDate;
+        $staffingEnry->project_Id= 8;
+        $staffingEnry->save();
 
             
     }

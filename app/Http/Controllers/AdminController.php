@@ -77,6 +77,9 @@ class AdminController extends Controller
         $persons->personAddress_id = $personaddress->id;
         $persons->user_id = $user->id;
         $persons->save();
+
+        
+
     }
 
     public function deleteUser(Request $request)
