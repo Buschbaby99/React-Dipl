@@ -13,7 +13,7 @@ export default function myprojects(props) {
             <LoggedIn auth={props.auth}></LoggedIn>
             <ProjectsBarChartComponent></ProjectsBarChartComponent>
             <PersonsStatistic></PersonsStatistic>
-            {/*<DepartmentsStatistic></DepartmentsStatistic>*/ }
+            <DepartmentsStatistic></DepartmentsStatistic>
             
         </div>
     );

@@ -33,7 +33,7 @@ const EmployeeProjectInfo = () => {
         fetchEmployeeProjectData();
     }, []);
 
-    console.log(employeeProjectData);
+    //console.log(employeeProjectData);
 
 
     

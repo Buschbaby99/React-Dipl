@@ -9,6 +9,29 @@ import {
     Legend,
 } from "recharts";
 
+const cardStyle = {
+    backgroundColor: "white",
+    borderRadius: "8px",
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+    maxWidth: "90%",
+    margin: "0 auto",
+    padding: "20px",
+    position: "relative",
+};
+
+const cardTitleStyle = {
+    fontSize: "24px",
+    fontWeight: "bold",
+    marginBottom: "20px",
+    textAlign: "center",
+    color: "#333",
+};
+
+const chartContainerStyle = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+};
 
 const ProjectsBarChartComponent = () => {
     const [data, setData] = useState([]);
@@ -56,34 +79,35 @@ const ProjectsBarChartComponent = () => {
         );
     };
 
-
     return (
         <div>
-            <h1 className="text-4xl font-semibold text-center text-gray-800 my-8">Projekt Statistiken</h1>
-            <div className="flex justify-center items-center mt-8">
-                <BarChart
-                    width={1400}
-                    height={300}
-                    data={data}
-                    margin={{
-                        top: 5,
-                        right: 30,
-                        left: 50,
-                        bottom: 50,
-                    }}
-                >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" tick={<CustomTick />} />
-                    <YAxis dataKey="days" />
-                    <Tooltip />
-                    <Legend />
-                    <Bar
-                        dataKey="days"
-                        fill="#8884d8"
-                        barSize={30}
-                        barGap={200}
-                    />
-                </BarChart>
+            <div style={cardStyle}>
+                <h1 style={cardTitleStyle}>Projekt Statistiken</h1>
+                <div style={chartContainerStyle}>
+                    <BarChart
+                        width={1400}
+                        height={300}
+                        data={data}
+                        margin={{
+                            top: 5,
+                            right: 30,
+                            left: 50,
+                            bottom: 50,
+                        }}
+                    >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="name" tick={<CustomTick />} />
+                        <YAxis dataKey="days" />
+                        <Tooltip />
+                        <Legend />
+                        <Bar
+                            dataKey="days"
+                            fill="#8884d8"
+                            barSize={30}
+                            barGap={200}
+                        />
+                    </BarChart>
+                </div>
             </div>
         </div>
     );

@@ -39,7 +39,7 @@ const datePickerWrapperStyles = {
 };
 
 function SchedulerComponent(data) {
-    console.log(data);
+    //console.log(data);
     const [month, setMonth] = useState(new Date()); // initial value is today's date
 
 
@@ -98,7 +98,7 @@ function SchedulerComponent(data) {
 
     const renderPersons = () => {
         addToPersons(data.data, persons);
-        console.log(persons);
+        //console.log(persons);
 
         return persons.map((person, index) => {
             const personProjects = [];
@@ -121,7 +121,7 @@ function SchedulerComponent(data) {
                        // end_Date: : end_Date,
                     });
                 }
-                console.log(start);
+                //console.log(start);
             });
             const personCells = [];
             let currentIndex = 0;
