@@ -12,7 +12,7 @@ export default function Scheduler(props) {
         <div>
             <Head title="Scheduler" />
             <LoggedIn auth={props.auth}></LoggedIn>
-            <SchedulerComponent data={props.data} ></SchedulerComponent>
+            <SchedulerComponent data={props.data} projects={props.projects}></SchedulerComponent>
         </div>
     );
 }

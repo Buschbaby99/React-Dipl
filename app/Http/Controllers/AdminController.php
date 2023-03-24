@@ -6,7 +6,7 @@ use App\Models\Persons;
 use App\Models\Personaddress;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -34,21 +34,6 @@ class AdminController extends Controller
         return response()->json(['message' => 'Data inserted successfully']);
     }
 
-    public function ReceiveIt(Request $request){
-        $validatedData = $request->validate([
-            'id' => 'nullable',
-            'name' => 'nullable',
-            'email' => 'nullable',
-            'email_verified_at' => 'nullable',
-            'password' => 'nullable',
-            'remember_token' => 'nullable',
-            'created_at' => 'nullable',
-            'updated_at' => 'nullable',
-            'role' => 'nullable'
-        ]);
-
-        return json_encode($validatedData);
-    }
 
     public function myRegister(Request $request)
     {
@@ -101,11 +86,22 @@ class AdminController extends Controller
         
         $personAddress_id= $persons->personAddress_id;
         $address = Personaddress::where('id', $personAddress_id)->first();
+        
+        $roleName=DB::table('users')
+        ->select('name')
+        ->orderBy('name')
+        ->get();
+        $departments=DB::table('departments')
+        ->select('name')
+        ->orderBy('name')
+        ->get();
        
         return response()->json([
             'user' => $user,
             'persons' => $persons,
             'address' => $address,
+            'roleName' => $roleName,
+            'departments' => $departments
         ]);
     }
 
@@ -134,12 +130,23 @@ class AdminController extends Controller
         $personAddress->city =$request->city;
         $personAddress->street= $request->street;
         $personAddress->save();
-       
-        
-
-
-        
+          
     }
-    
+
+    public function showInsertUser()
+    {
+        
+        
+        $departments=DB::table('departments')
+        ->select('name')
+        ->orderBy('name')
+        ->get();
+        
+        return Inertia::render('Admin/AdminInsertPage', $departments);
+    }
+
+ 
+
+
 }
 
