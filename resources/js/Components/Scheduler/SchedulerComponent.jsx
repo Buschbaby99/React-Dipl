@@ -26,12 +26,12 @@ const containerStyles = {
 const stickyColumnStyles = {
     position: "sticky",
     left: -1,
-    background: "white",
+  
     zIndex: 10,
     boxShadow: "2px 0px 4px rgba(0, 0, 0, 0.1)",
     borderRight: "1px solid #dee2e6",
     borderLeft: "1px solid #dee2e6",
-    backgroundColor: "rgba(255, 255, 255, 1)",
+   
 };
 
 const datePickerWrapperStyles = {
@@ -42,7 +42,7 @@ function SchedulerComponent(data) {
   
     const [month, setMonth] = useState(new Date()); // initial value is today's date
 
-    const [popoverOpen, setPopoverOpen] = useState(false);
+
 
     const daysInMonth = new Date(
         month.getFullYear(),

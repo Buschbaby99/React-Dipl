@@ -24,10 +24,13 @@ export default function ProjectUpdateComponent(props) {
 
         description: "",
     });
+    console.log(data);
   
     const onHandleChange = (event) => {
         setData(event.target.name, event.target.value);
         console.log(data.projectName)
+      
+     
     };
 
     const [value, setValue] = useState({
@@ -36,21 +39,14 @@ export default function ProjectUpdateComponent(props) {
     });
 
     const handleValueChange = (newValue) => {
+   
         setValue(newValue);
         data.startDate = newValue.startDate;
         data.endDate = newValue.endDate;
-    
-        console.log("newValue:", data.endDate);
-    };
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        axios
-            .post("/api/updateUser", data)
-            .then(() => {
       
-            })
-          
+ 
     };
+
 
     const handleUpdate = (event) => {
         event.preventDefault();
@@ -75,10 +71,10 @@ export default function ProjectUpdateComponent(props) {
             })
     
     };
-
+  
     return (
         <>
-            <div>
+            <div >
                 <div className="flex justify-center align-center p-12">
                     <form >
                         <div style={inputStyle}>
@@ -130,7 +126,7 @@ export default function ProjectUpdateComponent(props) {
                         <DropdownForm
                         projects={props.projects}
                         onHandleChange ={onHandleChange}
-                        value={props.projects}
+                        value={props.projectName}
                         >
 
                         </DropdownForm>

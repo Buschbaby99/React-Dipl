@@ -35,29 +35,31 @@ class StaffingController extends Controller
     }
     public function insertStaffing (Request $request){
        
-        $staffingEnry= new Staffing;
+        $staffingEntry= new Staffing;
         $project = Projects::where('name', $request->projectName)->first();
      
      
 
-        $staffingEnry->person_Id= $request->personid;
-        $staffingEnry->endDate= $request->endDate;
-        $staffingEnry->startDate= $request->startDate;
-        $staffingEnry->project_Id= $project->id;
-        $staffingEnry->save();
+        $staffingEntry->person_Id= $request->personid;
+        $staffingEntry->endDate= $request->endDate;
+        $staffingEntry->startDate= $request->startDate;
+        $staffingEntry->project_Id= $project->id;
+        $staffingEntry->save();
 
             
     }
     public function updateStaffing (Request $request){
+        
         $project = Projects::where('name', $request->projectName)->first();
         $newid =$project->id;
 
         $id = $request->staffingid;
-        $staffingEnry = Staffing::where('id', $id)->first();
-        $staffingEnry->startDate= $request->startDate;
-        $staffingEnry->endDate= $request->endDate;
-        $staffingEnry->project_Id= $newid;
-        $staffingEnry->save();
+        $staffingEntry = Staffing::where('id', $id)->first();
+        $staffingEntry->project_Id= $newid;
+        $staffingEntry->startDate= $request->startDate;
+        $staffingEntry->endDate= $request->endDate;
+        $staffingEntry->project_Id= $newid;
+        $staffingEntry->save();
             
     }
     public function deleteStaffing (Request $request){
