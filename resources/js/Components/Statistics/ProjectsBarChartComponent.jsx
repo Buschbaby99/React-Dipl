@@ -17,6 +17,8 @@ const cardStyle = {
     margin: "0 auto",
     padding: "20px",
     position: "relative",
+    marginBottom: "15px",
+    marginTop: "15px",
 };
 
 const cardTitleStyle = {

@@ -11,6 +11,7 @@ const cardStyle = {
     marginTop: '10px',
     padding: '20px',
     position: 'relative',
+    marginBottom: "15px"
 };
 
 const cardTitleStyle = {
