@@ -33,7 +33,35 @@ const EmployeeProjectInfo = () => {
         fetchEmployeeProjectData();
     }, []);
 
-    //console.log(employeeProjectData);
+
+    const getTotalWorkingDaysForEachEmployee = (employeeProjectData) => {
+        const employeeWorkingDays = employeeProjectData.reduce((acc, project) => {
+          const employeeName = project.name + " " + project.lastname;
+          const existingEmployee = acc.find((e) => e.employee === employeeName);
+      
+          if (existingEmployee) {
+            existingEmployee.days += project.days;
+          } else {
+            acc.push({
+              employee: employeeName,
+              days: project.days,
+            });
+          }
+      
+          return acc;
+        }, []);
+      
+        return employeeWorkingDays;
+      };
+      
+
+    console.log(employeeProjectData);
+
+    const totalWorkingDaysForEachEmployee = getTotalWorkingDaysForEachEmployee(
+        employeeProjectData
+      );
+    console.log(totalWorkingDaysForEachEmployee);
+      
 
 
     
