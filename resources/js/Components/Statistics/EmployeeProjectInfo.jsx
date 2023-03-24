@@ -28,7 +28,7 @@ const cardStyle = {
     margin: "0 auto",
     padding: "20px",
     position: "relative",
-    marginBottom: "15px"
+    
 };
 
 const cardTitleStyle = {
@@ -85,7 +85,6 @@ const EmployeeProjectInfo = () => {
                             startDate > lastDayOfMonth
                                 ? 0
                                 : (end - start) / (1000 * 60 * 60 * 24) + 1;
-
                         const daysInCurrentMonth = new Date(
                             selectedYear,
                             selectedMonth + 1,
@@ -120,6 +119,7 @@ const EmployeeProjectInfo = () => {
 
     console.log(employeeProjectData);
 
+    /*
     const aggregateEmployeeData = (employeeProjectData) => {
         const aggregatedData = {};
 
@@ -178,6 +178,65 @@ const EmployeeProjectInfo = () => {
         freeDays: dept.totalCurrentMonthFree,
     }));
 
+    */
+
+    const hoursPerDay = 8;
+
+const aggregateEmployeeData = (employeeProjectData) => {
+    const aggregatedData = {};
+
+    employeeProjectData.forEach((employee) => {
+        const department = employee.department;
+        const name = employee.name + " " + employee.lastname;
+        const currentMonthDays = employee.currentMonthDays;
+
+        if (!aggregatedData[department]) {
+            aggregatedData[department] = {
+                department,
+                employees: {},
+                totalCurrentMonthHours: 0,
+            };
+        }
+
+        if (!aggregatedData[department].employees[name]) {
+            aggregatedData[department].employees[name] = {
+                name,
+                currentMonthHours: 0,
+            };
+        }
+
+        aggregatedData[department].employees[name].currentMonthHours +=
+            currentMonthDays * hoursPerDay;
+        aggregatedData[department].totalCurrentMonthHours +=
+            currentMonthDays * hoursPerDay;
+    });
+
+    const maxWorkDays = 22;
+
+    Object.values(aggregatedData).forEach((dept) => {
+        Object.values(dept.employees).forEach((employee) => {
+            employee.currentMonthFreeHours =
+                maxWorkDays * hoursPerDay - employee.currentMonthHours;
+        });
+        dept.totalCurrentMonthFreeHours =
+            maxWorkDays * Object.keys(dept.employees).length * hoursPerDay -
+            dept.totalCurrentMonthHours;
+    });
+
+    const departmentData = Object.values(aggregatedData);
+    return departmentData;
+};
+
+    const departmentData = aggregateEmployeeData(employeeProjectData);
+    const chartData = departmentData.map((dept) => ({
+        department: dept.department,
+        workHours: dept.totalCurrentMonthHours,
+        freeHours: dept.totalCurrentMonthFreeHours,
+    }));
+
+    
+
+
     return (
         <div>
           <div style={cardStyle}>
@@ -208,8 +267,8 @@ const EmployeeProjectInfo = () => {
                   <YAxis />
                   <Tooltip />
                   <Legend />
-                  <Bar dataKey="workDays" name="Arbeitstage" fill="#8884d8" />
-                  <Bar dataKey="freeDays" name="Freie Tage" fill="#82ca9d" />
+                  <Bar dataKey="workHours" name="Arbeitsstunden" fill="#8884d8" />
+                  <Bar dataKey="freeHours" name="Freie Stunden" fill="#82ca9d" />
                 </BarChart>
               </ResponsiveContainer>
             </div>
