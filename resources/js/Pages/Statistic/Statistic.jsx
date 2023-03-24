@@ -11,9 +11,9 @@ export default function myprojects(props) {
         <div>
             <Head title="Statistic" />
             <LoggedIn auth={props.auth}></LoggedIn>
+            <PersonsStatistic></PersonsStatistic>
             <ProjectsBarChartComponent></ProjectsBarChartComponent>
             <DepartmentsStatistic></DepartmentsStatistic>
-            <PersonsStatistic></PersonsStatistic>
             
         </div>
     );
