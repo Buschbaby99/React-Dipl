@@ -69,7 +69,7 @@ function SchedulerComponent(data) {
             "11",
             "12",
         ];
-console.log(data);
+
         for (let i = 1; i <= daysInMonth; i++) {
             const date = new Date(month.getFullYear(), month.getMonth(), i);
             const weekday = weekdays[date.getDay()];
@@ -97,11 +97,11 @@ console.log(data);
 
     const renderPersons = () => {
         addToPersons(data.data, persons);
-        //console.log(persons);
+        console.log(persons);
 
         return persons.map((person, index) => {
             const personProjects = [];
-            person.unavailable.forEach(({ start, end, project }) => {
+            person.unavailable.forEach(({ start, end, project, entryNumber }) => {
                 const start_Date = new Date(start);
                 const end_Date = new Date(end);
                 if (
@@ -116,15 +116,19 @@ console.log(data);
                         start: start_Date.getDate() - 1,
                         end: end_Date.getDate() - 1,
                         start_Date: start,
-                        end_Date : end
+                        end_Date : end,
+                        entryNumber:entryNumber
+                       
+                      
                        // end_Date: : end_Date,
                     });
                 }
-                //console.log(start);
+             console.log(person)
             });
             const personCells = [];
             let currentIndex = 0;
-            personProjects.forEach(({ project, start, end,start_Date,end_Date }) => {
+            console.log(personProjects);
+            personProjects.forEach(({ project, start, end,start_Date,end_Date,entryNumber }) => {
                 // Add cells for any gaps between projects
                 if (currentIndex < start) {
                     personCells.push(
@@ -138,7 +142,7 @@ console.log(data);
                 // Add cells for the project duration
                 personCells.push(
                     <td
-                        key={`${person.name}-${project}-${start}-${end}}`}
+                        key={`${person.name}-${project}-${start}-${end}-${entryNumber}}`}
                         colSpan={end - start + 1}
                         className={`border px-3 py-2 bg-red-200`}
                     >
@@ -168,7 +172,7 @@ console.log(data);
                                         start={start}
                                         end={end}
                                         month={month.getMonth() + 1}
-                                        staffingid={person.entryNumber}
+                                        staffingid={entryNumber}
                                     ></UpdateInsertComponent>
                                 </div>
                             </Popover.Panel>

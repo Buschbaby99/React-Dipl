@@ -52,7 +52,11 @@ export default function ProjectUpdateComponent(props) {
             .then(() => {
                 window.location.href = "Scheduler";
             })
-            .catch((error) => {});
+            .catch((error) => {
+                console.log(data.projectName);
+             //   console.log(error);
+
+            });
     };
 
     return (
