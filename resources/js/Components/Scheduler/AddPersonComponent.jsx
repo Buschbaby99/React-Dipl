@@ -6,6 +6,7 @@ export const addToPersons = (data, persons) => {
                 start: item.start,
                 end: item.end,
                 project: item.project,
+                entryNumber: item.entryNumber,
             };
             person.unavailable.push(unavailable);
         } else {
@@ -13,9 +14,9 @@ export const addToPersons = (data, persons) => {
                 id: item.id,
                 name: item.name,
                 lastname: item.lastname,
-                entryNumber: item.entryNumber,
+               
                 unavailable: [
-                    { start: item.start, end: item.end, project: item.project },
+                    { start: item.start, end: item.end, project: item.project, entryNumber: item.entryNumber },
                 ],
             });
         }
