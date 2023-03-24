@@ -3,6 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Popover } from "@headlessui/react";
 import { addToPersons } from "./AddPersonComponent";
+
 import Exit from "@mui/icons-material/DisabledByDefault";
 import UpdateInsertComponent from "@/Components/Scheduler/UpdateInsertComponent";
 import InsertComponent from '@/Components/Scheduler/InsertComponent';
@@ -39,7 +40,7 @@ const datePickerWrapperStyles = {
 };
 
 function SchedulerComponent(data) {
-    //console.log(data);
+  
     const [month, setMonth] = useState(new Date()); // initial value is today's date
 
 
@@ -97,7 +98,7 @@ function SchedulerComponent(data) {
 
     const renderPersons = () => {
         addToPersons(data.data, persons);
-        console.log(persons);
+    
 
         return persons.map((person, index) => {
             const personProjects = [];
@@ -123,11 +124,14 @@ function SchedulerComponent(data) {
                        // end_Date: : end_Date,
                     });
                 }
-             console.log(person)
+        
+          
+            console.log(person);
+          
             });
             const personCells = [];
             let currentIndex = 0;
-            console.log(personProjects);
+           
             personProjects.forEach(({ project, start, end,start_Date,end_Date,entryNumber }) => {
                 // Add cells for any gaps between projects
                 if (currentIndex < start) {
