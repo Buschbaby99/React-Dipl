@@ -22,8 +22,14 @@ class StaffingController extends Controller
             ->orderBy('persons.lastname')
             ->orderBy('start')
             ->get();
+
+            $projects=DB::table('projects')
+            ->select('name')
+            ->orderBy('name')
+            ->get();
     
-            return Inertia::render('Scheduler', array('data' => $jsonString));
+
+            return Inertia::render('Scheduler', ['data' => $jsonString, 'projects' => $projects]);
         }
     
     }
@@ -43,10 +49,14 @@ class StaffingController extends Controller
             
     }
     public function updateStaffing (Request $request){
+        $project = Projects::where('name', $request->projectName)->first();
+        $newid =$project->id;
+
         $id = $request->staffingid;
         $staffingEnry = Staffing::where('id', $id)->first();
         $staffingEnry->startDate= $request->startDate;
         $staffingEnry->endDate= $request->endDate;
+        $staffingEnry->project_Id= $newid;
         $staffingEnry->save();
             
     }

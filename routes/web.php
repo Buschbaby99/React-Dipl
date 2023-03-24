@@ -16,13 +16,20 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/* 
+Admin Routes 
+*/
 
 Route::get('AdminHome', [\App\Http\Controllers\AdminController::class, 'formyadmin'])->middleware(['auth', 'verified', 'isAdmin'])->name('AdminHome');
+Route::get('AdminInsertPage', [\App\Http\Controllers\AdminController::class, 'showInsertUser'])->middleware(['auth', 'verified', 'isAdmin'])->name('AdminInsertPage');
+/* 
+Manager Routes 
+*/
 Route::get('ProjectHome', [\App\Http\Controllers\ProjectController::class, 'formyprojects'])->middleware(['auth', 'verified', 'isManager'])->name('ProjectHome');
+
 Route::get('Scheduler', [\App\Http\Controllers\StaffingController::class, 'formystaffing'])->name('Scheduler');
 
-Route::get('/test', 'DataController@test');
+
 
 
 Route::get('/', function () {
@@ -50,9 +57,6 @@ Route::get('ProjectInsertPage', function () {
     return Inertia::render('Project/ProjectInsertPage');
 });
 
-Route::get('AdminInsertPage', function () {
-    return Inertia::render('Admin/AdminInsertPage');
-});
 
 Route::get('AdminUpdatePage', function () {
     return Inertia::render('Admin/AdminUpdatePage');
@@ -62,11 +66,7 @@ Route::get('/NewsPage', function () {
     return Inertia::render('NewsPage');
 })->middleware(['auth', 'verified'])->name('NewsPage');
 
-/*
-Route::get('/Scheduler', function () {
-    return Inertia::render('Scheduler');
-})->middleware(['auth', 'verified'])->name('Scheduler');
-*/
+
 Route::get('/projects_list', function () {
     return Inertia::render('projects_list');
 })->middleware(['auth', 'verified', 'isUser'])->name('projects_list');

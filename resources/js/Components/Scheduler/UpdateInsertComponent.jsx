@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
+import DropdownForm from "../Inputs/DropdownForm";
 import InputError from "@/Components/Inputs/InputError";
 import InputLabel from "@/Components/Inputs/InputLabel";
 import TextInput from "@/Components/Inputs/TextInput";
@@ -13,7 +13,7 @@ const inputStyle = {
 
 export default function ProjectUpdateComponent(props) {
 
-    console.log(props);
+    
     const { data, setData, post, processing, errors, reset } = useForm({
         staffingid : props.staffingid,
         firstname: props.firstname,
@@ -27,6 +27,7 @@ export default function ProjectUpdateComponent(props) {
   
     const onHandleChange = (event) => {
         setData(event.target.name, event.target.value);
+        console.log(data.projectName)
     };
 
     const [value, setValue] = useState({
@@ -125,28 +126,14 @@ export default function ProjectUpdateComponent(props) {
                                 className="mt-2"
                             />
                         </div>
-                        <div style={inputStyle}>
-                            <InputLabel
-                                className="mt-4"
-                                forInput="projektName"
-                                value="Projektname"
-                            />
+                    
+                        <DropdownForm
+                        projects={props.projects}
+                        onHandleChange ={onHandleChange}
+                        value={props.projects}
+                        >
 
-                            <TextInput
-                                id="projektName"
-                                name="projektName"
-                                value={props.projectName}
-                                className="mt-1 block w-full"
-                                autoComplete="projektName"
-                                handleChange={onHandleChange}
-                                locked={true}
-                            />
-
-                            <InputError
-                                message={errors.projectName}
-                                className="mt-2"
-                            />
-                        </div>
+                        </DropdownForm>
 
                         <div style={inputStyle}>
                             <InputLabel

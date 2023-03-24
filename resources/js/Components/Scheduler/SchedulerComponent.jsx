@@ -3,7 +3,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Popover } from "@headlessui/react";
 import { addToPersons } from "./AddPersonComponent";
-
 import Exit from "@mui/icons-material/DisabledByDefault";
 import UpdateInsertComponent from "@/Components/Scheduler/UpdateInsertComponent";
 import InsertComponent from '@/Components/Scheduler/InsertComponent';
@@ -42,7 +41,6 @@ const datePickerWrapperStyles = {
 function SchedulerComponent(data) {
   
     const [month, setMonth] = useState(new Date()); // initial value is today's date
-
 
     const [popoverOpen, setPopoverOpen] = useState(false);
 
@@ -126,7 +124,7 @@ function SchedulerComponent(data) {
                 }
         
           
-            console.log(person);
+
           
             });
             const personCells = [];
@@ -177,6 +175,7 @@ function SchedulerComponent(data) {
                                         end={end}
                                         month={month.getMonth() + 1}
                                         staffingid={entryNumber}
+                                        projects={data.projects}
                                     ></UpdateInsertComponent>
                                 </div>
                             </Popover.Panel>
@@ -221,7 +220,7 @@ function SchedulerComponent(data) {
                                         personid= {person.id}
                                         firstname={person.name}
                                         lastname={person.lastname}
-                                     
+                                        projects={data.projects}
                                       
                                     ></InsertComponent>
                                 </div>

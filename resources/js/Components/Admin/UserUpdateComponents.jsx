@@ -15,7 +15,7 @@ export default function AdminUpdate(props) {
     const [loading, setLoading] = useState(true);
     const urlSearchParams = new URLSearchParams(window.location.search);
     myVar = urlSearchParams.get("id");
-
+    
     const { data, setData, post, processing, errors, reset } = useForm({
         name: "",
         email: "",

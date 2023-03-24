@@ -6,6 +6,7 @@ import TextInput from "@/Components/Inputs/TextInput";
 import { Head, Link, useForm } from "@inertiajs/react";
 import UniversalButton from "../Buttons/UniversalButtonComponent";
 import Datepicker from "react-tailwindcss-datepicker";
+import DropdownForm from "../Inputs/DropdownForm";
 
 const inputStyle = {
     width: "500px",
@@ -109,27 +110,16 @@ export default function ProjectUpdateComponent(props) {
                                 className="mt-2"
                             />
                         </div>
-                        <div style={inputStyle}>
-                            <InputLabel
-                                className="mt-4"
-                                forInput="projectName"
-                                value="Projektname"
-                            />
+             
+                        <DropdownForm
+                        projects={props.projects}
+                        onHandleChange ={onHandleChange}
+                        value={props.projects}
+                        >
 
-                            <TextInput
-                                id="projectName"
-                                name="projectName"
-                                value={data.projectName}
-                                className="mt-1 block w-full"
-                                autoComplete="projektName"
-                                handleChange={onHandleChange}
-                            />
+                        </DropdownForm>
 
-                            <InputError
-                                message={errors.projectName}
-                                className="mt-2"
-                            />
-                        </div>
+                        
 
                         <div style={inputStyle}>
                             <InputLabel
