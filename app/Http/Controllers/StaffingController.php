@@ -7,6 +7,7 @@ use App\Models\Persons;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Models\Staffing;
+use App\Models\Projects;
 use Illuminate\Support\Facades\DB;
 
 class StaffingController extends Controller
@@ -27,16 +28,14 @@ class StaffingController extends Controller
     }
     public function insertStaffing (Request $request){
         $staffingEnry= new Staffing;
-        
-        $project_id = DB::table('projects')
-        ->select('id')
-        ->where('name', '=', $request->projectName)
-        ->first();
+        $project = Projects::where('name', $request->projectName)->first();
+     
+     
 
         $staffingEnry->person_Id= $request->personid;
         $staffingEnry->endDate= $request->endDate;
         $staffingEnry->startDate= $request->startDate;
-        $staffingEnry->project_Id= 8;
+        $staffingEnry->project_Id= $project->id;
         $staffingEnry->save();
 
             
