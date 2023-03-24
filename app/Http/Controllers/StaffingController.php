@@ -19,6 +19,7 @@ class StaffingController extends Controller
             ->join('persons', 'staffings.person_Id', '=', 'persons.id')
             ->join('projects', 'staffings.project_Id', '=', 'projects.id')
             ->select('persons.id', 'persons.firstname as name', 'persons.lastname','staffings.id as entryNumber' ,'projects.name as project', 'staffings.startDate as start', 'staffings.endDate as end')
+            ->orderBy('persons.lastname')
             ->orderBy('start')
             ->get();
     
@@ -27,6 +28,7 @@ class StaffingController extends Controller
     
     }
     public function insertStaffing (Request $request){
+       
         $staffingEnry= new Staffing;
         $project = Projects::where('name', $request->projectName)->first();
      
