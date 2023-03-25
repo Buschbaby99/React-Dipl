@@ -28,7 +28,9 @@ Route::get('AdminUpdatePage', [\App\Http\Controllers\AdminController::class, 'sh
 Manager Routes 
 */
 Route::get('ProjectHome', [\App\Http\Controllers\ProjectController::class, 'formyprojects'])->middleware(['auth', 'verified', 'isManager'])->name('ProjectHome');
-
+/*
+Routes for everbody
+*/
 Route::get('Scheduler', [\App\Http\Controllers\StaffingController::class, 'formystaffing'])->name('Scheduler');
 
 
@@ -55,6 +57,10 @@ Route::get('Statistic', function () {
 Route::get('ProjectInsertPage', function () {
     return Inertia::render('Project/ProjectInsertPage');
 });
+Route::get('ProjectUpdatePage', function () {
+    return Inertia::render('Project/ProjectUpdatePage');
+});
+
 
 
 
@@ -62,10 +68,6 @@ Route::get('/NewsPage', function () {
     return Inertia::render('NewsPage');
 })->middleware(['auth', 'verified'])->name('NewsPage');
 
-
-Route::get('/projects_list', function () {
-    return Inertia::render('projects_list');
-})->middleware(['auth', 'verified', 'isUser'])->name('projects_list');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

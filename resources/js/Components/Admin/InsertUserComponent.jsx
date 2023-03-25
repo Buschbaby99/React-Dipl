@@ -52,7 +52,7 @@ console.log(props)
             )
             .catch(error => {
                 console.log("ERROR:: ", error.response.data);
-                console.log(data);
+           
             });
     }
 

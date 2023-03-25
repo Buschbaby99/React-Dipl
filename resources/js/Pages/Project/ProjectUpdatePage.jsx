@@ -10,7 +10,7 @@ export default function adminInsertPage(props) {
 
   return (
     <div>
-        <Head title="AdminUpdatePage" />
+        <Head title="ProjectUpdate" />
         <LoggedIn auth={props.auth}></LoggedIn>
         <ProjectUpdateComponent name={props}></ProjectUpdateComponent>
     </div>
