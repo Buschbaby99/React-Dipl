@@ -26,11 +26,12 @@ const containerStyles = {
 const stickyColumnStyles = {
     position: "sticky",
     left: -1,
-  
+    background: "rgb(31 41 55)",
     zIndex: 10,
     boxShadow: "2px 0px 4px rgba(0, 0, 0, 0.1)",
     borderRight: "1px solid #dee2e6",
     borderLeft: "1px solid #dee2e6",
+    backgroundColor: "rgb(31 41 55)",
    
 };
 
@@ -161,7 +162,12 @@ function SchedulerComponent(data) {
                                                 <h1>Projekt Einteilung</h1>
                                             </div>
                                             <div className="flex-shrink-0">
+                                            <a
+                                                className="text-black-500 hover:text-black-700"
+                                                href={`Scheduler`}
+                                            >
                                                 <Exit></Exit>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -196,7 +202,7 @@ function SchedulerComponent(data) {
             }
             return (
                 <tr key={index}>
-                    <td className="border px-3 py-2" style={stickyColumnStyles}>
+                    <td className="border px-3 py-2 bg-gray-800 color text-gray-300 text-m " style={stickyColumnStyles}>
                     <Popover className="relative">
                             <Popover.Button>
                                 {person.name}
@@ -204,7 +210,7 @@ function SchedulerComponent(data) {
                                 {person.lastname}
                             </Popover.Button>
 
-                            <Popover.Panel className="fixed z-50 top-0 left-0 w-screen h-screen flex items-center justify-center">
+                            <Popover.Panel className="fixed z-50 top-0 left-0 w-screen h-screen text-black flex items-center justify-center">
                                 <div className="bg-gray-400 rounded-lg">
                                     <div className="bg-gray-400 rounded-lg mt-2 mr-2">
                                         <div className="flex justify-between items-start">
@@ -212,7 +218,13 @@ function SchedulerComponent(data) {
                                                 <h1>Projekt Einteilung</h1>
                                             </div>
                                             <div className="flex-shrink-0">
+                                            <a
+                                                className="text-black-500 hover:text-black-700"
+                                                href={`Scheduler`}
+                                            >
+                                              
                                                 <Exit></Exit>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
