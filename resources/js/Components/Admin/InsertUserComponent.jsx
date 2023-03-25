@@ -26,14 +26,14 @@ export default function AdminInputInsert(props) {
         TelNr2: '',
         rank: '',
         country: '',
-        zip:'',
+        zip: '',
         city: '',
-        street:'',
-        role:'',
+        street: '',
+        role: '',
 
     });
 
-    console.log(props);
+    console.log(data);
 
 
     const onHandleChange = (event) => {
@@ -43,22 +43,22 @@ export default function AdminInputInsert(props) {
     const handleSubmit = (event) => {
         event.preventDefault();
         axios.post('/api/insertUser', data)
-        .then(() => {
+            .then(() => {
                 alert("User: " + JSON.stringify(data.name) + "wurde angelegt!");
                 reset();
             }
             )
-        .catch(error => {
-            console.log("ERROR:: ",error.response.data);
-        });
+            .catch(error => {
+                console.log("ERROR:: ", error.response.data);
+            });
     }
-    
+
 
     return (
         <>
             <div>
                 <div className="flex justify-center align-center p-12">
-                    <form  onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit}>
                         <div style={inputStyle}>
                             <InputLabel className="mt-4" forInput="name" value="Username" />
 
@@ -191,18 +191,31 @@ export default function AdminInputInsert(props) {
                         <div style={inputStyle}>
                             <InputLabel className="mt-4" forInput="role" value="Role" />
 
-                            <TextInput
-                                id="role"
-                                name="role"
-                                value={data.role}
-                                className="mt-1 block w-full"
-                                autoComplete="role"
-                                handleChange={onHandleChange}
-                                required
-                            />
+                            <div className="relative mt-1">
+                                <select
+                                    id="role"
+                                    name="role"
+                                    value={data.role}
+                                    onChange={onHandleChange}
+                                    className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+                                    required
+                                >
+                                    <option value="">Select a role</option>
+                                    <option value="1">Admin</option>
+                                    <option value="2">Manager</option>
+                                    <option value="3">Mitarbeiter</option>
+                                </select>
+                                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                    <svg className="fill-current h-4 w-4"  viewBox="0 0 20 20"><path d="M10 12l-6-6h12l-6 6z" /></svg>
+                                </div>
+                            </div>
 
                             <InputError message={errors.role} className="mt-2" />
                         </div>
+
+
+
+
                         {/*
                         <div style={inputStyle}>
                             <InputLabel className="mt-4" forInput="department" value="Department" />
