@@ -7,7 +7,6 @@ import AdminUpdateUser from '../../Components/Admin/UserUpdateComponents';
 
 export default function adminInsertPage(props) {
 
-  console.log(props);
 
   return (
     <div>

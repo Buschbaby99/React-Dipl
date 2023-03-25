@@ -22,7 +22,9 @@ Admin Routes
 
 Route::get('AdminHome', [\App\Http\Controllers\AdminController::class, 'formyadmin'])->middleware(['auth', 'verified', 'isAdmin'])->name('AdminHome');
 Route::get('AdminInsertPage', [\App\Http\Controllers\AdminController::class, 'showInsertUser'])->middleware(['auth', 'verified', 'isAdmin'])->name('AdminInsertPage');
-/* 
+Route::get('AdminUpdatePage', [\App\Http\Controllers\AdminController::class, 'showUpdateUser'])->middleware(['auth', 'verified', 'isAdmin'])->name('AdminUpdatePage');
+
+/*
 Manager Routes 
 */
 Route::get('ProjectHome', [\App\Http\Controllers\ProjectController::class, 'formyprojects'])->middleware(['auth', 'verified', 'isManager'])->name('ProjectHome');
@@ -49,18 +51,12 @@ Route::get('Statistic', function () {
     return Inertia::render('Statistic/Statistic');
 });
 
-Route::get('ProjectUpdatePage', function () {
-    return Inertia::render('Project/ProjectUpdatePage');
-});
 
 Route::get('ProjectInsertPage', function () {
     return Inertia::render('Project/ProjectInsertPage');
 });
 
 
-Route::get('AdminUpdatePage', function () {
-    return Inertia::render('Admin/AdminUpdatePage');
-});
 
 Route::get('/NewsPage', function () {
     return Inertia::render('NewsPage');

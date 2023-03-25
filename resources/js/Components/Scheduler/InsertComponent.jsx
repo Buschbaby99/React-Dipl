@@ -14,7 +14,7 @@ const inputStyle = {
 
 export default function ProjectUpdateComponent(props) {
     const { data, setData, post, processing, errors, reset } = useForm({
- 
+
         personid: props.personid,
 
         firstname: props.firstname,
@@ -24,7 +24,7 @@ export default function ProjectUpdateComponent(props) {
         endDate: '',
         description: "",
     });
-    
+
 
     const onHandleChange = (event) => {
         setData(event.target.name, event.target.value);
@@ -35,7 +35,7 @@ export default function ProjectUpdateComponent(props) {
         startDate: props.startDate,
         endDate: props.endDate,
     });
-    
+
 
     const handleValueChange = (newValue) => {
         setValue(newValue);
@@ -44,7 +44,7 @@ export default function ProjectUpdateComponent(props) {
 
         console.log("newValue:", data.endDate);
     };
-  
+
 
     const handleInsert = (event) => {
         event.preventDefault();
@@ -55,7 +55,7 @@ export default function ProjectUpdateComponent(props) {
             })
             .catch((error) => {
                 console.log(data.projectName);
-             //   console.log(error);
+                //   console.log(error);
 
             });
     };
@@ -89,12 +89,12 @@ export default function ProjectUpdateComponent(props) {
                         </div>
 
                         <div style={inputStyle}>
-                            <InputLabel
+                        <InputLabel
                                 className="mt-4"
                                 forInput="lastname"
                                 value="Zuname"
                             />
-
+                            
                             <TextInput
                                 id="lastname"
                                 name="lastname"
@@ -110,16 +110,26 @@ export default function ProjectUpdateComponent(props) {
                                 className="mt-2"
                             />
                         </div>
-             
-                        <DropdownForm
-                        projects={props.projects}
-                        onHandleChange ={onHandleChange}
-                        value={props.projects}
-                        >
+                        <div style={inputStyle}>
+                        <InputLabel
+                                className="mt-4"
+                                forInput="lastname"
+                                value="Projektname"
+                            />
 
-                        </DropdownForm>
+                            <DropdownForm
+                                projects={props.projects}
+                                onHandleChange={onHandleChange}
+                                value={props.projects}
 
-                        
+                                id ={"projectName"}
+                                name={"projectName"}
+                                autoComplete={"projectName"}
+                            >
+                            </DropdownForm>
+                        </div>
+
+
 
                         <div style={inputStyle}>
                             <InputLabel

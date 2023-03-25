@@ -11,8 +11,7 @@ class Departments extends Model
 
         'name',
         'manager_id',
-        'area',
-        'street',
+        'color'
      
     ];
 }

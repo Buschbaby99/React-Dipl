@@ -142,7 +142,20 @@ class AdminController extends Controller
         ->orderBy('name')
         ->get();
         
-        return Inertia::render('Admin/AdminInsertPage', $departments);
+        return Inertia::render('Admin/AdminInsertPage', array('department' => $departments));
+    }
+
+    
+    public function showUpdateUser()
+    {
+        
+        
+        $departments=DB::table('departments')
+        ->select('name')
+        ->orderBy('name')
+        ->get();
+        
+        return Inertia::render('Admin/AdminUpdatePage', array('department' => $departments));
     }
 
  

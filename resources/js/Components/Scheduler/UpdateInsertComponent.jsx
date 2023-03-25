@@ -13,9 +13,9 @@ const inputStyle = {
 
 export default function ProjectUpdateComponent(props) {
 
-    
+
     const { data, setData, post, processing, errors, reset } = useForm({
-        staffingid : props.staffingid,
+        staffingid: props.staffingid,
         firstname: props.firstname,
         lastname: props.lastname,
         projectName: props.projectName,
@@ -25,12 +25,12 @@ export default function ProjectUpdateComponent(props) {
         description: "",
     });
     console.log(data);
-  
+
     const onHandleChange = (event) => {
         setData(event.target.name, event.target.value);
         console.log(data.projectName)
-      
-     
+
+
     };
 
     const [value, setValue] = useState({
@@ -39,12 +39,12 @@ export default function ProjectUpdateComponent(props) {
     });
 
     const handleValueChange = (newValue) => {
-   
+
         setValue(newValue);
         data.startDate = newValue.startDate;
         data.endDate = newValue.endDate;
-      
- 
+
+
     };
 
 
@@ -53,12 +53,12 @@ export default function ProjectUpdateComponent(props) {
         axios
             .post("/api/updateStaffing", data)
             .then(() => {
-               
-              window.location.href = "Scheduler";
-                
+
+                window.location.href = "Scheduler";
+
             })
             .catch((error) => {
-             
+
             });
     };
     const handleDelete = (event) => {
@@ -67,11 +67,11 @@ export default function ProjectUpdateComponent(props) {
             .post("/api/deleteStaffing", props)
             .then(() => {
                 window.location.href = "Scheduler";
-                   
+
             })
-    
+
     };
-  
+
     return (
         <>
             <div >
@@ -122,14 +122,33 @@ export default function ProjectUpdateComponent(props) {
                                 className="mt-2"
                             />
                         </div>
-                    
-                        <DropdownForm
-                        projects={props.projects}
-                        onHandleChange ={onHandleChange}
-                        value={props.projectName}
-                        >
 
-                        </DropdownForm>
+
+                        <div style={inputStyle}>
+                            <InputLabel
+                                className="mt-4"
+                                forInput="lastname"
+                                value="Projektname"
+                            />
+
+                            <DropdownForm
+                                projects={props.projects}
+                                onHandleChange={onHandleChange}
+                                value={props.projectName}
+                                
+                                id ={"projectName"}
+                                name={"projectName"}
+                                autoComplete={"projectName"}
+                            >
+
+                            </DropdownForm>
+
+
+                            <InputError
+                                message={errors.lastname}
+                                className="mt-2"
+                            />
+                        </div>
 
                         <div style={inputStyle}>
                             <InputLabel
@@ -143,26 +162,26 @@ export default function ProjectUpdateComponent(props) {
                             />
                         </div>
 
-                
+
                     </form>
-                    
+
                 </div>
 
                 <div className="flex justify-center align-center">
                     <form onSubmit={handleUpdate}>
-                            <UniversalButton
-                                type="submit"
-                                text="Update"
-                            ></UniversalButton>
-                   </form>      
-                   <form onSubmit={handleDelete}>   
-                            <UniversalButton
-                                type="submit"      
-                                text="Delete"
-                            ></UniversalButton>
-                       
-                    </form>  
-                    </div>
+                        <UniversalButton
+                            type="submit"
+                            text="Update"
+                        ></UniversalButton>
+                    </form>
+                    <form onSubmit={handleDelete}>
+                        <UniversalButton
+                            type="submit"
+                            text="Delete"
+                        ></UniversalButton>
+
+                    </form>
+                </div>
             </div>
         </>
     );

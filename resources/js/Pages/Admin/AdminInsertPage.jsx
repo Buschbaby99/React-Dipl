@@ -8,7 +8,7 @@ import AdminButton from "../../Components/Buttons/UniversalButtonComponent"
 
 export default function adminInsertPage(props) {
 
-  console.log(props);
+
 
   return (
     <div>

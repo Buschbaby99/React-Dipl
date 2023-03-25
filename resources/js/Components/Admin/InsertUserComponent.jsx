@@ -4,7 +4,7 @@ import InputLabel from '@/Components/Inputs/InputLabel';
 import TextInput from '@/Components/Inputs/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 import AdminButton from '../Buttons/UniversalButtonComponent';
-
+import DropdownForm from "../Inputs/DropdownForm";
 
 
 const inputStyle = {
@@ -13,7 +13,7 @@ const inputStyle = {
 
 export default function AdminInputInsert(props) {
 
-
+console.log(props)
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
@@ -46,10 +46,13 @@ export default function AdminInputInsert(props) {
             .then(() => {
                 alert("User: " + JSON.stringify(data.name) + "wurde angelegt!");
                 reset();
+
+                window.location.href = 'AdminInsertPage';
             }
             )
             .catch(error => {
                 console.log("ERROR:: ", error.response.data);
+                console.log(data);
             });
     }
 
@@ -145,18 +148,22 @@ export default function AdminInputInsert(props) {
                         <div style={inputStyle}>
                             <InputLabel className="mt-4" forInput="department" value="Abteilung" />
 
-                            <TextInput
-                                id="department"
-                                name="department"
-                                value={data.department}
-                                className="mt-1 block w-full"
-                                autoComplete="department"
-                                handleChange={onHandleChange}
-                                required
-                            />
+                            <DropdownForm
+                            
+                        projects={props.name.department}
+                        onHandleChange ={onHandleChange}
+                     
+                        value={data.department}
+                        id ={"department"}
+                        name={"department"}
+                        autoComplete={"department"}
+                        >
 
+                        </DropdownForm>
                             <InputError message={errors.department} className="mt-2" />
                         </div>
+
+                 
                         <div style={inputStyle}>
                             <InputLabel className="mt-4" forInput="TelNr1" value="Telefonnummer 1" />
 
@@ -214,25 +221,6 @@ export default function AdminInputInsert(props) {
                         </div>
 
 
-
-
-                        {/*
-                        <div style={inputStyle}>
-                            <InputLabel className="mt-4" forInput="department" value="Department" />
-
-                            <TextInput
-                                id="department2"
-                                name="department"
-                                value={data.department}
-                                className="mt-1 block w-full"
-                                autoComplete="department"
-                                handleChange={onHandleChange}
-                                required
-                            />
-
-                            <InputError message={errors.department} className="mt-2" />
-                        </div>
-                        */}
                         <div style={inputStyle}>
                             <InputLabel className="mt-4" forInput="country" value="Country" />
 

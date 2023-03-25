@@ -1,15 +1,14 @@
-export default function DropdownForm (projects,onHandleChange ,value) {
+export default function DropdownForm (projects,onHandleChange ,value, id,name,autoComplete) {
     
     console.log(projects)
     return (
-    <div className="mt-4">
-    <label htmlFor="projectName" className="block font-medium text-gray-700">Projektname</label>
+    <div className="mt-2">
+   
     <div className="relative">
       <select
-        id="projectName"
-        name="projectName"
-      
-         autoComplete="projektName"
+        id={projects.id}
+        name={projects.name}
+        autoComplete={autoComplete}
         onChange={projects.onHandleChange}
        
    
