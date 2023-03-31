@@ -90,7 +90,7 @@ function SchedulerComponent(data) {
 
     const renderPersons = () => {
         addToPersons(data.data, persons, data.allPersons);
-    
+
         return persons.map((person, index) => {
             const personProjects = [];
             person.unavailable.forEach(
@@ -114,7 +114,7 @@ function SchedulerComponent(data) {
                     }
                 }
             );
-    
+
             const personRows = [[]];
             personProjects.forEach((project) => {
                 let placed = false;
@@ -130,11 +130,11 @@ function SchedulerComponent(data) {
                     personRows.push([project]);
                 }
             });
-    
+
             return personRows.map((row, rowIndex) => {
                 const personCells = [];
                 let currentIndex = 0;
-    
+
                 row.forEach(
                     ({
                         project,
@@ -161,7 +161,45 @@ function SchedulerComponent(data) {
                                 colSpan={end - start + 1}
                                 className={`border px-3 py-2 bg-red-200`}
                             >
-                                {/* Your existing popover code */}
+                                <Popover className="relative">
+                                    <Popover.Button>
+                                        {`Project ${project}`}
+                                    </Popover.Button>
+
+                                    <Popover.Panel className="fixed z-50 top-0 left-0 w-screen h-screen flex items-center justify-center">
+                                        <div className="bg-gray-400 rounded-lg">
+                                            <div className="bg-gray-400 rounded-lg mt-2 mr-2">
+                                                <div className="flex justify-between items-start">
+                                                    <div className="flex-grow text-center">
+                                                        <h1>
+                                                            Projekt Einteilung
+                                                        </h1>
+                                                    </div>
+                                                    <div className="flex-shrink-0">
+                                                        <a
+                                                            className="text-black-500 hover:text-black-700"
+                                                            href={`Scheduler`}
+                                                        >
+                                                            <Exit></Exit>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <UpdateInsertComponent
+                                                firstname={person.name}
+                                                lastname={person.lastname}
+                                                projectName={project}
+                                                startDate={start_Date}
+                                                endDate={end_Date}
+                                                start={start}
+                                                end={end}
+                                                month={month.getMonth() + 1}
+                                                staffingid={entryNumber}
+                                                projects={data.projects}
+                                            ></UpdateInsertComponent>
+                                        </div>
+                                    </Popover.Panel>
+                                </Popover>
                             </td>
                         );
                         currentIndex = end + 1;
@@ -182,49 +220,51 @@ function SchedulerComponent(data) {
                         {rowIndex === 0 && (
                             <td
                                 rowSpan={personRows.length}
-                                className="border px-3 py-2 bg-gray-800 color text-gray-300text-m "
+                                className="border px-3 py-2 bg-gray-800 color text-gray-300 text-m"
                                 style={stickyColumnStyles}
-                                >
+                            >
                                 <Popover className="relative">
-                                <Popover.Button>
-                                {person.name}
-                                <br />
-                                {person.lastname}
-                                </Popover.Button>
-                                <Popover.Panel className="fixed z-50 top-0 left-0 w-screen h-screen text-black flex items-center justify-center">
-                                <div className="bg-gray-400 rounded-lg">
-                                    <div className="bg-gray-400 rounded-lg mt-2 mr-2">
-                                        <div className="flex justify-between items-start">
-                                            <div className="flex-grow text-center">
-                                                <h1>Projekt Einteilung</h1>
+                                    <Popover.Button>
+                                        {person.name}
+                                        <br />
+                                        {person.lastname}
+                                    </Popover.Button>
+                                    <Popover.Panel className="fixed z-50 top-0 left-0 w-screen h-screen text-black flex items-center justify-center">
+                                        <div className="bg-gray-400 rounded-lg">
+                                            <div className="bg-gray-400 rounded-lg mt-2 mr-2">
+                                                <div className="flex justify-between items-start">
+                                                    <div className="flex-grow text-center">
+                                                        <h1>
+                                                            Projekt Einteilung
+                                                        </h1>
+                                                    </div>
+                                                    <div className="flex-shrink-0">
+                                                        <a
+                                                            className="text-black-500 hover:text-black-700"
+                                                            href={`Scheduler`}
+                                                        >
+                                                            <Exit></Exit>
+                                                        </a>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div className="flex-shrink-0">
-                                                <a
-                                                    className="text-black-500 hover:text-black-700"
-                                                    href={`Scheduler`}
-                                                >
-                                                    <Exit></Exit>
-                                                </a>
-                                            </div>
+                                            <InsertComponent
+                                                personid={person.id}
+                                                firstname={person.name}
+                                                lastname={person.lastname}
+                                                projects={data.projects}
+                                            ></InsertComponent>
                                         </div>
-                                    </div>
-                                    <InsertComponent
-                                        personid={person.id}
-                                        firstname={person.name}
-                                        lastname={person.lastname}
-                                        projects={data.projects}
-                                    ></InsertComponent>
-                                </div>
-                            </Popover.Panel>
-                        </Popover>
-                    </td>
-                )}
-                {personCells}
-            </tr>
-        )});
-    });
-};
-
+                                    </Popover.Panel>
+                                </Popover>
+                            </td>
+                        )}
+                        {personCells}
+                    </tr>
+                );
+            });
+        });
+    };
 
     return (
         <div style={containerStyles}>
