@@ -1,0 +1,13 @@
+.table-responsive {
+    overflow-x: auto;
+  }
+  @media (max-width: 640px) {
+    table {
+      font-size: 12px;
+    }
+    td,
+    th {
+      padding: 0.5rem;
+    }
+  }
+  
