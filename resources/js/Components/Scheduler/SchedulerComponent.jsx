@@ -43,6 +43,8 @@ function SchedulerComponent(data) {
   
     const [month, setMonth] = useState(new Date()); // initial value is today's date
 
+    //console.log(data);
+
     const daysInMonth = new Date(
         month.getFullYear(),
         month.getMonth() + 1,
@@ -93,7 +95,7 @@ function SchedulerComponent(data) {
     const persons = [];
 
     const renderPersons = () => {
-        addToPersons(data.data, persons);
+        addToPersons(data.data, persons, data.allPersons);
     
         return persons.map((person, index) => {
             const personProjects = [];
