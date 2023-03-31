@@ -43,6 +43,33 @@ function SchedulerComponent(data) {
 
     //console.log(data);
 
+    const [selectedProject, setSelectedProject] = useState("");
+
+    const renderProjectFilter = () => {
+        const projectOptions = data.projects.map((project) => (
+            <option key={project.id} value={project.id}>
+                {project.name}
+            </option>
+        ));
+
+        return (
+            <Fragment>
+                <label htmlFor="project-filter" className="mr-2">
+                    Projektfilter:
+                </label>
+                <select
+                    id="project-filter"
+                    value={selectedProject}
+                    onChange={(e) => setSelectedProject(e.target.value)}
+                    className="rounded-md border-gray-300"
+                >
+                    <option value="">Alle Projekte</option>
+                    {projectOptions}
+                </select>
+            </Fragment>
+        );
+    };
+
     const daysInMonth = new Date(
         month.getFullYear(),
         month.getMonth() + 1,
@@ -98,22 +125,23 @@ function SchedulerComponent(data) {
                     const start_Date = new Date(start);
                     const end_Date = new Date(end);
                     if (
+                        (!selectedProject || project === selectedProject) &&
                         start_Date.getFullYear() === month.getFullYear() &&
                         start_Date.getMonth() === month.getMonth() &&
                         end_Date.getFullYear() === month.getFullYear() &&
                         end_Date.getMonth() === month.getMonth()
-                    ) {
+                      ) {
                         personProjects.push({
-                            project,
-                            start: start_Date.getDate() - 1,
-                            end: end_Date.getDate() - 1,
-                            start_Date: start,
-                            end_Date: end,
-                            entryNumber: entryNumber,
+                          project,
+                          start: start_Date.getDate() - 1,
+                          end: end_Date.getDate() - 1,
+                          start_Date: start,
+                          end_Date: end,
+                          entryNumber: entryNumber,
                         });
+                      }
                     }
-                }
-            );
+                  );
 
             const personRows = [[]];
             personProjects.forEach((project) => {
@@ -268,10 +296,8 @@ function SchedulerComponent(data) {
 
     return (
         <div style={containerStyles}>
-            <div
-                className="flex justify-center mb-4 w-auto"
-                style={datePickerWrapperStyles}
-            >
+            <div className="flex justify-center mb-4 w-auto">
+                {renderProjectFilter()}
                 <DatePicker
                     selected={month}
                     onChange={(date) => setMonth(date)}
@@ -279,6 +305,7 @@ function SchedulerComponent(data) {
                     showMonthYearPicker
                 />
             </div>
+
             <div style={tableWrapperStyles}>
                 <table className="table-auto border-collapse border border-blue-800 w-full">
                     <thead>
