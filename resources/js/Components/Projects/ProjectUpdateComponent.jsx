@@ -8,7 +8,9 @@ import UniversalButton from "../Buttons/UniversalButtonComponent";
 import Datepicker from "react-tailwindcss-datepicker";
 
 const inputStyle = {
-    width: "500px",
+    maxWidth: "500px",
+    width: "100%",
+    margin: "0.5rem",
 };
 
 export default function ProjectUpdateComponent(props) {

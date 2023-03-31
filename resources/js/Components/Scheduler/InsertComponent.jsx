@@ -9,7 +9,9 @@ import Datepicker from "react-tailwindcss-datepicker";
 import DropdownForm from "../Inputs/DropdownForm";
 
 const inputStyle = {
-    width: "500px",
+    maxWidth: "500px",
+    width: "100%",
+    margin: "0.5rem",
 };
 
 export default function ProjectUpdateComponent(props) {
