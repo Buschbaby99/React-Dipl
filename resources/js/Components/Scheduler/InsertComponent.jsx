@@ -94,7 +94,7 @@ export default function ProjectUpdateComponent(props) {
                                 forInput="lastname"
                                 value="Zuname"
                             />
-                            
+
                             <TextInput
                                 id="lastname"
                                 name="lastname"

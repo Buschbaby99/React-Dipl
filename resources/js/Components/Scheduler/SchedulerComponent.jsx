@@ -1,11 +1,14 @@
 import React, { useState, Fragment } from "react";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Popover } from "@headlessui/react";
 import { addToPersons } from "./AddPersonComponent";
 import Exit from "@mui/icons-material/DisabledByDefault";
 import UpdateInsertComponent from "@/Components/Scheduler/UpdateInsertComponent";
 import InsertComponent from "@/Components/Scheduler/InsertComponent";
+import { DateRangePicker } from "react-date-range";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
+import { addDays } from "date-fns";
 
 const tableWrapperStyles = {
     overflowX: "auto",
@@ -45,6 +48,24 @@ function SchedulerComponent(data) {
 
     const [selectedProject, setSelectedProject] = useState("");
 
+    const [dateRange, setDateRange] = useState({
+        startDate: new Date(),
+        endDate: addDays(new Date(), 7),
+        key: "selection",
+    });
+
+    const getDaysInRange = (startDate, endDate) => {
+        const days = [];
+        let currentDate = startDate;
+
+        while (currentDate <= endDate) {
+          days.push(currentDate);
+          currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
+        }
+
+        return days;
+      };
+
     const renderProjectFilter = () => {
         const projectOptions = data.projects.map((project) => (
             <option key={project.id} value={project.id}>
@@ -70,48 +91,41 @@ function SchedulerComponent(data) {
         );
     };
 
-    const daysInMonth = new Date(
-        month.getFullYear(),
-        month.getMonth() + 1,
-        0
-    ).getDate();
+    const daysInRange = getDaysInRange(dateRange.startDate, dateRange.endDate);
 
     const renderDays = () => {
-        const days = [];
+      return daysInRange.map((day) => {
+        const date = day;
         const weekdays = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
         const months = [
-            "01",
-            "02",
-            "03",
-            "04",
-            "05",
-            "06",
-            "07",
-            "08",
-            "09",
-            "10",
-            "11",
-            "12",
+          "01",
+          "02",
+          "03",
+          "04",
+          "05",
+          "06",
+          "07",
+          "08",
+          "09",
+          "10",
+          "11",
+          "12",
         ];
-
-        for (let i = 1; i <= daysInMonth; i++) {
-            const date = new Date(month.getFullYear(), month.getMonth(), i);
-            const weekday = weekdays[date.getDay()];
-            const monthname = months[month.getMonth()];
-            const dayname =
-                weekday + " " + i.toString().padStart(2, "0") + "." + monthname;
-            days.push(
-                <th
-                    key={i}
-                    scope="col"
-                    className="border px-3 py-2 bg-gray-800 color text-gray-300 text-sm"
-                >
-                    {dayname}
-                </th>
-            );
-        }
-        return days;
+        const weekday = weekdays[date.getDay()];
+        const monthname = months[date.getMonth()];
+        const dayname = weekday + " " + date.getDate().toString().padStart(2, "0") + "." + monthname;
+        return (
+          <th
+            key={dayname}
+            scope="col"
+            className="border px-3 py-2 bg-gray-800 color text-gray-300 text-sm"
+          >
+            {dayname}
+          </th>
+        );
+      });
     };
+
     // render table headers for each day of the month
     const persons = [];
 
@@ -126,22 +140,23 @@ function SchedulerComponent(data) {
                     const end_Date = new Date(end);
                     if (
                         (!selectedProject || project === selectedProject) &&
-                        start_Date.getFullYear() === month.getFullYear() &&
-                        start_Date.getMonth() === month.getMonth() &&
-                        end_Date.getFullYear() === month.getFullYear() &&
-                        end_Date.getMonth() === month.getMonth()
-                      ) {
+                        start_Date <= dateRange.endDate &&
+                        end_Date >= dateRange.startDate
+                    ) {
+                        const startIndex = Math.max(start_Date - dateRange.startDate, 0);
+                        const endIndex = Math.min(end_Date - dateRange.startDate, daysInRange.length - 1);
+
                         personProjects.push({
-                          project,
-                          start: start_Date.getDate() - 1,
-                          end: end_Date.getDate() - 1,
-                          start_Date: start,
-                          end_Date: end,
-                          entryNumber: entryNumber,
+                            project,
+                            start: startIndex,
+                            end: endIndex,
+                            start_Date: start,
+                            end_Date: end,
+                            entryNumber: entryNumber,
                         });
-                      }
                     }
-                  );
+                }
+            );
 
             const personRows = [[]];
             personProjects.forEach((project) => {
@@ -178,7 +193,7 @@ function SchedulerComponent(data) {
                                 <td
                                     key={`gap-${currentIndex}`}
                                     colSpan={start - currentIndex}
-                                    className="border px-3 py-2"
+                                    className="border px-4 py-2"
                                 ></td>
                             );
                         }
@@ -234,15 +249,16 @@ function SchedulerComponent(data) {
                     }
                 );
                 // Add any remaining cells after the last project
-                if (currentIndex < daysInMonth) {
+                if (currentIndex < daysInRange.length) {
                     personCells.push(
-                        <td
-                            key={`gap-${currentIndex}`}
-                            colSpan={daysInMonth - currentIndex}
-                            className="border px-4 py-2"
-                        ></td>
+                      <td
+                        key={`gap-${currentIndex}`}
+                        colSpan={daysInRange.length - currentIndex}
+                        className="border px-4 py-2"
+                      ></td>
                     );
-                }
+                  }
+
                 return (
                     <tr key={`${index}-${rowIndex}`}>
                         {rowIndex === 0 && (
@@ -298,12 +314,23 @@ function SchedulerComponent(data) {
         <div style={containerStyles}>
             <div className="flex justify-center mb-4 w-auto">
                 {renderProjectFilter()}
-                <DatePicker
-                    selected={month}
-                    onChange={(date) => setMonth(date)}
-                    dateFormat="MMMM yyyy"
-                    showMonthYearPicker
-                />
+                <div className="mx-4">
+                    <label htmlFor="date-range" className="mr-2">
+                        Zeitraum:
+                    </label>
+                    <DateRangePicker
+                        id="date-range"
+                        className="rounded-md border-gray-300"
+                        ranges={[dateRange]}
+                        onChange={(item) => {
+                            setDateRange({
+                                ...dateRange,
+                                startDate: item.selection.startDate,
+                                endDate: item.selection.endDate,
+                            });
+                        }}
+                    />
+                </div>
             </div>
 
             <div style={tableWrapperStyles}>

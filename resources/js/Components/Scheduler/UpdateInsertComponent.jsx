@@ -135,7 +135,7 @@ export default function ProjectUpdateComponent(props) {
                                 projects={props.projects}
                                 onHandleChange={onHandleChange}
                                 value={props.projectName}
-                                
+
                                 id ={"projectName"}
                                 name={"projectName"}
                                 autoComplete={"projectName"}
