@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 12. Mrz 2023 um 16:03
+-- Erstellungszeit: 03. Apr 2023 um 15:39
 -- Server-Version: 10.4.27-MariaDB
 -- PHP-Version: 8.2.0
 
@@ -24,42 +24,31 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `area`
---
-
-CREATE TABLE `area` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Tabellenstruktur für Tabelle `departments`
 --
 
 CREATE TABLE `departments` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
-  `manager_id` bigint(20) NOT NULL,
+  `manager_id` bigint(20) UNSIGNED NOT NULL,
+  `color` varchar(64) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- --------------------------------------------------------
-
 --
--- Tabellenstruktur für Tabelle `dep_area`
+-- Daten für Tabelle `departments`
 --
 
-CREATE TABLE `dep_area` (
-  `department_id` bigint(20) NOT NULL,
-  `area_id` bigint(20) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `departments` (`id`, `name`, `manager_id`, `color`, `created_at`, `updated_at`) VALUES
+(1, 'Montage', 1, 'red', NULL, NULL),
+(2, 'Verteilerbau', 7, 'blue', NULL, NULL),
+(3, 'Automatisierung', 8, 'green', NULL, NULL),
+(9, 'Technische Planung', 1, 'yellow', NULL, NULL),
+(10, 'Buchhaltung', 7, 'grey', NULL, NULL),
+(11, 'Administration', 8, 'pink', NULL, NULL),
+(12, 'Einkauf', 1, 'brown', NULL, NULL),
+(13, 'Lager', 7, 'violett', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -140,20 +129,12 @@ CREATE TABLE `personaddresses` (
 --
 
 INSERT INTO `personaddresses` (`id`, `country`, `ZIP`, `city`, `street`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin', 'admin', 'admin', '2023-02-17 06:13:20', '2023-02-17 06:13:20'),
-(2, 'AT', '7564', 'Dobersdorf', 'Gartengasse 1', '2023-02-17 06:21:38', '2023-02-17 06:21:38'),
-(3, 'AT', '7564', 'Dobersdorf', 'Gartengasse 1', '2023-02-17 06:22:56', '2023-02-17 06:22:56'),
-(4, 'AT', '7564', 'Dobersdorf', 'Gartengasse 1', '2023-02-17 06:23:49', '2023-02-17 06:23:49'),
 (5, 'AT', '7564', 'Dobersdorfer', 'Gartengasse 1', '2023-02-17 06:25:16', '2023-03-12 13:13:39'),
 (6, 'Manager', 'Manager', 'Manager', 'Manager', '2023-02-17 06:33:13', '2023-02-17 06:33:50'),
-(7, 'Austria', '8041', 'Graz', 'Sternäckerweg', '2023-02-17 06:50:32', '2023-02-17 06:50:59'),
-(8, 'sdd', '333', 'dfdf', 'dsdd', '2023-02-20 08:15:56', '2023-02-20 09:06:08'),
-(9, 'dffd', '444', 'ffg', 'fgfg', '2023-02-20 08:51:11', '2023-02-20 09:14:43'),
-(10, 'dsfd', '324', 'cv', 'ycyx', '2023-02-20 10:47:47', '2023-02-24 07:36:52'),
-(11, 'Austria', '8041', 'Graz', 'Sternäckerweg', '2023-02-23 08:56:12', '2023-02-23 08:56:12'),
-(12, 'aa', '22', 'ss', 'xx', '2023-02-24 08:12:59', '2023-03-12 13:41:15'),
-(13, 'sacsac', '45', 'dvdf', 'vdv', '2023-02-24 08:54:58', '2023-02-24 08:54:58'),
-(14, 'sss', 'sss', 'ss', 'ss', '2023-02-24 08:56:46', '2023-02-24 08:56:46');
+(11, 'Austria', '8041', 'Graz', 'Sternäckerweg', '2023-02-23 08:56:12', '2023-04-03 11:17:20'),
+(12, 'Austria', '8355', 'Oberdorf', 'Userhausen 45', '2023-02-24 08:12:59', '2023-04-03 11:20:07'),
+(15, 'Austria', '8324', 'Kirchberg an der Raab', 'Monteurhausen 12', '2023-04-03 11:16:17', '2023-04-03 11:16:17'),
+(16, 'Austria', '8475', 'Rudersdorf', 'Lagerhausen 45', '2023-04-03 11:22:06', '2023-04-03 11:22:06');
 
 -- --------------------------------------------------------
 
@@ -187,9 +168,9 @@ CREATE TABLE `persons` (
   `TelNr1` varchar(255) NOT NULL,
   `TelNr2` varchar(255) DEFAULT NULL,
   `rank` varchar(255) DEFAULT NULL,
-  `user_id` bigint(20) NOT NULL,
-  `department` varchar(20) NOT NULL,
-  `personAddress_id` bigint(20) NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `department` bigint(20) UNSIGNED NOT NULL,
+  `personAddress_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -199,14 +180,12 @@ CREATE TABLE `persons` (
 --
 
 INSERT INTO `persons` (`id`, `firstname`, `lastname`, `TelNr1`, `TelNr2`, `rank`, `user_id`, `department`, `personAddress_id`, `created_at`, `updated_at`) VALUES
-(1, 'Alexander', 'Kainz', '06641509102', '06641509102', NULL, 9, 'Rechtschutz', 5, '2023-02-17 06:25:16', '2023-02-17 06:25:16'),
-(2, 'Manager', 'Manager', 'Manager', 'Manager', NULL, 10, 'Manager', 6, '2023-02-17 06:33:13', '2023-02-17 06:33:13'),
-(4, 'Test', 'Test', '12211', '211', NULL, 12, 'sdsd', 8, '2023-02-20 08:15:56', '2023-02-20 08:15:56'),
-(5, 'zzzzsdsd', 'zz', '222', '222', NULL, 13, 'zz', 9, '2023-02-20 08:51:11', '2023-02-20 09:06:47'),
-(6, 'sdcsdc', 'sdcsdc', '324234', '23423', NULL, 14, 'dscsd', 10, '2023-02-20 10:47:47', '2023-02-20 10:47:47'),
-(7, 'Mario', 'Pilz', '0', '0', NULL, 15, 'Programmierer', 11, '2023-02-23 08:56:12', '2023-02-23 08:56:12'),
-(8, 'Dominik', 'Kosednar', '22', '22', NULL, 16, 'aa', 12, '2023-02-24 08:12:59', '2023-03-12 13:41:15'),
-(9, 'assaa', 'asas', 'saas', 'assas', NULL, 17, 'asas', 13, '2023-02-24 08:54:58', '2023-02-24 08:54:58');
+(1, 'Alexander', 'Kainz', '06641509102', '06641509102', NULL, 9, 2, 5, '2023-02-17 06:25:16', '2023-02-17 06:25:16'),
+(2, 'Manager', 'Manager', 'Manager', 'Manager', NULL, 10, 2, 6, '2023-02-17 06:33:13', '2023-02-17 06:33:13'),
+(7, 'Mario', 'Pilz', '0', '0', NULL, 15, 3, 11, '2023-02-23 08:56:12', '2023-04-03 11:17:20'),
+(8, 'Dominik', 'Kosednar', '0800100100', '0664500500', NULL, 16, 1, 12, '2023-02-24 08:12:59', '2023-04-03 11:20:07'),
+(11, 'Monteur', 'Makita', '0664800800', '0664200200', NULL, 19, 1, 15, '2023-04-03 11:16:17', '2023-04-03 11:16:17'),
+(12, 'lager', 'josef', '0664300250', '0664800120', NULL, 20, 13, 16, '2023-04-03 11:22:06', '2023-04-03 11:22:06');
 
 -- --------------------------------------------------------
 
@@ -221,7 +200,7 @@ CREATE TABLE `projects` (
   `description` varchar(255) DEFAULT NULL,
   `startDate` date DEFAULT NULL,
   `endDate` date DEFAULT NULL,
-  `projectAddress_Id` bigint(20) NOT NULL,
+  `projectAddress_Id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -268,8 +247,8 @@ INSERT INTO `project_addresses` (`id`, `country`, `ZIP`, `city`, `street`, `crea
 
 CREATE TABLE `staffings` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `person_Id` bigint(20) NOT NULL,
-  `project_Id` bigint(20) NOT NULL,
+  `person_Id` bigint(20) UNSIGNED NOT NULL,
+  `project_Id` bigint(20) UNSIGNED NOT NULL,
   `startDate` timestamp NULL DEFAULT NULL,
   `endDate` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -313,28 +292,21 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
 (9, 'Admin', 'admin@gmx.at', NULL, '$2y$10$PwZ.hLuEkhOoC4.kjZRFoO2dSePCpsXUGpmfl6rM61aid5/2AFeay', 1, NULL, '2023-02-17 06:25:16', '2023-03-12 13:13:39'),
 (10, 'Manager', 'manager@gmx.at', NULL, '$2y$10$tYqaknEPBAs1tjRly.jNzueCKwSJtdB7dJKudP1skRwLRM7rhlQoe', 2, NULL, '2023-02-17 06:33:13', '2023-02-23 08:01:32'),
-(12, 'Test212ssxxx', 'test@gmx.at', NULL, '$2y$10$d3jMlxXRhJlv5EowJJXYG.waO9lpyRyFuYR.xo0VGAY4sECXOT2iu', 1, NULL, '2023-02-20 08:15:56', '2023-02-20 09:06:08'),
-(13, 'zzaa', 'zzz@tt.at', NULL, '$2y$10$r1jmstsFlfwFH9ZN/KbLeu.9Xc8vh2K6GVhrg.fwXX37IFf366tmq', 1, NULL, '2023-02-20 08:51:11', '2023-02-20 09:14:43'),
-(14, 'aaaa', 'dasdasda@sdcsd.at', NULL, '$2y$10$fPzMZCV3ZMvq0OnUWUVPZe/yOGTtm6tJkWlEYZwbfjdyXbUIpOiTC', 1, NULL, '2023-02-20 10:47:47', '2023-02-24 07:36:52'),
-(15, 'Mario', 'mario.pilz0601@gmail.com', NULL, '$2y$10$RqHTxmSZnJHGeVi.tNT8legJFzQnBm4C6Asn7mt8WqrUq.QnbFfE6', 0, NULL, '2023-02-23 08:56:12', '2023-02-23 08:56:12'),
-(16, 'User', 'user@gmx.at', NULL, '$2y$10$qkk5mYt9fUv4UywXunhlwervz/L/MZQ.hyTwjsDlEZ5GZ0.5o.tHG', 0, NULL, '2023-02-24 08:12:59', '2023-03-12 13:14:10'),
-(17, 'vsdvsd', 'sdvsdv@scsc.at', NULL, '$2y$10$rVGaksZ0w5nQ1TU0AfiR5OKecyYr5TVqDqp1dgh1ZIkZVauN9TwCK', 1, NULL, '2023-02-24 08:54:58', '2023-02-24 08:54:58');
+(15, 'Mario', 'mario.pilz0601@gmail.com', NULL, '$2y$10$RqHTxmSZnJHGeVi.tNT8legJFzQnBm4C6Asn7mt8WqrUq.QnbFfE6', 1, NULL, '2023-02-23 08:56:12', '2023-04-03 11:17:20'),
+(16, 'User', 'user@gmx.at', NULL, '$2y$10$qkk5mYt9fUv4UywXunhlwervz/L/MZQ.hyTwjsDlEZ5GZ0.5o.tHG', 3, NULL, '2023-02-24 08:12:59', '2023-04-03 11:20:07'),
+(19, 'montage', 'montage@gmx.at', NULL, '$2y$10$KnFrlXVAMIkeSuKRh41ZM.b3lwc9AMLg4unq9hOUxgYzbwig7yHaK', 3, NULL, '2023-04-03 11:16:17', '2023-04-03 11:16:17'),
+(20, 'lager', 'lager@gmx.at', NULL, '$2y$10$hRPlKC8.g.ozSxr0IRY1bOIOuvQDz8E8qVkPhMzTHOmaTXVtdbvIm', 3, NULL, '2023-04-03 11:22:06', '2023-04-03 11:22:06');
 
 --
 -- Indizes der exportierten Tabellen
 --
 
 --
--- Indizes für die Tabelle `area`
---
-ALTER TABLE `area`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indizes für die Tabelle `departments`
 --
 ALTER TABLE `departments`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `manager_id` (`manager_id`);
 
 --
 -- Indizes für die Tabelle `failed_jobs`
@@ -373,13 +345,17 @@ ALTER TABLE `personal_access_tokens`
 -- Indizes für die Tabelle `persons`
 --
 ALTER TABLE `persons`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `dept_id` (`department`),
+  ADD KEY `personaddress` (`personAddress_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indizes für die Tabelle `projects`
 --
 ALTER TABLE `projects`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `project_addresses` (`projectAddress_Id`);
 
 --
 -- Indizes für die Tabelle `project_addresses`
@@ -391,7 +367,9 @@ ALTER TABLE `project_addresses`
 -- Indizes für die Tabelle `staffings`
 --
 ALTER TABLE `staffings`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `person_id` (`person_Id`),
+  ADD KEY `project_id` (`project_Id`);
 
 --
 -- Indizes für die Tabelle `users`
@@ -405,16 +383,10 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT für Tabelle `area`
---
-ALTER TABLE `area`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT für Tabelle `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT für Tabelle `failed_jobs`
@@ -432,7 +404,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT für Tabelle `personaddresses`
 --
 ALTER TABLE `personaddresses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT für Tabelle `personal_access_tokens`
@@ -444,7 +416,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT für Tabelle `persons`
 --
 ALTER TABLE `persons`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT für Tabelle `projects`
@@ -468,7 +440,38 @@ ALTER TABLE `staffings`
 -- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- Constraints der exportierten Tabellen
+--
+
+--
+-- Constraints der Tabelle `departments`
+--
+ALTER TABLE `departments`
+  ADD CONSTRAINT `manager_id` FOREIGN KEY (`manager_id`) REFERENCES `persons` (`id`);
+
+--
+-- Constraints der Tabelle `persons`
+--
+ALTER TABLE `persons`
+  ADD CONSTRAINT `dept_id` FOREIGN KEY (`department`) REFERENCES `departments` (`id`),
+  ADD CONSTRAINT `personaddress` FOREIGN KEY (`personAddress_id`) REFERENCES `personaddresses` (`id`),
+  ADD CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints der Tabelle `projects`
+--
+ALTER TABLE `projects`
+  ADD CONSTRAINT `project_addresses` FOREIGN KEY (`projectAddress_Id`) REFERENCES `project_addresses` (`id`);
+
+--
+-- Constraints der Tabelle `staffings`
+--
+ALTER TABLE `staffings`
+  ADD CONSTRAINT `person_id` FOREIGN KEY (`person_Id`) REFERENCES `persons` (`id`),
+  ADD CONSTRAINT `project_id` FOREIGN KEY (`project_Id`) REFERENCES `projects` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
