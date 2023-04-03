@@ -193,8 +193,8 @@ function SchedulerComponent(data) {
                                     <Popover.Button>
                                         {`Project ${project}`}
                                     </Popover.Button>
+                                    <Popover.Panel className="fixed z-50 top-0 left-0 w-screen h-screen flex items-center justify-center md:overflow-y-auto md:max-h-[80vh]">
 
-                                    <Popover.Panel className="fixed z-50 top-0 left-0 w-screen h-screen flex items-center justify-center">
                                         <div className="bg-gray-400 rounded-lg">
                                             <div className="bg-gray-400 rounded-lg mt-2 mr-2">
                                                 <div className="flex justify-between items-start">
