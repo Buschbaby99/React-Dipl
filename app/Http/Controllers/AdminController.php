@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Departments;
 use App\Models\User;
 use App\Models\Persons;
 use App\Models\Personaddress;
@@ -10,17 +12,17 @@ use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-   
+
     public function formyadmin()
     {
-      
+
         $users = User::all();
         $encode[]=json_encode($users);
-      
-        
+
+
         return Inertia::render('Admin/AdminHome', $encode);
     }
-   
+
     public function myRegister(Request $request)
     {
         $user = new User;
@@ -42,14 +44,16 @@ class AdminController extends Controller
         $persons = new Persons;
         $persons->firstname = $request->input('firstname');
         $persons->lastname = $request->input('lastname');
-        $persons->department = $request->input('department');
+        $department = Departments::where('name', $request->input('department'))->first();
+        $newid = $department->id;
+        $persons->department = $newid;
         $persons->TelNr1 = $request->input('TelNr1');
         $persons->TelNr2 = $request->input('TelNr2');
         $persons->personAddress_id = $personaddress->id;
         $persons->user_id = $user->id;
         $persons->save();
 
-        
+
 
     }
 
@@ -59,8 +63,11 @@ class AdminController extends Controller
         $user = User::where('id', $id)->first();
         $userId = $user->id;
         $persons = Persons::where('user_id', $userId)->first();
+        $personAddress_id= $persons->personAddress_id;
+        $address = Personaddress::where('id', $personAddress_id)->first();
         $persons->delete();
         $user->delete();
+        $address->delete();
     }
 
     public function editUser(Request $request)
@@ -69,10 +76,10 @@ class AdminController extends Controller
         $user = User::where('id', $id)->first();
         $userId = $user->id;
         $persons = Persons::where('user_id', $userId)->first();
-        
+
         $personAddress_id= $persons->personAddress_id;
         $address = Personaddress::where('id', $personAddress_id)->first();
-        
+
         $roleName=DB::table('users')
         ->select('name')
         ->orderBy('name')
@@ -81,7 +88,7 @@ class AdminController extends Controller
         ->select('name')
         ->orderBy('name')
         ->get();
-       
+
         return response()->json([
             'user' => $user,
             'persons' => $persons,
@@ -94,7 +101,7 @@ class AdminController extends Controller
     public function updateUser(Request $request)
     {
         $user = User::where('id', $request->id)->first();
-       
+
         $user->name = $request->name;
         $user->email = $request->email;
         $user->role = $request->role;
@@ -103,7 +110,9 @@ class AdminController extends Controller
         $person = Persons::where('user_id', $request->id)->first();
         $person->firstname =$request->firstname;
         $person->lastname =$request->lastname;
-        $person->department =$request->department;
+        $department = Departments::where('name', $request->input('department'))->first();
+        $newid = $department->id;
+        $person->department = $newid;
         $person->TelNr1= $request->TelNr1;
         $person->TelNr2= $request->TelNr2;
         $person->rank =$request->rank;
@@ -116,35 +125,35 @@ class AdminController extends Controller
         $personAddress->city =$request->city;
         $personAddress->street= $request->street;
         $personAddress->save();
-          
+
     }
 
     public function showInsertUser()
     {
-        
-        
+
+
         $departments=DB::table('departments')
         ->select('name')
         ->orderBy('name')
         ->get();
-        
+
         return Inertia::render('Admin/AdminInsertPage', array('department' => $departments));
     }
 
-    
+
     public function showUpdateUser()
     {
-        
-        
+
+
         $departments=DB::table('departments')
         ->select('name')
         ->orderBy('name')
         ->get();
-        
+
         return Inertia::render('Admin/AdminUpdatePage', array('department' => $departments));
     }
 
- 
+
 
 
 }
