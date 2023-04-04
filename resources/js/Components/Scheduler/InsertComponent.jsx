@@ -30,7 +30,7 @@ export default function ProjectUpdateComponent(props) {
 
     const onHandleChange = (event) => {
         setData(event.target.name, event.target.value);
-        console.log(data);
+        //console.log(data);
     };
 
     const [value, setValue] = useState({
@@ -56,7 +56,7 @@ export default function ProjectUpdateComponent(props) {
                 window.location.href = "Scheduler";
             })
             .catch((error) => {
-                console.log(data.projectName);
+                //console.log(data.projectName);
                 //   console.log(error);
 
             });

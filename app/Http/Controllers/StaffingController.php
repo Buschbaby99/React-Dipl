@@ -17,12 +17,11 @@ class StaffingController extends Controller
         $jsonString = DB::table('persons')
             ->leftJoin('staffings', 'staffings.person_Id', '=', 'persons.id')
             ->leftJoin('projects', 'staffings.project_Id', '=', 'projects.id')
-            ->select('persons.id', 'persons.firstname as name', 'persons.lastname', 'staffings.id as entryNumber', 'projects.name as project', 'staffings.startDate as start', 'staffings.endDate as end')
+            ->leftJoin('departments', 'departments.id', '=', 'persons.department')
+            ->select('persons.id', 'persons.firstname as name', 'persons.lastname', 'staffings.id as entryNumber', 'projects.name as project', 'staffings.startDate as start', 'staffings.endDate as end', 'departments.color as color', 'departments.name as departmentName')
             ->orderBy('persons.lastname')
             ->orderBy('start')
             ->get();
-
-
 
         $projects = DB::table('projects')
             ->select('name')

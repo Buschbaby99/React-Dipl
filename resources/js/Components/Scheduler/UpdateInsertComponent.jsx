@@ -26,11 +26,11 @@ export default function ProjectUpdateComponent(props) {
 
         description: "",
     });
-    console.log(data);
+    //console.log(data);
 
     const onHandleChange = (event) => {
         setData(event.target.name, event.target.value);
-        console.log(data.projectName)
+        //console.log(data.projectName)
 
 
     };

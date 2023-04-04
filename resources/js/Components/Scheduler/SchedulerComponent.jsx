@@ -34,23 +34,20 @@ const stickyColumnStyles = {
     backgroundColor: "rgb(31 41 55)",
 };
 
-const datePickerWrapperStyles = {
-    zIndex: 11, // Set this to a higher value than the zIndex in stickyColumnStyles
-};
-
 function SchedulerComponent(data) {
-    const [month, setMonth] = useState(new Date()); // initial value is today's date
 
+    const [month, setMonth] = useState(new Date());
     const today = new Date();
     const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
     const [startDate, setStartDate] = useState(firstDayOfMonth);
-    
-    const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+
+    const lastDayOfMonth = new Date(
+        today.getFullYear(),
+        today.getMonth() + 1,
+        0
+    );
+
     const [endDate, setEndDate] = useState(lastDayOfMonth);
-
-
-    //console.log(data);
-
     const [selectedProject, setSelectedProject] = useState("");
 
     const renderProjectFilter = () => {
@@ -79,10 +76,9 @@ function SchedulerComponent(data) {
     };
 
     const daysInMonth =
-    Math.floor(
-        (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)
-    ) + 1; // Add 1 here
-
+        Math.floor(
+            (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)
+        ) + 1; // Add 1 here
 
     const renderDays = () => {
         const days = [];
@@ -125,12 +121,13 @@ function SchedulerComponent(data) {
         }
         return days;
     };
+
     // render table headers for each day of the month
     const persons = [];
 
     const renderPersons = () => {
         addToPersons(data.data, persons, data.allPersons);
-
+        console.log(persons);
         return persons.map((person, index) => {
             const personProjects = [];
             person.unavailable.forEach(
@@ -169,8 +166,6 @@ function SchedulerComponent(data) {
                 }
             );
 
-            console.log(personProjects);
-
             const personRows = [[]];
             personProjects.forEach((project) => {
                 let placed = false;
@@ -204,22 +199,24 @@ function SchedulerComponent(data) {
                         if (currentIndex < start) {
                             personCells.push(
                                 <td
-                                    key={`gap-${currentIndex}`}
+                                    key={`gap-${rowIndex}-${currentIndex}`}
                                     colSpan={start - currentIndex}
                                     className="border px-3 py-2"
                                 ></td>
                             );
                         }
                         // Add cells for the project duration
+                        console.log(data.data);
                         personCells.push(
                             <td
-                                key={`${person.name}-${project}-${start}-${end}-${entryNumber}`}
+
+                            key={`${entryNumber}-${project}-${start}-${end}-${person.color}`}
                                 colSpan={end - start + 1}
-                                className={`border px-3 py-2 bg-red-200`}
+                                className={`border px-3 py-2 bg-${person.color}-200 rounded-lg `}
                             >
                                 <Popover className="relative">
                                     <Popover.Button>
-                                        {`Project ${project}`}
+                                        {`${project}`}
                                     </Popover.Button>
 
                                     <Popover.Panel className="fixed z-50 top-0 left-0 w-screen h-screen flex items-center justify-center">
@@ -265,14 +262,14 @@ function SchedulerComponent(data) {
                 if (currentIndex < daysInMonth) {
                     personCells.push(
                         <td
-                            key={`gap-${currentIndex}`}
+                        key={`gap-${rowIndex}-${currentIndex}`}
                             colSpan={daysInMonth - currentIndex}
                             className="border px-4 py-2"
                         ></td>
                     );
                 }
                 return (
-                    <tr key={`${index}-${rowIndex}`}>
+                    <tr key={`person-${rowIndex}`}>
                         {rowIndex === 0 && (
                             <td
                                 rowSpan={personRows.length}
@@ -324,17 +321,27 @@ function SchedulerComponent(data) {
 
     return (
         <div style={containerStyles}>
-            <div className="flex justify-center mb-4 w-auto">
+        <div className="flex justify-center mb-4 w-auto">
+            <div className="flex items-center justify-center space-x-4">
                 {renderProjectFilter()}
+                <label htmlFor="start-date-picker" className="mr-2">
+                    Startdatum:
+                </label>
                 <DatePicker
+                    id="start-date-picker"
                     selected={startDate}
                     onChange={(date) => setStartDate(date)}
                     dateFormat="dd.MM.yyyy"
                     selectsStart
                     startDate={startDate}
                     endDate={endDate}
+                    className="rounded-md border-gray-300"
                 />
+                <label htmlFor="end-date-picker" className="mr-2">
+                    Enddatum:
+                </label>
                 <DatePicker
+                    id="end-date-picker"
                     selected={endDate}
                     onChange={(date) => setEndDate(date)}
                     dateFormat="dd.MM.yyyy"
@@ -342,8 +349,10 @@ function SchedulerComponent(data) {
                     startDate={startDate}
                     endDate={endDate}
                     minDate={startDate}
+                    className="rounded-md border-gray-300"
                 />
             </div>
+        </div>
 
             <div style={tableWrapperStyles}>
                 <table className="table-auto border-collapse border border-blue-800 w-full">
