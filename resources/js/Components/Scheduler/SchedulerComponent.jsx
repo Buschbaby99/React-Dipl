@@ -309,11 +309,11 @@ function SchedulerComponent(data) {
                                 style={stickyColumnStyles}
                             >
                                 <Popover className="relative">
-                                    <Popover.Button>
-                                        {person.name}
-                                        <br />
-                                        {person.lastname}
-                                    </Popover.Button>
+                    <Popover.Button className="text-left">
+                        {person.name}
+                        <br />
+                        {person.lastname}
+                    </Popover.Button>
                                     <Popover.Panel className="fixed z-50 top-0 left-0 w-screen h-screen text-black flex items-center justify-center">
                                         <div className="bg-gray-400 rounded-lg">
                                             <div className="bg-gray-400 rounded-lg mt-2 mr-2">
