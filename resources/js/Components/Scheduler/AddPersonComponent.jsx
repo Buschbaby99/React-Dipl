@@ -1,13 +1,18 @@
 import { SplittMonthFunction } from "./SplittMonthFunction";
-export const addToPersons = (data, persons, allPersons) => {
+export const addToPersons = (data, persons, end) => {
 
-    console.log(data);
-    console.log(persons);
+
 
     data.forEach((item) => {
         
+      
+
+        
         const person = persons.find((p) => p.id === item.id);
         if (person) {
+            if (new Date(item.start).getTime() <= end.getTime() )
+            {
+
             const unavailable = {
                 start: item.start,
                 end: item.end,
@@ -20,7 +25,18 @@ export const addToPersons = (data, persons, allPersons) => {
             for (let index = 0; index < seperate.length; index++) {
                 person.unavailable.push(seperate[index]);
             }
+
+       }
         } else {
+
+          
+
+            if (new Date(item.start).getTime() <= end.getTime() )
+            {
+
+                console.log("Zeit 1:"+new Date(item.start).getTime());
+                console.log("Zeit 2:"+end.getTime() );
+   
             let seperate = [];
             const unavailable = {
                 start: item.start,
@@ -38,5 +54,5 @@ export const addToPersons = (data, persons, allPersons) => {
                 unavailable: seperate,
             });
         }
-    });
+}});
 };

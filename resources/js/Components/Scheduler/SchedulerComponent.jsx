@@ -6,6 +6,10 @@ import { addToPersons } from "./AddPersonComponent";
 import Exit from "@mui/icons-material/DisabledByDefault";
 import UpdateInsertComponent from "@/Components/Scheduler/UpdateInsertComponent";
 import InsertComponent from "@/Components/Scheduler/InsertComponent";
+import { DateRangePicker } from 'react-date-range';
+import 'react-date-range/dist/styles.css'; // main css file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+
 
 const tableWrapperStyles = {
     overflowX: "auto",
@@ -40,9 +44,21 @@ const datePickerWrapperStyles = {
 
 function SchedulerComponent(data) {
     const [month, setMonth] = useState(new Date()); // initial value is today's date
-
-    //console.log(data);
-
+  
+    
+    const [start, setStart] = useState(new Date(2023, 3, 1));
+    const [end, setEnd] = useState(new Date(2023, 3, 15));
+  
+    const handleSelect = (ranges) => {
+      setStart(ranges.selection.startDate);
+      setEnd(ranges.selection.endDate);
+    };
+  
+    const dateRange = {
+      startDate: start,
+      endDate: end,
+      key: 'selection',
+    };
     const [selectedProject, setSelectedProject] = useState("");
 
     const renderProjectFilter = () => {
@@ -76,9 +92,9 @@ function SchedulerComponent(data) {
         0
     ).getDate();
 
-    const renderDays = () => {
+    const renderDays = (startDate, endDate) => {
         const days = [];
-        const weekdays = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
+        const weekdays = ["So", "Mo", "Di", "Mi", "Do", "Fr ", "Sa"];
         const months = [
             "01",
             "02",
@@ -93,48 +109,50 @@ function SchedulerComponent(data) {
             "11",
             "12",
         ];
-
-        for (let i = 1; i <= daysInMonth; i++) {
-            const date = new Date(month.getFullYear(), month.getMonth(), i);
-            const weekday = weekdays[date.getDay()];
-            const monthname = months[month.getMonth()];
-            const dayname =
-                weekday + " " + i.toString().padStart(2, "0") + "." + monthname;
-            days.push(
-                <th
-                    key={i}
-                    scope="col"
-                    className="border px-3 py-2 bg-gray-800 color text-gray-300 text-sm"
-                >
-                    {dayname}
-                </th>
-            );
+      
+        let currentDay = new Date(startDate.getTime());
+      
+        while (currentDay <= endDate) {
+          const weekday = weekdays[currentDay.getDay()];
+          const monthname = months[currentDay.getMonth()];
+          const dayname =
+              weekday + " " + currentDay.getDate().toString().padStart(2, "0") + "." + monthname;
+          days.push(
+              <th
+                  key={currentDay.getTime()}
+                  scope="col"
+                  className="border px-3 py-2 bg-gray-800 color text-gray-300 text-sm"
+              >
+                  {dayname}
+              </th>
+          );
+          currentDay.setDate(currentDay.getDate() + 1);
         }
+        
         return days;
-    };
+      };
     // render table headers for each day of the month
     const persons = [];
 
     const renderPersons = () => {
-        addToPersons(data.data, persons, data.allPersons);
-
+        
+        addToPersons(data.data, persons,end);
+console.log(persons);
         return persons.map((person, index) => {
             const personProjects = [];
             person.unavailable.forEach(
                 ({ start, end, project, entryNumber }) => {
-                    const start_Date = new Date(start);
-                    const end_Date = new Date(end);
+                    const start_Date = new Date(start).getTime();
+                    const end_Date = new Date(end).getTime();
                     if (
                         (!selectedProject || project === selectedProject) &&
-                        start_Date.getFullYear() === month.getFullYear() &&
-                        start_Date.getMonth() === month.getMonth() &&
-                        end_Date.getFullYear() === month.getFullYear() &&
-                        end_Date.getMonth() === month.getMonth()
-                      ) {
+                        start_Date <= end &&
+                        end_Date >= start 
+                    ) {
                         personProjects.push({
                           project,
-                          start: start_Date.getDate() - 1,
-                          end: end_Date.getDate() - 1,
+                          start: start_Date,
+                          end: end_Date,
                           start_Date: start,
                           end_Date: end,
                           entryNumber: entryNumber,
@@ -143,7 +161,7 @@ function SchedulerComponent(data) {
                     }
                   );
 
-            const personRows = [[]];
+            const personRows = [];
             personProjects.forEach((project) => {
                 let placed = false;
                 for (const row of personRows) {
@@ -173,11 +191,12 @@ function SchedulerComponent(data) {
                         entryNumber,
                     }) => {
                         // Add cells for any gaps between projects
-                        if (currentIndex < start) {
+                        if (currentIndex.getTime() < start.getTime()) {
                             personCells.push(
                                 <td
                                     key={`gap-${currentIndex}`}
-                                    colSpan={start - currentIndex}
+                                    colSpan={Math.floor((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)) + 1}
+
                                     className="border px-3 py-2"
                                 ></td>
                             );
@@ -234,11 +253,13 @@ function SchedulerComponent(data) {
                     }
                 );
                 // Add any remaining cells after the last project
-                if (currentIndex < daysInMonth) {
+                if (currentIndex.getTime() < end.getTime()) {
+
                     personCells.push(
                         <td
                             key={`gap-${currentIndex}`}
-                            colSpan={daysInMonth - currentIndex}
+                            colSpan={Math.floor((end.getTime() - currentIndex.getTime()) / (1000 * 60 * 60 * 24))}
+
                             className="border px-4 py-2"
                         ></td>
                     );
@@ -297,14 +318,12 @@ function SchedulerComponent(data) {
     return (
         <div style={containerStyles}>
             <div className="flex justify-center mb-4 w-auto">
-                {renderProjectFilter()}
-                <DatePicker
-                    selected={month}
-                    onChange={(date) => setMonth(date)}
-                    dateFormat="MMMM yyyy"
-                    showMonthYearPicker
-                />
-            </div>
+        <DateRangePicker
+          ranges={[dateRange]}
+          onChange={handleSelect}
+          className="bg-white rounded p-2 shadow"
+        />
+      </div>
 
             <div style={tableWrapperStyles}>
                 <table className="table-auto border-collapse border border-blue-800 w-full">
@@ -317,7 +336,7 @@ function SchedulerComponent(data) {
                                 Mitarbeiter
                             </th>
 
-                            {renderDays()}
+                            {renderDays(start, end)}
                         </tr>
                     </thead>
                     <tbody>{renderPersons()}</tbody>
