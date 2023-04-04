@@ -13,6 +13,7 @@ export const addToPersons = (data, persons, allPersons) => {
                 end: item.end,
                 project: item.project,
                 entryNumber: item.entryNumber,
+                department: item.department,
             };
 
             let seperate = [];
@@ -27,6 +28,7 @@ export const addToPersons = (data, persons, allPersons) => {
                 end: item.end,
                 project: item.project,
                 entryNumber: item.entryNumber,
+                department: item.department,
             };
 
             SplittMonthFunction(unavailable, seperate);
@@ -34,7 +36,7 @@ export const addToPersons = (data, persons, allPersons) => {
             persons.push({
                 id: item.id,
                 color: item.color,
-                departmentName: item.departmentName,
+                department: item.department,
                 name: item.name,
                 lastname: item.lastname,
                 unavailable: seperate,

@@ -19,6 +19,7 @@ export default function Scheduler(props) {
                     allPersons={props.allPersons}
                     data={props.data}
                     projects={props.projects}
+                    departments={props.departments}
                 ></SchedulerComponent>
         </div>
     );

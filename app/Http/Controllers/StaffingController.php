@@ -18,7 +18,7 @@ class StaffingController extends Controller
             ->leftJoin('staffings', 'staffings.person_Id', '=', 'persons.id')
             ->leftJoin('projects', 'staffings.project_Id', '=', 'projects.id')
             ->leftJoin('departments', 'departments.id', '=', 'persons.department')
-            ->select('persons.id', 'persons.firstname as name', 'persons.lastname', 'staffings.id as entryNumber', 'projects.name as project', 'staffings.startDate as start', 'staffings.endDate as end', 'departments.color as color', 'departments.name as departmentName')
+            ->select('persons.id', 'persons.firstname as name', 'persons.lastname', 'staffings.id as entryNumber', 'projects.name as project', 'staffings.startDate as start', 'staffings.endDate as end', 'departments.color as color', 'departments.name as department')
             ->orderBy('persons.lastname')
             ->orderBy('start')
             ->get();
@@ -33,7 +33,12 @@ class StaffingController extends Controller
             ->orderBy('lastname')
             ->get();
 
-        return Inertia::render('Scheduler', ['data' => $jsonString, 'projects' => $projects, 'allPersons' => $persons]);
+            $departments = DB::table('departments')
+            ->select('id', 'name', 'color')
+            ->orderBy('name')
+            ->get();
+
+        return Inertia::render('Scheduler', ['data' => $jsonString, 'projects' => $projects, 'allPersons' => $persons, 'departments' => $departments]);
     }
     public function insertStaffing(Request $request)
     {

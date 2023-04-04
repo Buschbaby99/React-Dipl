@@ -36,6 +36,8 @@ const stickyColumnStyles = {
 
 function SchedulerComponent(data) {
 
+
+ 
     const [month, setMonth] = useState(new Date());
     const today = new Date();
     const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -48,11 +50,13 @@ function SchedulerComponent(data) {
     );
 
     const [endDate, setEndDate] = useState(lastDayOfMonth);
+    
     const [selectedProject, setSelectedProject] = useState("");
+    const [selectedDepartment, setSelectedDepartment] = useState("");
 
     const renderProjectFilter = () => {
         const projectOptions = data.projects.map((project) => (
-            <option key={project.id} value={project.id}>
+            <option key={project.name} value={project.name}>
                 {project.name}
             </option>
         ));
@@ -72,6 +76,32 @@ function SchedulerComponent(data) {
                     {projectOptions}
                 </select>
             </Fragment>
+        );
+    };
+   
+
+ 
+    const renderDepartmentFilter = () => {
+        const departmentOptions = data.departments.map((department) => (
+          <option key={department.name} value={department.name}>
+            {department.name}
+          </option>
+        ));
+        return (
+            <Fragment>
+            <label htmlFor="department-filter" className="mr-2">
+              Abteilungsfilter:
+            </label>
+            <select
+              id="department-filter"
+              value={selectedDepartment}
+              onChange={(e) => setSelectedDepartment(e.target.value)}
+              className="rounded-md border-gray-300"
+            >
+              <option value="">Alle Abteilungen</option>
+              {departmentOptions}
+            </select>
+          </Fragment>
         );
     };
 
@@ -127,15 +157,18 @@ function SchedulerComponent(data) {
 
     const renderPersons = () => {
         addToPersons(data.data, persons, data.allPersons);
-        console.log(persons);
-        return persons.map((person, index) => {
+      console.log(selectedDepartment);
+        return persons.map((person, personIndex) => {
             const personProjects = [];
             person.unavailable.forEach(
-                ({ start, end, project, entryNumber }) => {
+              
+                ({ start, end, project, entryNumber, department }) => {
+                    
                     const start_Date = new Date(start);
                     const end_Date = new Date(end);
                     if (
                         (!selectedProject || project === selectedProject) &&
+                        (!selectedDepartment || department === selectedDepartment) &&
                         start_Date.getTime() <= endDate.getTime() &&
                         end_Date.getTime() >= startDate.getTime()
                     ) {
@@ -206,11 +239,10 @@ function SchedulerComponent(data) {
                             );
                         }
                         // Add cells for the project duration
-                        console.log(data.data);
+                     
                         personCells.push(
                             <td
-
-                            key={`${entryNumber}-${project}-${start}-${end}-${person.color}`}
+                            key={`entry-${entryNumber}-person-${person.id}-project-${project}-start-${start}-end-${end}-color-${person.color}`}
                                 colSpan={end - start + 1}
                                 className={`border px-3 py-2 bg-${person.color}-200 rounded-lg `}
                             >
@@ -269,7 +301,7 @@ function SchedulerComponent(data) {
                     );
                 }
                 return (
-                    <tr key={`person-${rowIndex}`}>
+                    <tr key={`person-${person.id}-row-${rowIndex}`}>
                         {rowIndex === 0 && (
                             <td
                                 rowSpan={personRows.length}
@@ -324,6 +356,7 @@ function SchedulerComponent(data) {
         <div className="flex justify-center mb-4 w-auto">
             <div className="flex items-center justify-center space-x-4">
                 {renderProjectFilter()}
+                {renderDepartmentFilter()}
                 <label htmlFor="start-date-picker" className="mr-2">
                     Startdatum:
                 </label>
