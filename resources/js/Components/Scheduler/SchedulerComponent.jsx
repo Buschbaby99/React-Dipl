@@ -35,9 +35,6 @@ const stickyColumnStyles = {
 };
 
 function SchedulerComponent(data) {
-
-
- 
     const [month, setMonth] = useState(new Date());
     const today = new Date();
     const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -50,7 +47,7 @@ function SchedulerComponent(data) {
     );
 
     const [endDate, setEndDate] = useState(lastDayOfMonth);
-    
+
     const [selectedProject, setSelectedProject] = useState("");
     const [selectedDepartment, setSelectedDepartment] = useState("");
 
@@ -78,30 +75,28 @@ function SchedulerComponent(data) {
             </Fragment>
         );
     };
-   
 
- 
     const renderDepartmentFilter = () => {
         const departmentOptions = data.departments.map((department) => (
-          <option key={department.name} value={department.name}>
-            {department.name}
-          </option>
+            <option key={department.name} value={department.name}>
+                {department.name}
+            </option>
         ));
         return (
             <Fragment>
-            <label htmlFor="department-filter" className="mr-2">
-              Abteilungsfilter:
-            </label>
-            <select
-              id="department-filter"
-              value={selectedDepartment}
-              onChange={(e) => setSelectedDepartment(e.target.value)}
-              className="rounded-md border-gray-300"
-            >
-              <option value="">Alle Abteilungen</option>
-              {departmentOptions}
-            </select>
-          </Fragment>
+                <label htmlFor="department-filter" className="mr-2">
+                    Abteilungsfilter:
+                </label>
+                <select
+                    id="department-filter"
+                    value={selectedDepartment}
+                    onChange={(e) => setSelectedDepartment(e.target.value)}
+                    className="rounded-md border-gray-300"
+                >
+                    <option value="">Alle Abteilungen</option>
+                    {departmentOptions}
+                </select>
+            </Fragment>
         );
     };
 
@@ -157,18 +152,17 @@ function SchedulerComponent(data) {
 
     const renderPersons = () => {
         addToPersons(data.data, persons, data.allPersons);
-      console.log(selectedDepartment);
+        console.log(selectedDepartment);
         return persons.map((person, personIndex) => {
             const personProjects = [];
             person.unavailable.forEach(
-              
                 ({ start, end, project, entryNumber, department }) => {
-                    
                     const start_Date = new Date(start);
                     const end_Date = new Date(end);
                     if (
                         (!selectedProject || project === selectedProject) &&
-                        (!selectedDepartment || department === selectedDepartment) &&
+                        (!selectedDepartment ||
+                            department === selectedDepartment) &&
                         start_Date.getTime() <= endDate.getTime() &&
                         end_Date.getTime() >= startDate.getTime()
                     ) {
@@ -239,10 +233,10 @@ function SchedulerComponent(data) {
                             );
                         }
                         // Add cells for the project duration
-                     
+
                         personCells.push(
                             <td
-                            key={`entry-${entryNumber}-person-${person.id}-project-${project}-start-${start}-end-${end}-color-${person.color}`}
+                                key={`entry-${entryNumber}-person-${person.id}-project-${project}-start-${start}-end-${end}-color-${person.color}`}
                                 colSpan={end - start + 1}
                                 className={`border px-3 py-2 bg-${person.color}-200 rounded-lg `}
                             >
@@ -294,7 +288,7 @@ function SchedulerComponent(data) {
                 if (currentIndex < daysInMonth) {
                     personCells.push(
                         <td
-                        key={`gap-${rowIndex}-${currentIndex}`}
+                            key={`gap-${rowIndex}-${currentIndex}`}
                             colSpan={daysInMonth - currentIndex}
                             className="border px-4 py-2"
                         ></td>
@@ -309,11 +303,11 @@ function SchedulerComponent(data) {
                                 style={stickyColumnStyles}
                             >
                                 <Popover className="relative">
-                    <Popover.Button className="text-left">
-                        {person.name}
-                        <br />
-                        {person.lastname}
-                    </Popover.Button>
+                                    <Popover.Button className="text-left">
+                                        {person.name}
+                                        <br />
+                                        {person.lastname}
+                                    </Popover.Button>
                                     <Popover.Panel className="fixed z-50 top-0 left-0 w-screen h-screen text-black flex items-center justify-center">
                                         <div className="bg-gray-400 rounded-lg">
                                             <div className="bg-gray-400 rounded-lg mt-2 mr-2">
@@ -353,46 +347,46 @@ function SchedulerComponent(data) {
 
     return (
         <div style={containerStyles}>
-        <div className="flex justify-center mb-4 w-auto">
-            <div className="flex items-center justify-center space-x-4">
-                {renderProjectFilter()}
-                {renderDepartmentFilter()}
-                <label htmlFor="start-date-picker" className="mr-2">
-                    Startdatum:
-                </label>
-                <DatePicker
-                    id="start-date-picker"
-                    selected={startDate}
-                    onChange={(date) => setStartDate(date)}
-                    dateFormat="dd.MM.yyyy"
-                    selectsStart
-                    startDate={startDate}
-                    endDate={endDate}
-                    className="rounded-md border-gray-300"
-                />
-                <label htmlFor="end-date-picker" className="mr-2">
-                    Enddatum:
-                </label>
-                <DatePicker
-                    id="end-date-picker"
-                    selected={endDate}
-                    onChange={(date) => setEndDate(date)}
-                    dateFormat="dd.MM.yyyy"
-                    selectsEnd
-                    startDate={startDate}
-                    endDate={endDate}
-                    minDate={startDate}
-                    className="rounded-md border-gray-300"
-                />
+            <div className="flex justify-center mb-4 w-auto">
+                <div className="flex items-center justify-center space-x-4">
+                    {renderProjectFilter()}
+                    {renderDepartmentFilter()}
+                    <label htmlFor="start-date-picker" className="mr-2">
+                        Startdatum:
+                    </label>
+                    <DatePicker
+                        id="start-date-picker"
+                        selected={startDate}
+                        onChange={(date) => setStartDate(date)}
+                        dateFormat="dd.MM.yyyy"
+                        selectsStart
+                        startDate={startDate}
+                        endDate={endDate}
+                        className="rounded-md border-gray-300"
+                    />
+                    <label htmlFor="end-date-picker" className="mr-2">
+                        Enddatum:
+                    </label>
+                    <DatePicker
+                        id="end-date-picker"
+                        selected={endDate}
+                        onChange={(date) => setEndDate(date)}
+                        dateFormat="dd.MM.yyyy"
+                        selectsEnd
+                        startDate={startDate}
+                        endDate={endDate}
+                        minDate={startDate}
+                        className="rounded-md border-gray-300"
+                    />
+                </div>
             </div>
-        </div>
 
             <div style={tableWrapperStyles}>
                 <table className="table-auto border-collapse border border-blue-800 w-full">
                     <thead>
                         <tr>
                             <th
-                                className="border px-4 py-2 bg-gray-800 text-gray-300"
+                                className="border px-4 py-2 bg-gray-800 text-gray-300 text-left"
                                 style={stickyColumnStyles}
                             >
                                 Mitarbeiter
