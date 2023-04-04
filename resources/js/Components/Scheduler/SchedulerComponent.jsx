@@ -41,6 +41,14 @@ const datePickerWrapperStyles = {
 function SchedulerComponent(data) {
     const [month, setMonth] = useState(new Date()); // initial value is today's date
 
+    const today = new Date();
+    const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+    const [startDate, setStartDate] = useState(firstDayOfMonth);
+    
+    const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+    const [endDate, setEndDate] = useState(lastDayOfMonth);
+
+
     //console.log(data);
 
     const [selectedProject, setSelectedProject] = useState("");
@@ -70,11 +78,11 @@ function SchedulerComponent(data) {
         );
     };
 
-    const daysInMonth = new Date(
-        month.getFullYear(),
-        month.getMonth() + 1,
-        0
-    ).getDate();
+    const daysInMonth =
+    Math.floor(
+        (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)
+    ) + 1; // Add 1 here
+
 
     const renderDays = () => {
         const days = [];
@@ -94,12 +102,16 @@ function SchedulerComponent(data) {
             "12",
         ];
 
-        for (let i = 1; i <= daysInMonth; i++) {
-            const date = new Date(month.getFullYear(), month.getMonth(), i);
-            const weekday = weekdays[date.getDay()];
-            const monthname = months[month.getMonth()];
+        let currentDate = new Date(startDate);
+        for (let i = 0; i < daysInMonth; i++) {
+            const weekday = weekdays[currentDate.getDay()];
+            const monthname = months[currentDate.getMonth()];
             const dayname =
-                weekday + " " + i.toString().padStart(2, "0") + "." + monthname;
+                weekday +
+                " " +
+                currentDate.getDate().toString().padStart(2, "0") +
+                "." +
+                monthname;
             days.push(
                 <th
                     key={i}
@@ -109,6 +121,7 @@ function SchedulerComponent(data) {
                     {dayname}
                 </th>
             );
+            currentDate.setDate(currentDate.getDate() + 1);
         }
         return days;
     };
@@ -126,22 +139,37 @@ function SchedulerComponent(data) {
                     const end_Date = new Date(end);
                     if (
                         (!selectedProject || project === selectedProject) &&
-                        start_Date.getFullYear() === month.getFullYear() &&
-                        start_Date.getMonth() === month.getMonth() &&
-                        end_Date.getFullYear() === month.getFullYear() &&
-                        end_Date.getMonth() === month.getMonth()
-                      ) {
+                        start_Date.getTime() <= endDate.getTime() &&
+                        end_Date.getTime() >= startDate.getTime()
+                    ) {
+                        const adjustedStartDate = new Date(
+                            Math.max(start_Date.getTime(), startDate.getTime())
+                        );
+                        const adjustedEndDate = new Date(
+                            Math.min(end_Date.getTime(), endDate.getTime())
+                        );
+
                         personProjects.push({
-                          project,
-                          start: start_Date.getDate() - 1,
-                          end: end_Date.getDate() - 1,
-                          start_Date: start,
-                          end_Date: end,
-                          entryNumber: entryNumber,
+                            project,
+                            start: Math.floor(
+                                (adjustedStartDate.getTime() -
+                                    startDate.getTime()) /
+                                    (1000 * 60 * 60 * 24)
+                            ),
+                            end: Math.floor(
+                                (adjustedEndDate.getTime() -
+                                    startDate.getTime()) /
+                                    (1000 * 60 * 60 * 24)
+                            ),
+                            start_Date: start,
+                            end_Date: end,
+                            entryNumber: entryNumber,
                         });
-                      }
                     }
-                  );
+                }
+            );
+
+            console.log(personProjects);
 
             const personRows = [[]];
             personProjects.forEach((project) => {
@@ -299,10 +327,21 @@ function SchedulerComponent(data) {
             <div className="flex justify-center mb-4 w-auto">
                 {renderProjectFilter()}
                 <DatePicker
-                    selected={month}
-                    onChange={(date) => setMonth(date)}
-                    dateFormat="MMMM yyyy"
-                    showMonthYearPicker
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    dateFormat="dd.MM.yyyy"
+                    selectsStart
+                    startDate={startDate}
+                    endDate={endDate}
+                />
+                <DatePicker
+                    selected={endDate}
+                    onChange={(date) => setEndDate(date)}
+                    dateFormat="dd.MM.yyyy"
+                    selectsEnd
+                    startDate={startDate}
+                    endDate={endDate}
+                    minDate={startDate}
                 />
             </div>
 
