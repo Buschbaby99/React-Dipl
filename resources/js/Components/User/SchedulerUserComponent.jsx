@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { addToPersons } from "./AddPersonComponent";
@@ -76,6 +76,10 @@ function SchedulerComponent(data) {
         );
     };
 
+    useEffect(() => {
+        renderPersons();
+    }, [selectedDepartment]);
+
     const renderDepartmentFilter = () => {
         const departmentOptions = data.departments.map((department) => (
             <option key={department.name} value={department.name}>
@@ -152,8 +156,22 @@ function SchedulerComponent(data) {
 
     const renderPersons = () => {
         addToPersons(data.data, persons, data.allPersons);
-        console.log(selectedDepartment);
-        return persons.map((person, personIndex) => {
+    
+        return persons
+            .filter((person) => {
+                if (selectedDepartment && person.department !== selectedDepartment) {
+                    return false;
+                }
+    
+                if (selectedProject) {
+                    return person.unavailable.some(
+                        ({ project }) => project === selectedProject
+                    );
+                }
+    
+                return true;
+            })
+            .map((person, personIndex) => {
             const personProjects = [];
             person.unavailable.forEach(
                 ({ start, end, project, entryNumber, department }) => {
