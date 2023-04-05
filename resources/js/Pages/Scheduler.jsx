@@ -18,6 +18,7 @@ export default function Scheduler(props) {
             </div>
         </header>
             <SchedulerUser
+                auth={props.auth}
                 allPersons={props.allPersons}
                 data={props.data}
                 projects={props.projects}

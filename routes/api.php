@@ -51,3 +51,8 @@ Route::post('deleteStaffing', 'App\Http\Controllers\StaffingController@deleteSta
  */
 Route::get('forMyPersonsStatistic', 'App\Http\Controllers\PersonController@forMyPersonsStatistic');
 Route::get('getAllDataFromPersons', 'App\Http\Controllers\PersonController@getAllDataFromPersons');
+
+/**
+ * Note
+ */
+Route::post('insertNote', 'App\Http\Controllers\NoteController@insertNote');

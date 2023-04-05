@@ -3,6 +3,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { addToPersons } from "./AddPersonComponent";
 import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
+import { Popover } from "@headlessui/react";
+import Exit from "@mui/icons-material/DisabledByDefault";
+import InsertNote from '@/Components/User/InsertNote';
 
 const tableWrapperStyles = {
     overflowX: "auto",
@@ -237,7 +240,46 @@ function SchedulerComponent(data) {
                                 colSpan={end - start + 1}
                                 className={`border px-3 py-2 bg-${person.color}-200 rounded-lg `}
                             >
-                               {`${project}`}
+                                <Popover className="relative">
+                                    <Popover.Button>
+                                        {`${project}`}
+                                    </Popover.Button>
+
+                                    <Popover.Panel className="fixed z-50 top-0 left-0 w-screen h-screen flex items-center justify-center">
+                                        <div className="bg-gray-400 rounded-lg">
+                                            <div className="bg-gray-400 rounded-lg mt-2 mr-2">
+                                                <div className="flex justify-between items-start">
+                                                    <div className="flex-grow text-center">
+                                                        <h1>
+                                                           Notizen
+                                                        </h1>
+                                                    </div>
+                                                    <div className="flex-shrink-0">
+                                                        <a
+                                                            className="text-black-500 hover:text-black-700"
+                                                            href={`Scheduler`}
+                                                        >
+                                                            <Exit></Exit>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <InsertNote
+                                                user={data.auth}
+                                                firstname={person.name}
+                                                lastname={person.lastname}
+                                                projectName={project}
+                                                startDate={start_Date}
+                                                endDate={end_Date}
+                                                start={start}
+                                                end={end}
+                                                month={month.getMonth() + 1}
+                                                staffingid={entryNumber}
+                                                projects={data.projects}
+                                            ></InsertNote>
+                                        </div>
+                                    </Popover.Panel>
+                                </Popover>
                             </td>
                         );
                         currentIndex = end + 1;
