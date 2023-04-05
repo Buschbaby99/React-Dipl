@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect  } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Popover } from "@headlessui/react";
@@ -51,6 +51,11 @@ function SchedulerComponent(data) {
 
     const [selectedProject, setSelectedProject] = useState("");
     const [selectedDepartment, setSelectedDepartment] = useState("");
+
+    useEffect(() => {
+    renderPersons();
+}, [selectedDepartment]);
+
 
     const renderProjectFilter = () => {
         const projectOptions = data.projects.map((project) => (
@@ -153,8 +158,22 @@ function SchedulerComponent(data) {
 
     const renderPersons = () => {
         addToPersons(data.data, persons, data.allPersons);
-        console.log(selectedDepartment);
-        return persons.map((person, personIndex) => {
+    
+        return persons
+            .filter((person) => {
+                if (selectedDepartment && person.department !== selectedDepartment) {
+                    return false;
+                }
+    
+                if (selectedProject) {
+                    return person.unavailable.some(
+                        ({ project }) => project === selectedProject
+                    );
+                }
+    
+                return true;
+            })
+            .map((person, personIndex) => {
             const personProjects = [];
             person.unavailable.forEach(
                 ({ start, end, project, entryNumber, department }) => {
