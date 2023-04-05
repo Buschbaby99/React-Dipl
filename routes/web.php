@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AdminController;
+
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -32,7 +32,7 @@ Route::get('ProjectHome', [\App\Http\Controllers\ProjectController::class, 'form
 Routes for everbody
 */
 Route::get('Scheduler', [\App\Http\Controllers\StaffingController::class, 'formystaffing'])->name('Scheduler');
-
+Route::get('ProjectNotes', [\App\Http\Controllers\NoteController::class, 'formynotes'])->name('ProjectNotes');
 
 
 

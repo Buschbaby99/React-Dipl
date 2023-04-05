@@ -103,6 +103,7 @@ export default function ProjectUpdateComponent(props) {
 
                 <span className="mt-2 text-sm">{data.sliderValue}%</span>
               </div>
+              
             </form>
           </div>
         </div>

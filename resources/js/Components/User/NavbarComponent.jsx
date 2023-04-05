@@ -8,7 +8,7 @@ import ProjectsDropdown from "@/Components/Buttons/ProjectsDropdown";
 const navigation = [
     { name: "News", href: "NewsPage", current: false },
     { name: "Personaleinteilung", href: "Scheduler", current: false },
-    { name: "Projekte", href: "projects_list", current: false },
+    { name: "Projekte", href: "ProjectNotes", current: false },
 ];
 
 function classNames(...classes) {

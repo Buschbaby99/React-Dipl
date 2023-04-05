@@ -24,4 +24,23 @@ class NoteController extends Controller
         $noteEntry->note = $request->note;
         $noteEntry->save();
     }
+
+    public function formynotes()
+    {
+        $jsonString = DB::table('notes')
+            ->join('projects', 'projects.id', '=', 'notes.project_id')
+            ->join('users', 'users.id', '=', 'notes.user_id')
+            ->join('persons', 'users.id', '=', 'persons.user_id')
+            ->join('departments', 'departments.id', '=', 'persons.department')
+            ->select('persons.lastname','persons.firstname', 'departments.name as department','notes.note', 'projects.name as project', 'notes.status','notes.created_at' )
+            ->orderBy('notes.created_at', 'desc')
+         
+            ->get();
+
+        
+
+     
+
+        return Inertia::render('Project/ProjectNotes', ['data' => $jsonString ]);
+    }
 }
