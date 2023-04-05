@@ -262,16 +262,17 @@ function SchedulerComponent(data) {
                                 className="border px-3 py-2 bg-gray-800 color text-gray-300 text-m"
                                 style={stickyColumnStyles}
                             >
-                        <div>
-                                                {person.name}
-                                            </div>
-                                            <div>  
-                                                {person.lastname}
-                                            </div>
-                                            <div className="d-flex align-items-end">
-                                                <HomeRepairServiceIcon />
-                                                {person.department}
-                                            </div>
+                 
+                    
+                                        <div>{person.name}</div>
+                                        <div>{person.lastname}</div>
+                                        <div className="d-flex align-items-end">
+                                            <HomeRepairServiceIcon />
+                                            <span className="relative top-0.5">
+                                                {"-" + person.department}
+                                            </span>
+                                        </div>
+                             
                             </td>
                         )}
                         {personCells}
