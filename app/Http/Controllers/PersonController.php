@@ -10,7 +10,9 @@ class PersonController extends Controller
 {
     public function getAllDataFromPersons()
     {
-        $persons = Persons::all();
+        $persons = Persons::join('departments', 'departments.id', '=', 'persons.department')
+        ->select('persons.firstname', 'persons.lastname', 'departments.name as department')
+        ->get();
         return response()->json($persons);
     }
 
@@ -18,7 +20,8 @@ class PersonController extends Controller
     {
         $employeeProjectData = Staffing::join('persons', 'staffings.person_Id', '=', 'persons.id')
             ->join('projects', 'staffings.project_Id', '=', 'projects.id')
-            ->select('persons.firstname', 'persons.lastname', 'persons.department', 'projects.name as projectName', 'staffings.startDate', 'staffings.endDate')
+            ->join('departments', 'departments.id', '=', 'persons.department')
+            ->select('persons.firstname', 'persons.lastname', 'departments.name as department', 'projects.name as projectName', 'staffings.startDate', 'staffings.endDate')
             ->get();
 
         return response()->json($employeeProjectData);
