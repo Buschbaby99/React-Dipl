@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Popover } from "@headlessui/react";
 import { addToPersons } from "./AddPersonComponent";
 import Exit from "@mui/icons-material/DisabledByDefault";
-import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
+import HomeRepairServiceIcon from "@mui/icons-material/HomeRepairService";
 import UpdateInsertComponent from "@/Components/Scheduler/UpdateInsertComponent";
 import InsertComponent from "@/Components/Scheduler/InsertComponent";
 
@@ -295,29 +295,29 @@ function SchedulerComponent(data) {
                         ></td>
                     );
                 }
-               
+
                 return (
-                    <tr key={`person-${person.id}-row-${rowIndex}-color-${person.color}`}>
+                    <tr
+                        key={`person-${person.id}-row-${rowIndex}-color-${person.color}`}
+                    >
                         {rowIndex === 0 && (
                             <td
                                 rowSpan={personRows.length}
                                 className="border px-3 py-2 bg-gray-800 color text-gray-300 text-m"
                                 style={stickyColumnStyles}
                             >
-                                
                                 <Popover className="relative">
-                                <Popover.Button className="text-left d-flex align-items-end">
-                                            <div>
-                                                {person.name}
-                                            </div>
-                                            <div>  
-                                                {person.lastname}
-                                            </div>
-                                            <div className="d-flex align-items-end">
-                                                <HomeRepairServiceIcon />
-                                                {person.department}
-                                            </div>
-                                        </Popover.Button>
+                                    <Popover.Button className="text-left d-flex align-items-end">
+                                        <div>{person.name}</div>
+                                        <div>{person.lastname}</div>
+                                        <div className="d-flex align-items-end">
+                                            <HomeRepairServiceIcon />
+                                            <span className="relative top-0.5">
+                                                {"-" + person.department}
+                                            </span>
+                                        </div>
+                                    </Popover.Button>
+
                                     <Popover.Panel className="fixed z-50 top-0 left-0 w-screen h-screen text-black flex items-center justify-center">
                                         <div className="bg-gray-400 rounded-lg">
                                             <div className="bg-gray-400 rounded-lg mt-2 mr-2">
