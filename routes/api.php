@@ -53,4 +53,4 @@ Route::get('forMyPersonsStatistic', 'App\Http\Controllers\PersonController@forMy
 Route::get('getAllDataFromPersons', 'App\Http\Controllers\PersonController@getAllDataFromPersons');
 
 
-Route::post('insertNote', 'App\Http\Controllers\StaffingController@insertNote');
+Route::post('insertNote', 'App\Http\Controllers\NoteController@insertNote');
