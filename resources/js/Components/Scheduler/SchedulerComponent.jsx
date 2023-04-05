@@ -294,19 +294,28 @@ function SchedulerComponent(data) {
                         ></td>
                     );
                 }
+               
                 return (
-                    <tr key={`person-${person.id}-row-${rowIndex}`}>
+                    <tr key={`person-${person.id}-row-${rowIndex}-color-${person.color}`}>
                         {rowIndex === 0 && (
                             <td
                                 rowSpan={personRows.length}
                                 className="border px-3 py-2 bg-gray-800 color text-gray-300 text-m"
                                 style={stickyColumnStyles}
                             >
+                                
                                 <Popover className="relative">
                                     <Popover.Button className="text-left">
+                                        
+                                    <div >
                                         {person.name}
-                                        <br />
+                                        </div>
+                                     <div >  
                                         {person.lastname}
+                                        </div>
+                                        <div >
+                                        {person.department}
+                                        </div>
                                     </Popover.Button>
                                     <Popover.Panel className="fixed z-50 top-0 left-0 w-screen h-screen text-black flex items-center justify-center">
                                         <div className="bg-gray-400 rounded-lg">
