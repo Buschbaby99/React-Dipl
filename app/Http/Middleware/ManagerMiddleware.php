@@ -21,10 +21,10 @@ class ManagerMiddleware
             if (Auth::user()->role == 2 || Auth::user()->role == 1) {
                 return $next($request);
             } else {
-                return redirect('/news')->with('message', 'You are not admin');
+                return redirect('/Scheduler')->with('message', 'You are not admin');
             }
         } else {
-            return redirect('/news')->with('message', 'login to website');
+            return redirect('/Scheduler')->with('message', 'login to website');
         }
         return $next($request);
     }
