@@ -3,7 +3,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import firmenlogo from "../../../images/firmenlogo.png";
 import Dropdown from "@/Components/Inputs/Dropdown";
 import SettingsIcon from "@mui/icons-material/Settings";
-import ProjectsDropdown from "@/Components/Buttons/ProjectsDropdown";
+import ProjectsDropdown from "@/Components/Buttons/ProjectsDropdownUser";
 
 const navigation = [
     { name: "News", href: "NewsPage", current: false },
