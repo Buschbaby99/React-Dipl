@@ -17,8 +17,7 @@ const datePickerStyle = {
     display: "flex",
     justifyContent: "center",
     marginBottom: "20px",
-  };
-  
+};
 
 const cardStyle = {
     backgroundColor: "white",
@@ -28,7 +27,6 @@ const cardStyle = {
     margin: "0 auto",
     padding: "20px",
     position: "relative",
-    
 };
 
 const cardTitleStyle = {
@@ -119,7 +117,8 @@ const EmployeeProjectInfo = () => {
 
     console.log(employeeProjectData);
 
-    /*
+    const hoursPerDay = 8;
+
     const aggregateEmployeeData = (employeeProjectData) => {
         const aggregatedData = {};
 
@@ -132,39 +131,33 @@ const EmployeeProjectInfo = () => {
                 aggregatedData[department] = {
                     department,
                     employees: {},
-                    totalCurrentMonthDays: 0,
+                    totalCurrentMonthHours: 0,
                 };
             }
 
             if (!aggregatedData[department].employees[name]) {
                 aggregatedData[department].employees[name] = {
                     name,
-                    currentMonthDays: 0,
+                    currentMonthHours: 0,
                 };
             }
 
-            aggregatedData[department].employees[name].currentMonthDays +=
-                currentMonthDays;
-            aggregatedData[department].totalCurrentMonthDays +=
-                currentMonthDays;
+            aggregatedData[department].employees[name].currentMonthHours +=
+                currentMonthDays * hoursPerDay;
+            aggregatedData[department].totalCurrentMonthHours +=
+                currentMonthDays * hoursPerDay;
         });
 
-        const selectedYear = selectedDate.getFullYear();
-        const selectedMonth = selectedDate.getMonth();
-        const daysInCurrentMonth = new Date(
-            selectedYear,
-            selectedMonth + 1,
-            0
-        ).getDate();
+        const maxWorkDays = 22;
 
         Object.values(aggregatedData).forEach((dept) => {
             Object.values(dept.employees).forEach((employee) => {
-                employee.currentMonthFree =
-                    daysInCurrentMonth - employee.currentMonthDays;
+                employee.currentMonthFreeHours =
+                    maxWorkDays * hoursPerDay - employee.currentMonthHours;
             });
-            dept.totalCurrentMonthFree =
-                daysInCurrentMonth * Object.keys(dept.employees).length -
-                dept.totalCurrentMonthDays;
+            dept.totalCurrentMonthFreeHours =
+                maxWorkDays * Object.keys(dept.employees).length * hoursPerDay -
+                dept.totalCurrentMonthHours;
         });
 
         const departmentData = Object.values(aggregatedData);
@@ -174,109 +167,58 @@ const EmployeeProjectInfo = () => {
     const departmentData = aggregateEmployeeData(employeeProjectData);
     const chartData = departmentData.map((dept) => ({
         department: dept.department,
-        workDays: dept.totalCurrentMonthDays,
-        freeDays: dept.totalCurrentMonthFree,
-    }));
-
-    */
-
-    const hoursPerDay = 8;
-
-const aggregateEmployeeData = (employeeProjectData) => {
-    const aggregatedData = {};
-
-    employeeProjectData.forEach((employee) => {
-        const department = employee.department;
-        const name = employee.name + " " + employee.lastname;
-        const currentMonthDays = employee.currentMonthDays;
-
-        if (!aggregatedData[department]) {
-            aggregatedData[department] = {
-                department,
-                employees: {},
-                totalCurrentMonthHours: 0,
-            };
-        }
-
-        if (!aggregatedData[department].employees[name]) {
-            aggregatedData[department].employees[name] = {
-                name,
-                currentMonthHours: 0,
-            };
-        }
-
-        aggregatedData[department].employees[name].currentMonthHours +=
-            currentMonthDays * hoursPerDay;
-        aggregatedData[department].totalCurrentMonthHours +=
-            currentMonthDays * hoursPerDay;
-    });
-
-    const maxWorkDays = 22;
-
-    Object.values(aggregatedData).forEach((dept) => {
-        Object.values(dept.employees).forEach((employee) => {
-            employee.currentMonthFreeHours =
-                maxWorkDays * hoursPerDay - employee.currentMonthHours;
-        });
-        dept.totalCurrentMonthFreeHours =
-            maxWorkDays * Object.keys(dept.employees).length * hoursPerDay -
-            dept.totalCurrentMonthHours;
-    });
-
-    const departmentData = Object.values(aggregatedData);
-    return departmentData;
-};
-
-    const departmentData = aggregateEmployeeData(employeeProjectData);
-    const chartData = departmentData.map((dept) => ({
-        department: dept.department,
         workHours: dept.totalCurrentMonthHours,
         freeHours: dept.totalCurrentMonthFreeHours,
     }));
 
-    
-
-
     return (
         <div>
-          <div style={cardStyle}>
-            <h1 style={cardTitleStyle}>Arbeitstage und freie Tage für jedes Department</h1>
-            <div style={datePickerStyle}>
-              <DatePicker
-                selected={selectedDate}
-                onChange={handleDateChange}
-                dateFormat="MM/yyyy"
-                showMonthYearPicker
-                inline
-                wrapperClassName="datePickerWrapper"
-              />
+            <div style={cardStyle}>
+                <h1 style={cardTitleStyle}>
+                    Arbeitstage und freie Tage für jedes Department
+                </h1>
+                <div style={datePickerStyle}>
+                    <DatePicker
+                        selected={selectedDate}
+                        onChange={handleDateChange}
+                        dateFormat="MM/yyyy"
+                        showMonthYearPicker
+                        inline
+                        wrapperClassName="datePickerWrapper"
+                    />
+                </div>
+                <div style={chartContainerStyle}>
+                    <ResponsiveContainer width="100%" height={300}>
+                        <BarChart
+                            data={chartData}
+                            margin={{
+                                top: 5,
+                                right: 30,
+                                left: 20,
+                                bottom: 5,
+                            }}
+                        >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="department" />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
+                            <Bar
+                                dataKey="workHours"
+                                name="Arbeitsstunden"
+                                fill="#8884d8"
+                            />
+                            <Bar
+                                dataKey="freeHours"
+                                name="Freie Stunden"
+                                fill="#82ca9d"
+                            />
+                        </BarChart>
+                    </ResponsiveContainer>
+                </div>
             </div>
-            <div style={chartContainerStyle}>
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart
-                  data={chartData}
-                  margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                  }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="department" />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  <Bar dataKey="workHours" name="Arbeitsstunden" fill="#8884d8" />
-                  <Bar dataKey="freeHours" name="Freie Stunden" fill="#82ca9d" />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
         </div>
-      );
-      
-      
+    );
 };
 
 export default EmployeeProjectInfo;

@@ -33,6 +33,8 @@ const chartContainerStyle = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    marginTop: "50px",
+    marginBottom: "100px", 
 };
 
 const ProjectsBarChartComponent = () => {
@@ -67,46 +69,39 @@ const ProjectsBarChartComponent = () => {
         fetchData();
     }, []);
 
-    const CustomTick = ({ x, y, payload }) => {
-        const maxLength = 15; // Maximale Länge des Projektnamens
-        const text =
-            payload.value.length > maxLength
-                ? payload.value.slice(0, maxLength) + "..."
-                : payload.value;
-
-        return (
-            <text x={x} y={y} dy={16} textAnchor="middle" fill="#666">
-                {text}
-            </text>
-        );
-    };
-
     return (
         <div>
             <div style={cardStyle}>
                 <h1 style={cardTitleStyle}>Projekt Statistiken</h1>
                 <div style={chartContainerStyle}>
                     <BarChart
-                        width={1400}
-                        height={300}
+                        width={1600}
+                        height={500} 
                         data={data}
                         margin={{
-                            top: 5,
+                            top: 1,
                             right: 30,
                             left: 50,
-                            bottom: 50,
+                            bottom: 130,
                         }}
                     >
                         <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" tick={<CustomTick />} />
+                        <XAxis
+                            dataKey="name"
+                            angle={-45}
+                            textAnchor="end"
+                            interval={0}
+                            height={60}
+                        />
                         <YAxis dataKey="days" />
                         <Tooltip />
-                        <Legend />
+                        <Legend verticalAlign="top" height={70}/>
                         <Bar
                             dataKey="days"
+                            name="Projekt Dauer"
                             fill="#8884d8"
                             barSize={30}
-                            barGap={200}
+                            barGap={400}
                         />
                     </BarChart>
                 </div>

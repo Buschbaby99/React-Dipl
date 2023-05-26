@@ -72,22 +72,24 @@ const DepartmentsStatistic = () => {
             <div style={chartContainerStyle}>
                 <BarChart
                     width={1400}
-                    height={300}
+                    height={500}
                     data={chartData}
                     margin={{
-                        top: 5,
+                        top: 1,
                         right: 30,
                         left: 50,
-                        bottom: 50,
+                        bottom: 130,
                     }}
                 >
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="department" />
+                    <XAxis dataKey="department" angle={-45} textAnchor="end" />
+
                     <YAxis />
                     <Tooltip />
-                    <Legend />
+                    <Legend verticalAlign="top" height={70}/>
                     <Bar
                         dataKey="personenAnzahl"
+                        name="Personenanzahl"
                         fill="#8ee5ee"
                         barSize={30}
                         barGap={200}
