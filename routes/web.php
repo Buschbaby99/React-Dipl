@@ -45,23 +45,22 @@ Route::get('/', function () {
     ]);
 });
 
+/*
 Route::get('/loginPage', function () {
     return Inertia::render('LoginPage');
 });
-
+*/
 Route::get('Statistic', function () {
     return Inertia::render('Statistic/Statistic');
 });
 
 
 Route::get('ProjectInsertPage', function () {
-    return Inertia::render('Project/ProjectInsertPage');
+    return Inertia::render('Project/ProjectInsertPage')->middleware(['auth', 'verified']);
 });
 Route::get('ProjectUpdatePage', function () {
-    return Inertia::render('Project/ProjectUpdatePage');
+    return Inertia::render('Project/ProjectUpdatePage')->middleware(['auth', 'verified']);
 });
-
-
 
 
 Route::get('/NewsPage', function () {
