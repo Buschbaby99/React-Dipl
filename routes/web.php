@@ -28,6 +28,15 @@ Route::get('AdminUpdatePage', [\App\Http\Controllers\AdminController::class, 'sh
 Manager Routes 
 */
 Route::get('ProjectHome', [\App\Http\Controllers\ProjectController::class, 'formyprojects'])->middleware(['auth', 'verified', 'isManager'])->name('ProjectHome');
+Route::get('ProjectInsertPage', function () {
+    return Inertia::render('Project/ProjectInsertPage');
+})->middleware(['auth', 'verified', 'isManager']);
+
+Route::get('ProjectUpdatePage', function () {
+    return Inertia::render('Project/ProjectUpdatePage');
+})->middleware(['auth', 'verified', 'isManager']);
+
+
 /*
 Routes for everbody
 */
@@ -55,12 +64,9 @@ Route::get('Statistic', function () {
 });
 
 
-Route::get('ProjectInsertPage', function () {
-    return Inertia::render('Project/ProjectInsertPage');
-});
-Route::get('ProjectUpdatePage', function () {
-    return Inertia::render('Project/ProjectUpdatePage');
-});
+
+
+
 
 
 Route::get('/NewsPage', function () {

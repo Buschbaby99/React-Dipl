@@ -21,10 +21,10 @@ class UserMiddleware
             if(Auth::user()->role == 0 || Auth::user()->role == 1 || Auth::user()->role == 2){
                 return $next($request);
             } else {
-                return redirect('/welcome')->with('message', 'You are not admin');
+                return redirect('/Scheduler')->with('message', 'You are not admin');
             }
         } else {
-            return redirect('/welcome')->with('message', 'login to website');
+            return redirect('/Scheduler')->with('message', 'login to website');
         }
         return $next($request);
     }
