@@ -42,7 +42,9 @@ Routes for everbody
 */
 Route::get('Scheduler', [\App\Http\Controllers\StaffingController::class, 'formystaffing'])->name('Scheduler')->middleware(['auth', 'verified']);
 Route::get('ProjectNotes', [\App\Http\Controllers\NoteController::class, 'formynotes'])->name('ProjectNotes')->middleware(['auth', 'verified']);
-
+Route::get('Statistic', function () {
+    return Inertia::render('Statistic/Statistic');
+})->middleware(['auth', 'verified']);
 
 
 Route::get('/', function () {
@@ -59,9 +61,7 @@ Route::get('/loginPage', function () {
     return Inertia::render('LoginPage');
 });
 */
-Route::get('Statistic', function () {
-    return Inertia::render('Statistic/Statistic');
-})->middleware(['auth', 'verified', 'isUser']);
+
 
 
 
