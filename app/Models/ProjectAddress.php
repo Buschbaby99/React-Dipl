@@ -9,8 +9,6 @@ class ProjectAddress extends Model
 {
     use HasFactory;
 
-
-
     protected $fillable = [
         'country',
         'ZIP',

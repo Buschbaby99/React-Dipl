@@ -9,7 +9,6 @@ import AdminButton from "../Buttons/UniversalButtonComponent";
 import Datepicker from "react-tailwindcss-datepicker";
 
 const inputStyle = {
-   
     maxWidth: "500px",
     width: "100%",
     margin: "0.5rem",
@@ -48,11 +47,11 @@ export default function InsertProject(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.post("/api/insertProject", data)
+        axios
+            .post("/api/insertProject", data)
             .then(() => {
                 console.log("lsaslcs");
                 alert("User: " + JSON.stringify(data.name) + "wurde angelegt!");
-                //reset();
             })
             .catch((error) => {
                 console.log("ERROR:: ", error.response.data);

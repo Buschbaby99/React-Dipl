@@ -5,7 +5,6 @@ import Dropdown from "@/Components/Inputs/Dropdown";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ProjectsDropdown from "@/Components/Buttons/ProjectsDropdown";
 
-
 const navigation = [
     { name: "News", href: "NewsPage", current: false },
     { name: "Personaleinteilung", href: "Scheduler", current: false },
@@ -14,11 +13,10 @@ const navigation = [
 ];
 
 function classNames(...classes) {
-    return classes.filter(Boolean).join(" "); 
+    return classes.filter(Boolean).join(" ");
 }
 
 export default function MyNavbar({ myUser = NULL, header, children }) {
-   
     return (
         <Disclosure as="nav" className="bg-gray-800 z-1000">
             {({ open }) => (

@@ -18,10 +18,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+/**
+ * Route for Admin
+ */
 Route::post('insertUser', 'App\Http\Controllers\AdminController@insertUser');
 Route::post('deleteUser', 'App\Http\Controllers\AdminController@deleteUser');
-
 
 Route::post('editUser', 'App\Http\Controllers\AdminController@editUser');
 Route::post('updateUser', 'App\Http\Controllers\AdminController@updateUser');
@@ -52,5 +53,7 @@ Route::post('deleteStaffing', 'App\Http\Controllers\StaffingController@deleteSta
 Route::get('forMyPersonsStatistic', 'App\Http\Controllers\PersonController@forMyPersonsStatistic');
 Route::get('getAllDataFromPersons', 'App\Http\Controllers\PersonController@getAllDataFromPersons');
 
-
+/**
+ * Notiz
+ */
 Route::post('insertNote', 'App\Http\Controllers\NoteController@insertNote');  

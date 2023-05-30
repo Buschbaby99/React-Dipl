@@ -7,16 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Personaddress extends Model
 {
-
-
-    
     protected $fillable = [
-
         'country',
         'ZIP',
         'city',
         'street',
-     
     ];
 
 

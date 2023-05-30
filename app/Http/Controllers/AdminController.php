@@ -14,13 +14,10 @@ use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
 {
-
     public function formyadmin()
     {
-
         $users = User::all();
         $encode[] = json_encode($users);
-
 
         return Inertia::render('Admin/AdminHome', $encode);
     }
@@ -56,7 +53,6 @@ class AdminController extends Controller
         $persons->save();
     }
 
-
     public function deleteUser(Request $request)
     {
         try {
@@ -78,7 +74,6 @@ class AdminController extends Controller
             Log::error('Fehler beim Löschen des Benutzers: ' . $e->getMessage());
         }
     }
-
 
     public function editUser(Request $request)
     {
@@ -139,8 +134,6 @@ class AdminController extends Controller
 
     public function showInsertUser()
     {
-
-
         $departments = DB::table('departments')
             ->select('name')
             ->orderBy('name')
@@ -152,8 +145,6 @@ class AdminController extends Controller
 
     public function showUpdateUser()
     {
-
-
         $departments = DB::table('departments')
             ->select('name')
             ->orderBy('name')

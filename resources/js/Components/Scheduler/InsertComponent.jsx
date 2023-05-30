@@ -16,28 +16,24 @@ const inputStyle = {
 
 export default function ProjectUpdateComponent(props) {
     const { data, setData, post, processing, errors, reset } = useForm({
-
         personid: props.personid,
 
         firstname: props.firstname,
         lastname: props.lastname,
-        projectName: '',
-        startDate: '',
-        endDate: '',
+        projectName: "",
+        startDate: "",
+        endDate: "",
         description: "",
     });
 
-
     const onHandleChange = (event) => {
         setData(event.target.name, event.target.value);
-        //console.log(data);
     };
 
     const [value, setValue] = useState({
         startDate: props.startDate,
         endDate: props.endDate,
     });
-
 
     const handleValueChange = (newValue) => {
         setValue(newValue);
@@ -47,7 +43,6 @@ export default function ProjectUpdateComponent(props) {
         console.log("newValue:", data.endDate);
     };
 
-
     const handleInsert = (event) => {
         event.preventDefault();
         axios
@@ -56,9 +51,6 @@ export default function ProjectUpdateComponent(props) {
                 window.location.href = "Scheduler";
             })
             .catch((error) => {
-                //console.log(data.projectName);
-                //   console.log(error);
-
             });
     };
 
@@ -91,12 +83,12 @@ export default function ProjectUpdateComponent(props) {
                         </div>
 
                         <div style={inputStyle}>
-                        <InputLabel
+                            <InputLabel
                                 className="mt-4"
                                 forInput="lastname"
                                 value="Zuname"
                             />
-                            
+
                             <TextInput
                                 id="lastname"
                                 name="lastname"
@@ -113,7 +105,7 @@ export default function ProjectUpdateComponent(props) {
                             />
                         </div>
                         <div style={inputStyle}>
-                        <InputLabel
+                            <InputLabel
                                 className="mt-4"
                                 forInput="lastname"
                                 value="Projektname"
@@ -123,15 +115,11 @@ export default function ProjectUpdateComponent(props) {
                                 projects={props.projects}
                                 onHandleChange={onHandleChange}
                                 value={props.projects}
-
-                                id ={"projectName"}
+                                id={"projectName"}
                                 name={"projectName"}
                                 autoComplete={"projectName"}
-                            >
-                            </DropdownForm>
+                            ></DropdownForm>
                         </div>
-
-
 
                         <div style={inputStyle}>
                             <InputLabel

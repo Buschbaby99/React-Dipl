@@ -19,7 +19,6 @@ use Inertia\Inertia;
 /* 
 Admin Routes 
 */
-
 Route::get('AdminHome', [\App\Http\Controllers\AdminController::class, 'formyadmin'])->middleware(['auth', 'verified', 'isAdmin'])->name('AdminHome');
 Route::get('AdminInsertPage', [\App\Http\Controllers\AdminController::class, 'showInsertUser'])->middleware(['auth', 'verified', 'isAdmin'])->name('AdminInsertPage');
 Route::get('AdminUpdatePage', [\App\Http\Controllers\AdminController::class, 'showUpdateUser'])->middleware(['auth', 'verified', 'isAdmin'])->name('AdminUpdatePage');
@@ -36,7 +35,6 @@ Route::get('ProjectUpdatePage', function () {
     return Inertia::render('Project/ProjectUpdatePage');
 })->middleware(['auth', 'verified', 'isManager']);
 
-
 /*
 Routes for everbody
 */
@@ -46,7 +44,6 @@ Route::get('Statistic', function () {
     return Inertia::render('Statistic/Statistic');
 })->middleware(['auth', 'verified']);
 
-
 Route::get('/', function () {
     return Inertia::render('Login/LoginPage', [
         'canLogin' => Route::has('login'),
@@ -55,19 +52,6 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
-
-/*
-Route::get('/loginPage', function () {
-    return Inertia::render('LoginPage');
-});
-*/
-
-
-
-
-
-
-
 
 Route::get('/NewsPage', function () {
     return Inertia::render('NewsPage');
@@ -80,4 +64,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

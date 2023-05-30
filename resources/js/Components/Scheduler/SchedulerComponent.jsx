@@ -1,10 +1,10 @@
-import React, { useState, Fragment, useEffect  } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Popover } from "@headlessui/react";
 import { addToPersons } from "./AddPersonComponent";
 import Exit from "@mui/icons-material/DisabledByDefault";
-import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
+import HomeRepairServiceIcon from "@mui/icons-material/HomeRepairService";
 import UpdateInsertComponent from "@/Components/Scheduler/UpdateInsertComponent";
 import InsertComponent from "@/Components/Scheduler/InsertComponent";
 
@@ -53,9 +53,8 @@ function SchedulerComponent(data) {
     const [selectedDepartment, setSelectedDepartment] = useState("");
 
     useEffect(() => {
-    renderPersons();
-}, [selectedDepartment]);
-
+        renderPersons();
+    }, [selectedDepartment]);
 
     const renderProjectFilter = () => {
         const projectOptions = data.projects.map((project) => (
@@ -158,218 +157,227 @@ function SchedulerComponent(data) {
 
     const renderPersons = () => {
         addToPersons(data.data, persons, data.allPersons);
-    
+
         return persons
             .filter((person) => {
-                if (selectedDepartment && person.department !== selectedDepartment) {
+                if (
+                    selectedDepartment &&
+                    person.department !== selectedDepartment
+                ) {
                     return false;
                 }
-    
+
                 if (selectedProject) {
                     return person.unavailable.some(
                         ({ project }) => project === selectedProject
                     );
                 }
-    
+
                 return true;
             })
             .map((person, personIndex) => {
-            const personProjects = [];
-            person.unavailable.forEach(
-                ({ start, end, project, entryNumber, department }) => {
-                    const start_Date = new Date(start);
-                    const end_Date = new Date(end);
-                    if (
-                        (!selectedProject || project === selectedProject) &&
-                        (!selectedDepartment ||
-                            department === selectedDepartment) &&
-                        start_Date.getTime() <= endDate.getTime() &&
-                        end_Date.getTime() >= startDate.getTime()
-                    ) {
-                        const adjustedStartDate = new Date(
-                            Math.max(start_Date.getTime(), startDate.getTime())
-                        );
-                        const adjustedEndDate = new Date(
-                            Math.min(end_Date.getTime(), endDate.getTime())
-                        );
+                const personProjects = [];
+                person.unavailable.forEach(
+                    ({ start, end, project, entryNumber, department }) => {
+                        const start_Date = new Date(start);
+                        const end_Date = new Date(end);
+                        if (
+                            (!selectedProject || project === selectedProject) &&
+                            (!selectedDepartment ||
+                                department === selectedDepartment) &&
+                            start_Date.getTime() <= endDate.getTime() &&
+                            end_Date.getTime() >= startDate.getTime()
+                        ) {
+                            const adjustedStartDate = new Date(
+                                Math.max(
+                                    start_Date.getTime(),
+                                    startDate.getTime()
+                                )
+                            );
+                            const adjustedEndDate = new Date(
+                                Math.min(end_Date.getTime(), endDate.getTime())
+                            );
 
-                        personProjects.push({
+                            personProjects.push({
+                                project,
+                                start: Math.floor(
+                                    (adjustedStartDate.getTime() -
+                                        startDate.getTime()) /
+                                        (1000 * 60 * 60 * 24)
+                                ),
+                                end: Math.floor(
+                                    (adjustedEndDate.getTime() -
+                                        startDate.getTime()) /
+                                        (1000 * 60 * 60 * 24)
+                                ),
+                                start_Date: start,
+                                end_Date: end,
+                                entryNumber: entryNumber,
+                            });
+                        }
+                    }
+                );
+
+                const personRows = [[]];
+                personProjects.forEach((project) => {
+                    let placed = false;
+                    for (const row of personRows) {
+                        const lastProject = row[row.length - 1];
+                        if (!lastProject || project.start > lastProject.end) {
+                            row.push(project);
+                            placed = true;
+                            break;
+                        }
+                    }
+                    if (!placed) {
+                        personRows.push([project]);
+                    }
+                });
+
+                return personRows.map((row, rowIndex) => {
+                    const personCells = [];
+                    let currentIndex = 0;
+
+                    row.forEach(
+                        ({
                             project,
-                            start: Math.floor(
-                                (adjustedStartDate.getTime() -
-                                    startDate.getTime()) /
-                                    (1000 * 60 * 60 * 24)
-                            ),
-                            end: Math.floor(
-                                (adjustedEndDate.getTime() -
-                                    startDate.getTime()) /
-                                    (1000 * 60 * 60 * 24)
-                            ),
-                            start_Date: start,
-                            end_Date: end,
-                            entryNumber: entryNumber,
-                        });
-                    }
-                }
-            );
+                            start,
+                            end,
+                            start_Date,
+                            end_Date,
+                            entryNumber,
+                        }) => {
+                            // Add cells for any gaps between projects
+                            if (currentIndex < start) {
+                                personCells.push(
+                                    <td
+                                        key={`gap-${rowIndex}-${currentIndex}`}
+                                        colSpan={start - currentIndex}
+                                        className="border px-3 py-2"
+                                    ></td>
+                                );
+                            }
+                            // Add cells for the project duration
 
-            const personRows = [[]];
-            personProjects.forEach((project) => {
-                let placed = false;
-                for (const row of personRows) {
-                    const lastProject = row[row.length - 1];
-                    if (!lastProject || project.start > lastProject.end) {
-                        row.push(project);
-                        placed = true;
-                        break;
-                    }
-                }
-                if (!placed) {
-                    personRows.push([project]);
-                }
-            });
-
-            return personRows.map((row, rowIndex) => {
-                const personCells = [];
-                let currentIndex = 0;
-
-                row.forEach(
-                    ({
-                        project,
-                        start,
-                        end,
-                        start_Date,
-                        end_Date,
-                        entryNumber,
-                    }) => {
-                        // Add cells for any gaps between projects
-                        if (currentIndex < start) {
                             personCells.push(
                                 <td
-                                    key={`gap-${rowIndex}-${currentIndex}`}
-                                    colSpan={start - currentIndex}
-                                    className="border px-3 py-2"
-                                ></td>
-                            );
-                        }
-                        // Add cells for the project duration
+                                    key={`entry-${entryNumber}-person-${person.id}-project-${project}-start-${start}-end-${end}-color-${person.color}`}
+                                    colSpan={end - start + 1}
+                                    className={`border px-3 py-2 bg-${person.color}-200 rounded-lg `}
+                                >
+                                    <Popover className="relative">
+                                        <Popover.Button>
+                                            {`${project}`}
+                                        </Popover.Button>
 
+                                        <Popover.Panel className="fixed z-50 top-0 left-0 w-screen h-screen flex items-center justify-center">
+                                            <div className="bg-gray-400 rounded-lg">
+                                                <div className="bg-gray-400 rounded-lg mt-2 mr-2">
+                                                    <div className="flex justify-between items-start">
+                                                        <div className="flex-grow text-center">
+                                                            <h1>
+                                                                Projekt
+                                                                Einteilung
+                                                            </h1>
+                                                        </div>
+                                                        <div className="flex-shrink-0">
+                                                            <a
+                                                                className="text-black-500 hover:text-black-700"
+                                                                href={`Scheduler`}
+                                                            >
+                                                                <Exit></Exit>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <UpdateInsertComponent
+                                                    firstname={person.name}
+                                                    lastname={person.lastname}
+                                                    projectName={project}
+                                                    startDate={start_Date}
+                                                    endDate={end_Date}
+                                                    start={start}
+                                                    end={end}
+                                                    month={month.getMonth() + 1}
+                                                    staffingid={entryNumber}
+                                                    projects={data.projects}
+                                                ></UpdateInsertComponent>
+                                            </div>
+                                        </Popover.Panel>
+                                    </Popover>
+                                </td>
+                            );
+                            currentIndex = end + 1;
+                        }
+                    );
+                    // Add any remaining cells after the last project
+                    if (currentIndex < daysInMonth) {
                         personCells.push(
                             <td
-                                key={`entry-${entryNumber}-person-${person.id}-project-${project}-start-${start}-end-${end}-color-${person.color}`}
-                                colSpan={end - start + 1}
-                                className={`border px-3 py-2 bg-${person.color}-200 rounded-lg `}
-                            >
-                                <Popover className="relative">
-                                    <Popover.Button>
-                                        {`${project}`}
-                                    </Popover.Button>
-
-                                    <Popover.Panel className="fixed z-50 top-0 left-0 w-screen h-screen flex items-center justify-center">
-                                        <div className="bg-gray-400 rounded-lg">
-                                            <div className="bg-gray-400 rounded-lg mt-2 mr-2">
-                                                <div className="flex justify-between items-start">
-                                                    <div className="flex-grow text-center">
-                                                        <h1>
-                                                            Projekt Einteilung
-                                                        </h1>
-                                                    </div>
-                                                    <div className="flex-shrink-0">
-                                                        <a
-                                                            className="text-black-500 hover:text-black-700"
-                                                            href={`Scheduler`}
-                                                        >
-                                                            <Exit></Exit>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <UpdateInsertComponent
-                                                firstname={person.name}
-                                                lastname={person.lastname}
-                                                projectName={project}
-                                                startDate={start_Date}
-                                                endDate={end_Date}
-                                                start={start}
-                                                end={end}
-                                                month={month.getMonth() + 1}
-                                                staffingid={entryNumber}
-                                                projects={data.projects}
-                                            ></UpdateInsertComponent>
-                                        </div>
-                                    </Popover.Panel>
-                                </Popover>
-                            </td>
+                                key={`gap-${rowIndex}-${currentIndex}`}
+                                colSpan={daysInMonth - currentIndex}
+                                className="border px-4 py-2"
+                            ></td>
                         );
-                        currentIndex = end + 1;
                     }
-                );
-                // Add any remaining cells after the last project
-                if (currentIndex < daysInMonth) {
-                    personCells.push(
-                        <td
-                            key={`gap-${rowIndex}-${currentIndex}`}
-                            colSpan={daysInMonth - currentIndex}
-                            className="border px-4 py-2"
-                        ></td>
-                    );
-                }
-               
-                return (
-                    <tr key={`person-${person.id}-row-${rowIndex}-color-${person.color}`}>
-                        {rowIndex === 0 && (
-                            <td
-                                rowSpan={personRows.length}
-                                className="border px-3 py-2 bg-gray-800 color text-gray-300 text-m"
-                                style={stickyColumnStyles}
-                            >
-                                
-                                <Popover className="relative">
-                                <Popover.Button className="text-left d-flex align-items-end">
-                                        <div>{person.name}</div>
-                                        <div>{person.lastname}</div>
-                                        <div className="d-flex align-items-end">
-                                            <HomeRepairServiceIcon />
-                                            <span className="relative top-0.5">
-                                                {"-" + person.department}
-                                            </span>
-                                        </div>
-                                    </Popover.Button>
-                                    <Popover.Panel className="fixed z-50 top-0 left-0 w-screen h-screen text-black flex items-center justify-center">
-                                        <div className="bg-gray-400 rounded-lg">
-                                            <div className="bg-gray-400 rounded-lg mt-2 mr-2">
-                                                <div className="flex justify-between items-start">
-                                                    <div className="flex-grow text-center">
-                                                        <h1>
-                                                            Projekt Einteilung
-                                                        </h1>
-                                                    </div>
-                                                    <div className="flex-shrink-0">
-                                                        <a
-                                                            className="text-black-500 hover:text-black-700"
-                                                            href={`Scheduler`}
-                                                        >
-                                                            <Exit></Exit>
-                                                        </a>
+
+                    return (
+                        <tr
+                            key={`person-${person.id}-row-${rowIndex}-color-${person.color}`}
+                        >
+                            {rowIndex === 0 && (
+                                <td
+                                    rowSpan={personRows.length}
+                                    className="border px-3 py-2 bg-gray-800 color text-gray-300 text-m"
+                                    style={stickyColumnStyles}
+                                >
+                                    <Popover className="relative">
+                                        <Popover.Button className="text-left d-flex align-items-end">
+                                            <div>{person.name}</div>
+                                            <div>{person.lastname}</div>
+                                            <div className="d-flex align-items-end">
+                                                <HomeRepairServiceIcon />
+                                                <span className="relative top-0.5">
+                                                    {"-" + person.department}
+                                                </span>
+                                            </div>
+                                        </Popover.Button>
+                                        <Popover.Panel className="fixed z-50 top-0 left-0 w-screen h-screen text-black flex items-center justify-center">
+                                            <div className="bg-gray-400 rounded-lg">
+                                                <div className="bg-gray-400 rounded-lg mt-2 mr-2">
+                                                    <div className="flex justify-between items-start">
+                                                        <div className="flex-grow text-center">
+                                                            <h1>
+                                                                Projekt
+                                                                Einteilung
+                                                            </h1>
+                                                        </div>
+                                                        <div className="flex-shrink-0">
+                                                            <a
+                                                                className="text-black-500 hover:text-black-700"
+                                                                href={`Scheduler`}
+                                                            >
+                                                                <Exit></Exit>
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                 </div>
+                                                <InsertComponent
+                                                    personid={person.id}
+                                                    firstname={person.name}
+                                                    lastname={person.lastname}
+                                                    projects={data.projects}
+                                                ></InsertComponent>
                                             </div>
-                                            <InsertComponent
-                                                personid={person.id}
-                                                firstname={person.name}
-                                                lastname={person.lastname}
-                                                projects={data.projects}
-                                            ></InsertComponent>
-                                        </div>
-                                    </Popover.Panel>
-                                </Popover>
-                            </td>
-                        )}
-                        {personCells}
-                    </tr>
-                );
+                                        </Popover.Panel>
+                                    </Popover>
+                                </td>
+                            )}
+                            {personCells}
+                        </tr>
+                    );
+                });
             });
-        });
     };
 
     return (

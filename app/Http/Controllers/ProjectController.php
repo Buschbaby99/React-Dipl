@@ -50,9 +50,6 @@ class ProjectController extends Controller
     {
         $id = $request->id;
 
-
-
-
         $project = Projects::where('id', $id)->first();
 
         Staffing::where('project_Id', $project->id)->delete();
@@ -60,8 +57,6 @@ class ProjectController extends Controller
         $projectsAddress = ProjectAddress::where('id', $project->projectAddress_Id);
         $projectsAddress->delete();
     }
-
-
 
     public function editProject(Request $request)
     {
@@ -75,7 +70,6 @@ class ProjectController extends Controller
             'projectAddress' => $projectAddress,
         ]);
     }
-
 
     public function updateProject(Request $request)
     {
@@ -99,12 +93,10 @@ class ProjectController extends Controller
                 $project->projectAddress_Id = $projectAddress->id;
                 $project->save();
             } else {
-                // Behandeln Sie den Fall, dass kein Projekt gefunden wurde
                 Log::error('Kein Projekt gefunden mit projectAddress_Id: ' . $request->id);
                 return response()->json(['error' => 'Kein Projekt gefunden'], 404);
             }
         } else {
-            // Behandeln Sie den Fall, dass keine Projektadresse gefunden wurde
             Log::error('Keine Projektadresse gefunden mit id: ' . $request->id);
             return response()->json(['error' => 'Keine Projektadresse gefunden'], 404);
         }

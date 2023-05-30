@@ -14,8 +14,6 @@ const inputStyle = {
 };
 
 export default function ProjectUpdateComponent(props) {
-
-
     const { data, setData, post, processing, errors, reset } = useForm({
         staffingid: props.staffingid,
         firstname: props.firstname,
@@ -23,16 +21,11 @@ export default function ProjectUpdateComponent(props) {
         projectName: props.projectName,
         startDate: props.startDate,
         endDate: props.endDate,
-
         description: "",
     });
-    //console.log(data);
 
     const onHandleChange = (event) => {
         setData(event.target.name, event.target.value);
-        //console.log(data.projectName)
-
-
     };
 
     const [value, setValue] = useState({
@@ -41,54 +34,40 @@ export default function ProjectUpdateComponent(props) {
     });
 
     const handleValueChange = (newValue) => {
-
         setValue(newValue);
         data.startDate = newValue.startDate;
         data.endDate = newValue.endDate;
-
-
     };
-
 
     const handleUpdate = (event) => {
         event.preventDefault();
         axios
             .post("/api/updateStaffing", data)
             .then(() => {
-
                 window.location.href = "Scheduler";
-
             })
-            .catch((error) => {
-
-            });
+            .catch((error) => {});
     };
     const handleDelete = (event) => {
         event.preventDefault();
-        axios
-            .post("/api/deleteStaffing", props)
-            .then(() => {
-                window.location.href = "Scheduler";
-
-            })
-
+        axios.post("/api/deleteStaffing", props).then(() => {
+            window.location.href = "Scheduler";
+        });
     };
 
     return (
         <>
-            <div >
+            <div>
                 <div className="flex justify-center align-center p-12">
-                    <form >
+                    <form>
                         <div style={inputStyle}>
                             <InputLabel
-                               
                                 className="mt-4"
                                 forInput="firstname"
                                 value="Vorname"
                             />
 
                             <TextInput
-                     
                                 id="firstname"
                                 name="firstname"
                                 value={props.firstname}
@@ -127,7 +106,6 @@ export default function ProjectUpdateComponent(props) {
                             />
                         </div>
 
-
                         <div style={inputStyle}>
                             <InputLabel
                                 className="mt-4"
@@ -139,14 +117,10 @@ export default function ProjectUpdateComponent(props) {
                                 projects={props.projects}
                                 onHandleChange={onHandleChange}
                                 value={props.projectName}
-                                
-                                id ={"projectName"}
+                                id={"projectName"}
                                 name={"projectName"}
                                 autoComplete={"projectName"}
-                            >
-
-                            </DropdownForm>
-
+                            ></DropdownForm>
 
                             <InputError
                                 message={errors.lastname}
@@ -165,10 +139,7 @@ export default function ProjectUpdateComponent(props) {
                                 onChange={handleValueChange}
                             />
                         </div>
-
-
                     </form>
-
                 </div>
 
                 <div className="flex justify-center align-center">
@@ -183,7 +154,6 @@ export default function ProjectUpdateComponent(props) {
                             type="submit"
                             text="Delete"
                         ></UniversalButton>
-
                     </form>
                 </div>
             </div>

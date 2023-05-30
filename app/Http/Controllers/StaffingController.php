@@ -40,6 +40,7 @@ class StaffingController extends Controller
 
         return Inertia::render('Scheduler', ['data' => $jsonString, 'projects' => $projects, 'allPersons' => $persons, 'departments' => $departments]);
     }
+    
     public function insertStaffing(Request $request)
     {
         $staffingEntry = new Staffing;
@@ -51,6 +52,7 @@ class StaffingController extends Controller
         $staffingEntry->project_Id = $project->id;
         $staffingEntry->save();
     }
+
     public function updateStaffing(Request $request)
     {
         $project = Projects::where('name', $request->projectName)->first();
@@ -64,6 +66,7 @@ class StaffingController extends Controller
         $staffingEntry->project_Id = $newid;
         $staffingEntry->save();
     }
+
     public function deleteStaffing(Request $request)
     {
         $id = $request->staffingid;

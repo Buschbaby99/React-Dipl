@@ -34,7 +34,7 @@ const chartContainerStyle = {
     justifyContent: "center",
     alignItems: "center",
     marginTop: "50px",
-    marginBottom: "100px", 
+    marginBottom: "100px",
 };
 
 const ProjectsBarChartComponent = () => {
@@ -76,7 +76,7 @@ const ProjectsBarChartComponent = () => {
                 <div style={chartContainerStyle}>
                     <BarChart
                         width={1600}
-                        height={500} 
+                        height={500}
                         data={data}
                         margin={{
                             top: 1,
@@ -95,7 +95,7 @@ const ProjectsBarChartComponent = () => {
                         />
                         <YAxis dataKey="days" />
                         <Tooltip />
-                        <Legend verticalAlign="top" height={70}/>
+                        <Legend verticalAlign="top" height={70} />
                         <Bar
                             dataKey="days"
                             name="Projekt Dauer"

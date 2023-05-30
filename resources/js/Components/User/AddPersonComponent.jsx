@@ -1,11 +1,6 @@
 import { SplittMonthFunction } from "./SplittMonthFunction";
 export const addToPersons = (data, persons, allPersons) => {
-
-    //console.log(data);
-    //console.log(persons);
-
     data.forEach((item) => {
-        
         const person = persons.find((p) => p.id === item.id);
         if (person) {
             const unavailable = {
