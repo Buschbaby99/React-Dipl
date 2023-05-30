@@ -49,7 +49,10 @@ export default function AdminInputInsert(props) {
                 window.location.href = "AdminInsertPage";
             })
             .catch((error) => {
+              
                 console.log("ERROR:: ", error.response.data);
+                alert("User: " + JSON.stringify(data.name) + " nicht wurde angelegt!");
+
             });
     };
 
@@ -369,7 +372,7 @@ export default function AdminInputInsert(props) {
                         <div className="flex justify-center align-center p-5">
                             <AdminButton
                                 type="submit"
-                                href="AdminInsertPage"
+                               
                                 text="Hinzufügen"
                             ></AdminButton>
                             <div className="mx-2"></div>

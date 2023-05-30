@@ -19,7 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::post('insertUser', 'App\Http\Controllers\AdminController@myRegister');
+Route::post('insertUser', 'App\Http\Controllers\AdminController@insertUser');
 Route::post('deleteUser', 'App\Http\Controllers\AdminController@deleteUser');
 
 

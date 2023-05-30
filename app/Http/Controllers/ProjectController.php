@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Projects;
-
+use Illuminate\Support\Facades\Log;
 use App\Models\ProjectAddress;
 use App\Models\Staffing;
 
@@ -79,26 +79,34 @@ class ProjectController extends Controller
 
     public function updateProject(Request $request)
     {
-        $projectAddress = new ProjectAddress;
-
         $projectAddress = ProjectAddress::where('id', $request->id)->first();
-
-        $projectAddress->ZIP = $request->input('zip');
-        $projectAddress->country = $request->input('country');
-        $projectAddress->city = $request->input('city');
-        $projectAddress->street = $request->input('street');
-        $projectAddress->save();
-
-        $project = new Projects;
-
-        $project = Projects::where('projectAddress_Id', $request->id)->first();
-
-        $project->name = $request->input('name');
-        $project->project_number = $request->input('project_number');
-        $project->startDate = $request->input('startDate');
-        $project->endDate = $request->input('endDate');
-        $project->description = $request->input('description');
-        $project->projectAddress_Id = $projectAddress->id;
-        $project->save();
+    
+        if ($projectAddress) {
+            $projectAddress->ZIP = $request->input('zip');
+            $projectAddress->country = $request->input('country');
+            $projectAddress->city = $request->input('city');
+            $projectAddress->street = $request->input('street');
+            $projectAddress->save();
+    
+            $project = Projects::where('projectAddress_Id', $request->id)->first();
+    
+            if ($project) {
+                $project->name = $request->input('name', 'Gustav');
+                $project->project_number = $request->input('project_number');
+                $project->startDate = $request->input('startDate');
+                $project->endDate = $request->input('endDate');
+                $project->description = $request->input('description');
+                $project->projectAddress_Id = $projectAddress->id;
+                $project->save();
+            } else {
+                // Behandeln Sie den Fall, dass kein Projekt gefunden wurde
+                Log::error('Kein Projekt gefunden mit projectAddress_Id: ' . $request->id);
+                return response()->json(['error' => 'Kein Projekt gefunden'], 404);
+            }
+        } else {
+            // Behandeln Sie den Fall, dass keine Projektadresse gefunden wurde
+            Log::error('Keine Projektadresse gefunden mit id: ' . $request->id);
+            return response()->json(['error' => 'Keine Projektadresse gefunden'], 404);
+        }
     }
 }
