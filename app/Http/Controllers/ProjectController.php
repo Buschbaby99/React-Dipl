@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use App\Models\Projects;
 
 use App\Models\ProjectAddress;
+use App\Models\Staffing;
 
 class ProjectController extends Controller
 {
@@ -48,9 +49,15 @@ class ProjectController extends Controller
     public function deleteProject(Request $request)
     {
         $id = $request->id;
+
+       
+        
+
         $project = Projects::where('id', $id)->first();
+     
+        Staffing::where('project_Id', $project->id)->delete();
         $project->delete();
-        $projectsAddress = ProjectAddress::where('id', $project->projectAddress_Id)->first();
+        $projectsAddress = ProjectAddress::where('id', $project->projectAddress_Id);
         $projectsAddress->delete();
     }
 

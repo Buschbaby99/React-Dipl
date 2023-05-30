@@ -6,6 +6,7 @@ use App\Models\Departments;
 use App\Models\User;
 use App\Models\Persons;
 use App\Models\Personaddress;
+use App\Models\Staffing;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\DB;
@@ -59,12 +60,19 @@ class AdminController extends Controller
 
     public function deleteUser(Request $request)
     {
+       
         $id = $request->id;
+
+      
+        
         $user = User::where('id', $id)->first();
         $userId = $user->id;
         $persons = Persons::where('user_id', $userId)->first();
         $personAddress_id= $persons->personAddress_id;
         $address = Personaddress::where('id', $personAddress_id)->first();
+
+        $staffing=Staffing::where('person_Id', $persons->id);
+        $staffing->delete();
         $persons->delete();
         $user->delete();
         $address->delete();

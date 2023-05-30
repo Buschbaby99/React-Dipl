@@ -56,7 +56,7 @@ Route::get('Statistic', function () {
 
 
 Route::get('ProjectInsertPage', function () {
-    return Inertia::render('Project/ProjectInsertPage')->middleware(['auth', 'verified']);
+    return Inertia::render('Project/ProjectInsertPage');
 });
 Route::get('ProjectUpdatePage', function () {
     return Inertia::render('Project/ProjectUpdatePage')->middleware(['auth', 'verified']);
