@@ -40,7 +40,7 @@ Route::get('ProjectUpdatePage', function () {
 /*
 Routes for everbody
 */
-Route::get('Scheduler', [\App\Http\Controllers\StaffingController::class, 'formystaffing'])->name('Scheduler')->middleware(['auth', 'verified', 'isUser']);
+Route::get('Scheduler', [\App\Http\Controllers\StaffingController::class, 'formystaffing'])->name('Scheduler');
 Route::get('ProjectNotes', [\App\Http\Controllers\NoteController::class, 'formynotes'])->name('ProjectNotes')->middleware(['auth', 'verified', 'isUser']);;
 
 
