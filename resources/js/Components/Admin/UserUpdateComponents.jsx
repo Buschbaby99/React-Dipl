@@ -17,8 +17,7 @@ export default function AdminUpdate(props) {
     const [loading, setLoading] = useState(true);
     const urlSearchParams = new URLSearchParams(window.location.search);
     myVar = urlSearchParams.get("id");
-
-    console.log(props);
+  
     const { data, setData, post, processing, errors, reset } = useForm({
         name: "",
         email: "",
@@ -36,16 +35,17 @@ export default function AdminUpdate(props) {
         street: "",
         role: "",
     });
-    console.log(data);
+  
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.post(`/api/editUser`, {
                     id: myVar,
                 });
-        
-
+         
                 setResult(response.data);
+                console.log();
+                console.log();
                 setData({
                     id: myVar,
                     name: response.data.user.name,
@@ -74,16 +74,21 @@ export default function AdminUpdate(props) {
         fetchData();
     }, [myVar]);
 
+   // console.log(data);
+   
     const handleSubmit = (event) => {
         event.preventDefault();
         axios
             .post("/api/updateUser", data)
             .then(() => {
+                alert(`Benutzer ${data.name} wurde erfolgreich edititert.`);
                 window.location.href = "AdminHome";
             })
             .catch((error) => {
                 console.log("ERROR:: ", error.response.data);
-                console.log(data);
+               
+                alert(`Es wurden nicht alle Felder ausgefüllt`);
+
             });
     };
 
@@ -202,10 +207,12 @@ export default function AdminUpdate(props) {
                                 projects={props.name.department}
                                 onHandleChange={handleChange}
                                 value={data.department}
-                                id ={"department"}
+                                id ={data.department}
                                 name={"department"}
                                 autoComplete={"department"}
-                            >
+
+                              
+                           >
 
                             </DropdownForm>
                             <InputError message={errors.department} className="mt-2" />

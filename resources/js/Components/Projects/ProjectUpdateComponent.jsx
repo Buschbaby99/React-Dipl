@@ -67,6 +67,7 @@ export default function ProjectUpdateComponent(props) {
         axios
             .post("/api/updateProject", data)
             .then(() => {
+                alert(`Projekt ${data.name} wurde erfolgreich edititert.`);
             window.location.href="ProjectHome"
 
             })

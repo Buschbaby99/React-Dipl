@@ -1,6 +1,6 @@
 export default function DropdownForm (projects,onHandleChange ,value, id,name,autoComplete) {
     
-    console.log(projects)
+    
     return (
     <div className="mt-2">
    

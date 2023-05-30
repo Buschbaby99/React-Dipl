@@ -10,6 +10,7 @@ use App\Models\Staffing;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
 {
@@ -24,7 +25,7 @@ class AdminController extends Controller
         return Inertia::render('Admin/AdminHome', $encode);
     }
 
-    public function myRegister(Request $request)
+    public function insertUser(Request $request)
     {
         $user = new User;
         $user->name = $request->input('name');
@@ -57,26 +58,31 @@ class AdminController extends Controller
 
 
     }
+  
 
     public function deleteUser(Request $request)
     {
-       
-        $id = $request->id;
-
-      
-        
-        $user = User::where('id', $id)->first();
-        $userId = $user->id;
-        $persons = Persons::where('user_id', $userId)->first();
-        $personAddress_id= $persons->personAddress_id;
-        $address = Personaddress::where('id', $personAddress_id)->first();
-
-        $staffing=Staffing::where('person_Id', $persons->id);
-        $staffing->delete();
-        $persons->delete();
-        $user->delete();
-        $address->delete();
+        try {
+            $id = $request->id;
+            
+            $user = User::where('id', $id)->first();
+            $userId = $user->id;
+            $persons = Persons::where('user_id', $userId)->first();
+            $personAddress_id= $persons->personAddress_id;
+            $address = Personaddress::where('id', $personAddress_id)->first();
+    
+            $staffing=Staffing::where('person_Id', $persons->id);
+            $staffing->delete();
+            
+            $persons->delete();
+            $user->delete();
+            $address->delete();
+            
+        } catch (\Exception $e) {
+            Log::error('Fehler beim Löschen des Benutzers: '.$e->getMessage());
+        }
     }
+    
 
     public function editUser(Request $request)
     {

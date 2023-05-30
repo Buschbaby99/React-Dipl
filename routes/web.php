@@ -59,7 +59,7 @@ Route::get('ProjectInsertPage', function () {
     return Inertia::render('Project/ProjectInsertPage');
 });
 Route::get('ProjectUpdatePage', function () {
-    return Inertia::render('Project/ProjectUpdatePage')->middleware(['auth', 'verified']);
+    return Inertia::render('Project/ProjectUpdatePage');
 });
 
 
