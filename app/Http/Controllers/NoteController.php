@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class NoteController extends Controller
 {
-    
+
     public function insertNote(Request $request)
     {
         $noteEntry = new Notes;
@@ -32,15 +32,10 @@ class NoteController extends Controller
             ->join('users', 'users.id', '=', 'notes.user_id')
             ->join('persons', 'users.id', '=', 'persons.user_id')
             ->join('departments', 'departments.id', '=', 'persons.department')
-            ->select('persons.lastname','persons.firstname', 'departments.name as department','notes.note', 'projects.name as project', 'notes.status','notes.created_at' )
+            ->select('persons.lastname', 'persons.firstname', 'departments.name as department', 'notes.note', 'projects.name as project', 'notes.status', 'notes.created_at')
             ->orderBy('notes.created_at', 'desc')
-         
             ->get();
-
-        
-
-     
-
-        return Inertia::render('Project/ProjectNotes', ['data' => $jsonString ]);
+            
+        return Inertia::render('Project/ProjectNotes', ['data' => $jsonString]);
     }
 }

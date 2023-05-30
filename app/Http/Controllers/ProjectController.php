@@ -14,7 +14,7 @@ class ProjectController extends Controller
     public function formyprojects()
     {
         $projects = Projects::all();
-        $encode[]=json_encode($projects);
+        $encode[] = json_encode($projects);
 
         return Inertia::render('Project/ProjectHome', $encode);
     }
@@ -29,10 +29,10 @@ class ProjectController extends Controller
     {
         $projectAddress = new ProjectAddress;
 
-        $projectAddress->ZIP= $request->input('zip');
-        $projectAddress->country= $request->input('country');
-        $projectAddress->city= $request->input('city');
-        $projectAddress->street= $request->input('street');
+        $projectAddress->ZIP = $request->input('zip');
+        $projectAddress->country = $request->input('country');
+        $projectAddress->city = $request->input('city');
+        $projectAddress->street = $request->input('street');
         $projectAddress->save();
 
         $project = new Projects;
@@ -50,26 +50,26 @@ class ProjectController extends Controller
     {
         $id = $request->id;
 
-       
-        
+
+
 
         $project = Projects::where('id', $id)->first();
-     
+
         Staffing::where('project_Id', $project->id)->delete();
         $project->delete();
         $projectsAddress = ProjectAddress::where('id', $project->projectAddress_Id);
         $projectsAddress->delete();
     }
 
-    
+
 
     public function editProject(Request $request)
     {
         $id = $request->id;
         $project = Projects::where('id', $id)->first();
-        
+
         $projectAddress = ProjectAddress::where('id', $project->projectAddress_Id)->first();
-       
+
         return response()->json([
             'project' => $project,
             'projectAddress' => $projectAddress,
@@ -83,10 +83,10 @@ class ProjectController extends Controller
 
         $projectAddress = ProjectAddress::where('id', $request->id)->first();
 
-        $projectAddress->ZIP= $request->input('zip');
-        $projectAddress->country= $request->input('country');
-        $projectAddress->city= $request->input('city');
-        $projectAddress->street= $request->input('street');
+        $projectAddress->ZIP = $request->input('zip');
+        $projectAddress->country = $request->input('country');
+        $projectAddress->city = $request->input('city');
+        $projectAddress->street = $request->input('street');
         $projectAddress->save();
 
         $project = new Projects;

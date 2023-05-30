@@ -20,6 +20,8 @@ export default function ProjectUpdateComponent(props) {
     const urlSearchParams = new URLSearchParams(window.location.search);
     myVar = urlSearchParams.get("id");
 
+    //test
+
     const { data, setData, post, processing, errors, reset } = useForm({
         name: "",
         project_number: "",
@@ -68,8 +70,7 @@ export default function ProjectUpdateComponent(props) {
             .post("/api/updateProject", data)
             .then(() => {
                 alert(`Projekt ${data.name} wurde erfolgreich edititert.`);
-            window.location.href="ProjectHome"
-
+                window.location.href = "ProjectHome";
             })
             .catch((error) => {
                 console.log("ERROR:: ", error.response.data);
@@ -270,7 +271,6 @@ export default function ProjectUpdateComponent(props) {
                         <div className="flex justify-center align-center p-5">
                             <UniversalButton
                                 type="submit"
-                               
                                 text="Update"
                             ></UniversalButton>
                             <div className="mx-2"></div>

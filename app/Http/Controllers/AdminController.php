@@ -19,7 +19,7 @@ class AdminController extends Controller
     {
 
         $users = User::all();
-        $encode[]=json_encode($users);
+        $encode[] = json_encode($users);
 
 
         return Inertia::render('Admin/AdminHome', $encode);
@@ -37,10 +37,10 @@ class AdminController extends Controller
 
         $personaddress = new Personaddress;
 
-        $personaddress->ZIP= $request->input('zip');
-        $personaddress->country= $request->input('country');
-        $personaddress->city= $request->input('city');
-        $personaddress->street= $request->input('street');
+        $personaddress->ZIP = $request->input('zip');
+        $personaddress->country = $request->input('country');
+        $personaddress->city = $request->input('city');
+        $personaddress->street = $request->input('street');
         $personaddress->save();
 
         $persons = new Persons;
@@ -54,35 +54,31 @@ class AdminController extends Controller
         $persons->personAddress_id = $personaddress->id;
         $persons->user_id = $user->id;
         $persons->save();
-
-
-
     }
-  
+
 
     public function deleteUser(Request $request)
     {
         try {
             $id = $request->id;
-            
+
             $user = User::where('id', $id)->first();
             $userId = $user->id;
             $persons = Persons::where('user_id', $userId)->first();
-            $personAddress_id= $persons->personAddress_id;
+            $personAddress_id = $persons->personAddress_id;
             $address = Personaddress::where('id', $personAddress_id)->first();
-    
-            $staffing=Staffing::where('person_Id', $persons->id);
+
+            $staffing = Staffing::where('person_Id', $persons->id);
             $staffing->delete();
-            
+
             $persons->delete();
             $user->delete();
             $address->delete();
-            
         } catch (\Exception $e) {
-            Log::error('Fehler beim Löschen des Benutzers: '.$e->getMessage());
+            Log::error('Fehler beim Löschen des Benutzers: ' . $e->getMessage());
         }
     }
-    
+
 
     public function editUser(Request $request)
     {
@@ -91,17 +87,17 @@ class AdminController extends Controller
         $userId = $user->id;
         $persons = Persons::where('user_id', $userId)->first();
 
-        $personAddress_id= $persons->personAddress_id;
+        $personAddress_id = $persons->personAddress_id;
         $address = Personaddress::where('id', $personAddress_id)->first();
 
-        $roleName=DB::table('users')
-        ->select('name')
-        ->orderBy('name')
-        ->get();
-        $departments=DB::table('departments')
-        ->select('name')
-        ->orderBy('name')
-        ->get();
+        $roleName = DB::table('users')
+            ->select('name')
+            ->orderBy('name')
+            ->get();
+        $departments = DB::table('departments')
+            ->select('name')
+            ->orderBy('name')
+            ->get();
 
         return response()->json([
             'user' => $user,
@@ -122,34 +118,33 @@ class AdminController extends Controller
         $user->save();
 
         $person = Persons::where('user_id', $request->id)->first();
-        $person->firstname =$request->firstname;
-        $person->lastname =$request->lastname;
+        $person->firstname = $request->firstname;
+        $person->lastname = $request->lastname;
         $department = Departments::where('name', $request->input('department'))->first();
         $newid = $department->id;
         $person->department = $newid;
-        $person->TelNr1= $request->TelNr1;
-        $person->TelNr2= $request->TelNr2;
-        $person->rank =$request->rank;
+        $person->TelNr1 = $request->TelNr1;
+        $person->TelNr2 = $request->TelNr2;
+        $person->rank = $request->rank;
         $person->save();
 
         $personAddress = Personaddress::where('id', $request->personAddress_id)->first();
 
-        $personAddress->zip =$request->zip;
-        $personAddress->country =$request->country;
-        $personAddress->city =$request->city;
-        $personAddress->street= $request->street;
+        $personAddress->zip = $request->zip;
+        $personAddress->country = $request->country;
+        $personAddress->city = $request->city;
+        $personAddress->street = $request->street;
         $personAddress->save();
-
     }
 
     public function showInsertUser()
     {
 
 
-        $departments=DB::table('departments')
-        ->select('name')
-        ->orderBy('name')
-        ->get();
+        $departments = DB::table('departments')
+            ->select('name')
+            ->orderBy('name')
+            ->get();
 
         return Inertia::render('Admin/AdminInsertPage', array('department' => $departments));
     }
@@ -159,16 +154,11 @@ class AdminController extends Controller
     {
 
 
-        $departments=DB::table('departments')
-        ->select('name')
-        ->orderBy('name')
-        ->get();
+        $departments = DB::table('departments')
+            ->select('name')
+            ->orderBy('name')
+            ->get();
 
         return Inertia::render('Admin/AdminUpdatePage', array('department' => $departments));
     }
-
-
-
-
 }
-
