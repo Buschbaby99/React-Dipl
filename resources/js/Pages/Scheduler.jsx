@@ -3,7 +3,6 @@ import LoggedIn from "@/Components/ChangeNavbarComponent";
 import { Head } from "@inertiajs/react";
 import SchedulerComponent from "@/Components/Scheduler/SchedulerComponent";
 import SchedulerUser from "@/Components/User/SchedulerUserComponent";
-import MobileSchedulerComponent from "@/Components/Scheduler/MobileScheduler";
 
 export default function Scheduler(props) {
     if (props.auth.user.role == 3) {
