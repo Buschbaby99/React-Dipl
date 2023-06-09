@@ -159,7 +159,7 @@ function SchedulerComponent(data) {
     const persons = [];
 
     const renderPersons = () => {
-        addToPersons(data.data, persons, data.allPersons);
+        addToPersons(data.data, persons);
 
         return persons
             .filter((person) => {
@@ -191,8 +191,7 @@ function SchedulerComponent(data) {
                         const end_Date = new Date(end);
                         if (
                             (!selectedProject || project === selectedProject) &&
-                            (!selectedDepartment ||
-                                department === selectedDepartment) &&
+                            (!selectedDepartment || department === selectedDepartment) &&
                             start_Date.getTime() <= endDate.getTime() &&
                             end_Date.getTime() >= startDate.getTime()
                         ) {
@@ -225,10 +224,13 @@ function SchedulerComponent(data) {
                         }
                     }
                 );
-
+                
                 const personRows = [[]];
                 personProjects.forEach((project) => {
                     let placed = false;
+                    /**
+                     * Überprüft ob genug platz ist und fügt dies fals ja ein
+                     */
                     for (const row of personRows) {
                         const lastProject = row[row.length - 1];
                         if (!lastProject || project.start > lastProject.end) {
@@ -237,6 +239,9 @@ function SchedulerComponent(data) {
                             break;
                         }
                     }
+                    /**
+                     * für eine neue Zeile falls kein Platz vorhanden ist.
+                     */
                     if (!placed) {
                         personRows.push([project]);
                     }
@@ -255,7 +260,6 @@ function SchedulerComponent(data) {
                             end_Date,
                             entryNumber,
                         }) => {
-                            // Add cells for any gaps between projects
                             if (currentIndex < start) {
                                 personCells.push(
                                     <td

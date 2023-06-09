@@ -1,7 +1,5 @@
 import { SplittMonthFunction } from "./SplittMonthFunction";
-export const addToPersons = (data, persons, allPersons) => {
-    //console.log(data);
-    //console.log(persons);
+export const addToPersons = (data, persons) => {
 
     data.forEach((item) => {
         const person = persons.find((p) => p.id === item.id);
