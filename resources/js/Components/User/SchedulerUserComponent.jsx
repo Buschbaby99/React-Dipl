@@ -167,9 +167,14 @@ function SchedulerComponent(data) {
                 }
 
                 if (selectedProject) {
-                    return person.unavailable.some(
-                        ({ project }) => project === selectedProject
-                    );
+                    let projectFound = false;
+                    for(let i = 0; i < person.unavailable.length; i++) {
+                        if(person.unavailable[i].project === selectedProject) {
+                            projectFound = true;
+                            break;
+                        }
+                    }
+                    return projectFound;
                 }
 
                 return true;

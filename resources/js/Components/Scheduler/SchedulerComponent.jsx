@@ -49,6 +49,9 @@ function SchedulerComponent(data) {
 
     const [endDate, setEndDate] = useState(lastDayOfMonth);
 
+    /**
+     * Filter
+     */
     const [selectedProject, setSelectedProject] = useState("");
     const [selectedDepartment, setSelectedDepartment] = useState("");
 
@@ -168,14 +171,19 @@ function SchedulerComponent(data) {
                 }
 
                 if (selectedProject) {
-                    return person.unavailable.some(
-                        ({ project }) => project === selectedProject
-                    );
+                    let projectFound = false;
+                    for(let i = 0; i < person.unavailable.length; i++) {
+                        if(person.unavailable[i].project === selectedProject) {
+                            projectFound = true;
+                            break;
+                        }
+                    }
+                    return projectFound;
                 }
-
+                
                 return true;
             })
-            .map((person, personIndex) => {
+            .map((person) => {
                 const personProjects = [];
                 person.unavailable.forEach(
                     ({ start, end, project, entryNumber, department }) => {
