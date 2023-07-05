@@ -141,7 +141,7 @@ function SchedulerComponent(data) {
                 <th
                     key={i}
                     scope="col"
-                    className="border px-3 py-2 bg-gray-800 color text-gray-300 text-sm"
+                    className="border px-3 py-2 bg-gray-800 color text-gray-300 text-sm sticky top-0"
                 >
                     {dayname}
                 </th>
